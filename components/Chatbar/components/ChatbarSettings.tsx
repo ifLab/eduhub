@@ -34,6 +34,7 @@ export const ChatbarSettings = () => {
     handleImportConversations,
     handleExportData,
     handleApiKeyChange,
+    handleTeachingAssistant,
   } = useContext(ChatbarContext);
 
   return (
@@ -44,16 +45,22 @@ export const ChatbarSettings = () => {
 
       <Import onImport={handleImportConversations} />
 
-      <SidebarButton
+      {/* <SidebarButton
         text={t('Export data')}
         icon={<IconFileExport size={18} />}
         onClick={() => handleExportData()}
-      />
+      /> */}
 
       <SidebarButton
         text={t('Settings')}
         icon={<IconSettings size={18} />}
         onClick={() => setIsSettingDialog(true)}
+      />
+
+      <SidebarButton
+        text={t('教师助理')}
+        icon={<IconSettings size={18} />}
+        onClick={() => handleTeachingAssistant()}
       />
 
       {!serverSideApiKeyIsSet ? (

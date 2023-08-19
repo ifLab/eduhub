@@ -360,13 +360,13 @@ const Home = ({
       }}
     >
       <Head>
-        <title>Chatbot UI</title>
+        <title>BISTU Copilot</title>
         <meta name="description" content="ChatGPT but better." />
         <meta
           name="viewport"
           content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/bistu-logo-440.ico" />
       </Head>
       {selectedConversation && (
         <main
