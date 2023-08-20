@@ -9,6 +9,8 @@ import { saveConversation, saveConversations } from '@/utils/app/conversation';
 import { saveFolders } from '@/utils/app/folders';
 import { exportData, importData } from '@/utils/app/importExport';
 
+// import { teachingAssistant } from '@/utils/app/teachAssistant';
+
 import { Conversation } from '@/types/chat';
 import { LatestExportFormat, SupportedExportFormats } from '@/types/export';
 import { OpenAIModels } from '@/types/openai';
@@ -48,8 +50,10 @@ export const Chatbar = () => {
 
   const handleApiKeyChange = useCallback(
     (apiKey: string) => {
+      // 将'apiKey'字段的值更新为apiKey。
       homeDispatch({ field: 'apiKey', value: apiKey });
 
+      // 将apiKey保存到本地存储中。
       localStorage.setItem('apiKey', apiKey);
     },
     [homeDispatch],
@@ -206,6 +210,10 @@ export const Chatbar = () => {
     }
   }, [searchTerm, conversations]);
 
+  // const handleTeachingAssistant = () => {
+  //   teachingAssistant();
+  // };
+
   return (
     <ChatbarContext.Provider
       value={{
@@ -217,8 +225,11 @@ export const Chatbar = () => {
         handlePluginKeyChange,
         handleClearPluginKey,
         handleApiKeyChange,
+        // handleTeachingAssistant,
       }}
     >
+      {/* 渲染一个侧边栏，用于展示会话列表、文件夹列表以及其他相关功能。
+      侧边栏的显示与隐藏、搜索词的更新等操作都通过属性和回调函数进行处理。 */}
       <Sidebar<Conversation>
         side={'left'}
         isOpen={showChatbar}
@@ -230,9 +241,11 @@ export const Chatbar = () => {
         handleSearchTerm={(searchTerm: string) =>
           chatDispatch({ field: 'searchTerm', value: searchTerm })
         }
+        // 指定一个处理打开/关闭侧边栏的函数。
         toggleOpen={handleToggleChatbar}
         handleCreateItem={handleNewConversation}
         handleCreateFolder={() => handleCreateFolder(t('New folder'), 'chat')}
+        // 指定一个处理拖放操作的函数。
         handleDrop={handleDrop}
         footerComponent={<ChatbarSettings />}
       />

@@ -6,6 +6,7 @@ import { useTranslation } from 'next-i18next';
 import HomeContext from '@/pages/api/home/home.context';
 
 import { SettingDialog } from '@/components/Settings/SettingDialog';
+import { TeacherDialog } from '@/components/Settings/TeacherDialog';
 
 import { Import } from '../../Settings/Import';
 import { Key } from '../../Settings/Key';
@@ -17,6 +18,7 @@ import { PluginKeys } from './PluginKeys';
 export const ChatbarSettings = () => {
   const { t } = useTranslation('sidebar');
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
+  const [isTeacherDialogOpen, setIsTeacherDialog] = useState<boolean>(false);
 
   const {
     state: {
@@ -34,7 +36,7 @@ export const ChatbarSettings = () => {
     handleImportConversations,
     handleExportData,
     handleApiKeyChange,
-    handleTeachingAssistant,
+    // handleTeachingAssistant,
   } = useContext(ChatbarContext);
 
   return (
@@ -60,7 +62,13 @@ export const ChatbarSettings = () => {
       <SidebarButton
         text={t('教师助理')}
         icon={<IconSettings size={18} />}
-        onClick={() => handleTeachingAssistant()}
+        onClick={() => setIsTeacherDialog(true)}
+      />
+      <TeacherDialog
+        open={isTeacherDialogOpen}
+        onClose={() => {
+          setIsTeacherDialog(false);
+        }}
       />
 
       {!serverSideApiKeyIsSet ? (

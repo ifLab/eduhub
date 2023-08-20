@@ -15,61 +15,46 @@ interface Props {
   onClose: () => void;
 }
 
-export const SettingDialog: FC<Props> = ({ open, onClose }) => {
-  const { t } = useTranslation('settings');
-  // 通过getSettings函数获取与设置相关的配置信息，并将其赋值给settings变量。
-  const settings: Settings = getSettings();
-  // 使用useCreateReducer自定义钩子函数，创建了一个可管理Settings类型状态的state和dispatch。
-  const { state, dispatch } = useCreateReducer<Settings>({
-    initialState: settings,
-  });
-  // 使用useContext钩子函数获取到HomeContext上下文，并将其中的dispatch赋值给homeDispatch变量。
+export const TeacherDialog: FC<Props> = ({ open, onClose }) => {
+  const { t } = useTranslation('教师助理');
+//   const settings: Settings = getSettings();
+//   const { state, dispatch } = useCreateReducer<Settings>({
+//     initialState: settings,
+//   });
   const { dispatch: homeDispatch } = useContext(HomeContext);
-  // 使用useRef钩子函数创建了一个引用modalRef，该引用指向一个HTMLDivElement元素。
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 通过鼠标事件监听器实现了在用户点击对话框外部区域时关闭对话框的功能，
-  // 并且在组件卸载时清除了相关的事件监听器，以避免内存泄漏。
-  // 使用useEffect钩子函数来注册鼠标事件监听器，并在组件卸载时取消事件监听。
+  // 通过鼠标事件监听器实现了在用户点击对话框外部区域时关闭对话框的功能
   useEffect(() => {
-    // 定义handleMouseDown函数来处理鼠标按下事件。
     const handleMouseDown = (e: MouseEvent) => {
-      // 通过检查modalRef.current是否存在且鼠标点击的目标不在对话框内（即鼠标点击了对话框外部），
-      // 来确定用户是否希望关闭对话框。如果需要关闭对话框，则注册handleMouseUp函数作为mouseup事件的处理函数。
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         window.addEventListener('mouseup', handleMouseUp);
       }
     };
 
     const handleMouseUp = (e: MouseEvent) => {
-      // 移除mouseup事件监听器，然后调用onClose函数来关闭对话框。
       window.removeEventListener('mouseup', handleMouseUp);
       onClose();
     };
 
-    // 将handleMouseDown函数注册为mousedown事件的处理函数，以便捕获鼠标按下事件。
     window.addEventListener('mousedown', handleMouseDown);
 
     return () => {
-      // 在组件卸载时调用该函数，移除mousedown事件监听器。
       window.removeEventListener('mousedown', handleMouseDown);
     };
   }, [onClose]);
-  
-  // 保存设置并更新主题
+
   const handleSave = () => {
-    homeDispatch({ field: 'lightMode', value: state.theme });
-    saveSettings(state);
+    // homeDispatch({ field: 'lightMode', value: state.theme });
+    // saveSettings(state);
   };
 
-  // Render nothing if the dialog is not open.
   // 在对话框未打开时不渲染任何内容。
   if (!open) {
     return <></>;
   }
 
   // Render the dialog.
-  // 渲染对话框  呈现一个位于屏幕中心的对话框，其中包含一个下拉列表和一个保存按钮。
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="fixed inset-0 z-10 overflow-hidden">
@@ -85,14 +70,14 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             role="dialog"
           >
             <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
-              {t('Settings')}
+              {t('教师助理')}
             </div>
 
             <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
-              {t('Theme')}
+              {t('这是教师助理对话框')}
             </div>
 
-            <select
+            {/* <select
               className="w-full cursor-pointer bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
               value={state.theme}
               onChange={(event) =>
@@ -101,7 +86,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             >
               <option value="dark">{t('Dark mode')}</option>
               <option value="light">{t('Light mode')}</option>
-            </select>
+            </select> */}
 
             <button
               type="button"
@@ -111,7 +96,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 onClose();
               }}
             >
-              {t('Save')}
+              {t('保存')}
             </button>
           </div>
         </div>

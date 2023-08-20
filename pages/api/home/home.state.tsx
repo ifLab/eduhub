@@ -5,6 +5,7 @@ import { OpenAIModel, OpenAIModelID } from '@/types/openai';
 import { PluginKey } from '@/types/plugin';
 import { Prompt } from '@/types/prompt';
 
+// HomeInitialState接口包含的属性
 export interface HomeInitialState {
   apiKey: string;
   pluginKeys: PluginKey[];
@@ -29,6 +30,7 @@ export interface HomeInitialState {
   serverSidePluginKeysSet: boolean;
 }
 
+// 首页的初始状态
 export const initialState: HomeInitialState = {
   apiKey: '',
   loading: false,

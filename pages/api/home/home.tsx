@@ -251,6 +251,7 @@ const Home = ({
   // ON LOAD --------------------------------------------
 
   useEffect(() => {
+    // 获取并设置用户的主题设置。
     const settings = getSettings();
     if (settings.theme) {
       dispatch({
@@ -259,6 +260,7 @@ const Home = ({
       });
     }
 
+    // 获取并设置存储在本地的API密钥。
     const apiKey = localStorage.getItem('apiKey');
 
     if (serverSideApiKeyIsSet) {
@@ -269,6 +271,7 @@ const Home = ({
       dispatch({ field: 'apiKey', value: apiKey });
     }
 
+    // 获取并设置存储在本地的插件密钥。
     const pluginKeys = localStorage.getItem('pluginKeys');
     if (serverSidePluginKeysSet) {
       dispatch({ field: 'pluginKeys', value: [] });
@@ -277,6 +280,7 @@ const Home = ({
       dispatch({ field: 'pluginKeys', value: pluginKeys });
     }
 
+    // 根据窗口大小决定是否显示聊天栏和提示栏。
     if (window.innerWidth < 640) {
       dispatch({ field: 'showChatbar', value: false });
       dispatch({ field: 'showPromptbar', value: false });
@@ -292,6 +296,7 @@ const Home = ({
       dispatch({ field: 'showPromptbar', value: showPromptbar === 'true' });
     }
 
+    // 获取并设置存储在本地的文件夹数据。
     const folders = localStorage.getItem('folders');
     if (folders) {
       dispatch({ field: 'folders', value: JSON.parse(folders) });
@@ -302,6 +307,7 @@ const Home = ({
       dispatch({ field: 'prompts', value: JSON.parse(prompts) });
     }
 
+    // 获取并设置存储在本地的对话数据。
     const conversationHistory = localStorage.getItem('conversationHistory');
     if (conversationHistory) {
       const parsedConversationHistory: Conversation[] =
@@ -313,6 +319,7 @@ const Home = ({
       dispatch({ field: 'conversations', value: cleanedConversationHistory });
     }
 
+    // 根据上次选择的对话或创建一个新的对话。
     const selectedConversation = localStorage.getItem('selectedConversation');
     if (selectedConversation) {
       const parsedSelectedConversation: Conversation =
@@ -348,6 +355,7 @@ const Home = ({
   ]);
 
   return (
+    // 创建一个HomeContext.Provider组件，并向其中提供一个value属性值。
     <HomeContext.Provider
       value={{
         ...contextValue,
@@ -369,9 +377,11 @@ const Home = ({
         <link rel="icon" href="/bistu-logo-440.ico" />
       </Head>
       {selectedConversation && (
+        // <main>：主要的聊天界面容器
         <main
           className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
         >
+          {/* 固定在页面顶部，在小屏幕设备上隐藏的导航栏组件 */}
           <div className="fixed top-0 w-full sm:hidden">
             <Navbar
               selectedConversation={selectedConversation}
@@ -379,13 +389,18 @@ const Home = ({
             />
           </div>
 
+          {/* 使用Flex布局的容器，包含三个子元素 */}
           <div className="flex h-full w-full pt-[48px] sm:pt-0">
-            <Chatbar />
+            {/* 固定在页面左侧的导航栏组件 */}
+            <Chatbar />   
 
+            {/* 聊天栏组件 */}
             <div className="flex flex-1">
+              {/* 聊天内容展示组件，通过传递stopConversationRef作为属性给Chat组件。 */}
               <Chat stopConversationRef={stopConversationRef} />
             </div>
 
+            {/* 固定在页面右侧的提示栏组件。 */}
             <Promptbar />
           </div>
         </main>
@@ -395,6 +410,7 @@ const Home = ({
 };
 export default Home;
 
+// 获取服务器端的一些配置数据，并将这些数据作为组件的props传递给页面。
 export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
   const defaultModelId =
     (process.env.DEFAULT_MODEL &&

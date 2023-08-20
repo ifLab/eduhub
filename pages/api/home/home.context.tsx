@@ -8,6 +8,7 @@ import { FolderType } from '@/types/folder';
 
 import { HomeInitialState } from './home.state';
 
+// HomeContextProps是一个接口，定义了上下文中的属性和方法。
 export interface HomeContextProps {
   state: HomeInitialState;
   dispatch: Dispatch<ActionType<HomeInitialState>>;
