@@ -1,4 +1,6 @@
+// import { IconFileExport, IconSettings, IconUsers, IconUser, IconWorldUpload, IconFileDescription, IconMathFunction } from '@tabler/icons-react';
 import { IconFileExport, IconSettings } from '@tabler/icons-react';
+import { IconUsers, IconUser, IconWorldUpload, IconFileDescription, IconMathFunction } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -7,6 +9,10 @@ import HomeContext from '@/pages/api/home/home.context';
 
 import { SettingDialog } from '@/components/Settings/SettingDialog';
 import { TeacherDialog } from '@/components/Settings/TeacherDialog';
+import { StudentDialog } from '@/components/Settings/StudentDialog';
+import { SearchDialog } from '@/components/Settings/SearchDialog';
+import { PaperDialog } from '@/components/Settings/PaperDialog';
+import { CalculateDialog } from '@/components/Settings/CalculateDialog';
 
 import { Import } from '../../Settings/Import';
 import { Key } from '../../Settings/Key';
@@ -19,6 +25,10 @@ export const ChatbarSettings = () => {
   const { t } = useTranslation('sidebar');
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
   const [isTeacherDialogOpen, setIsTeacherDialog] = useState<boolean>(false);
+  const [isStudentDialogOpen, setIsStudentDialog] = useState<boolean>(false);
+  const [isSearchDialogOpen, setIsSearchDialog] = useState<boolean>(false);
+  const [isPaperDialogOpen, setIsPaperDialog] = useState<boolean>(false);
+  const [isCalculateDialogOpen, setIsCalculateDialog] = useState<boolean>(false);
 
   const {
     state: {
@@ -59,16 +69,39 @@ export const ChatbarSettings = () => {
         onClick={() => setIsSettingDialog(true)}
       />
 
+      {/* 教师助理 按钮渲染 */}
       <SidebarButton
         text={t('教师助理')}
-        icon={<IconSettings size={18} />}
+        icon={<IconUsers  size={18} />}
         onClick={() => setIsTeacherDialog(true)}
       />
-      <TeacherDialog
-        open={isTeacherDialogOpen}
-        onClose={() => {
-          setIsTeacherDialog(false);
-        }}
+
+      {/* 学生助理 按钮渲染 */}
+      <SidebarButton
+        text={t('学生助理')}
+        icon={<IconUser  size={18} />}
+        onClick={() => setIsStudentDialog(true)}
+      />
+
+      {/* 联网搜索 按钮渲染 */}
+      <SidebarButton
+        text={t('联网搜索')}
+        icon={<IconWorldUpload  size={18} />}
+        onClick={() => setIsSearchDialog(true)}
+      />
+
+      {/* 论文检索 按钮渲染 */}
+      <SidebarButton
+        text={t('论文检索')}
+        icon={<IconFileDescription  size={18} />}
+        onClick={() => setIsPaperDialog(true)}
+      />
+
+      {/* 数学计算 按钮渲染 */}
+      <SidebarButton
+        text={t('数学计算')}
+        icon={<IconMathFunction  size={18} />}
+        onClick={() => setIsCalculateDialog(true)}
       />
 
       {!serverSideApiKeyIsSet ? (
@@ -83,6 +116,36 @@ export const ChatbarSettings = () => {
           setIsSettingDialog(false);
         }}
       />
+      <TeacherDialog
+        open={isTeacherDialogOpen}
+        onClose={() => {
+          setIsTeacherDialog(false);
+        }}
+      />      
+      <StudentDialog
+        open={isStudentDialogOpen}
+        onClose={() => {
+          setIsStudentDialog(false);
+        }}
+      />   
+      <SearchDialog
+        open={isSearchDialogOpen}
+        onClose={() => {
+          setIsSearchDialog(false);
+        }}
+      />       
+      <PaperDialog
+        open={isPaperDialogOpen}
+        onClose={() => {
+          setIsPaperDialog(false);
+        }}
+      />       
+      <CalculateDialog
+        open={isCalculateDialogOpen}
+        onClose={() => {
+          setIsCalculateDialog(false);
+        }}
+      />         
     </div>
   );
 };
