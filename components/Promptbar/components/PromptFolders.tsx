@@ -9,6 +9,7 @@ import { PromptComponent } from '@/components/Promptbar/components/Prompt';
 
 import PromptbarContext from '../PromptBar.context';
 
+// 定义了一个名为 PromptFolders 的函数组件，用于展示包含提示对象的文件夹。
 export const PromptFolders = () => {
   const {
     state: { folders },

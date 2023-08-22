@@ -84,6 +84,7 @@ const Sidebar = <T,>({
           onSearch={handleSearchTerm}
         />
 
+        {/* items 是一个数组，如果长度大于 0，渲染文件夹组件；否则，渲染提示文本. */}
         <div className="flex-grow overflow-auto">
           {items?.length > 0 && (
             <div className="flex border-b border-white/20 pb-2">

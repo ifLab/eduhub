@@ -22,19 +22,21 @@ import { PromptModal } from './PromptModal';
 interface Props {
   prompt: Prompt;
 }
-
+// 使用 PromptComponent 来渲染一个提示条目，通过 Props 接口传入一个 prompt 对象作为参数
 export const PromptComponent = ({ prompt }: Props) => {
+  // 使用 useContext 获取 PromptbarContext 上下文的相关数据和方法
   const {
     dispatch: promptDispatch,
     handleUpdatePrompt,
     handleDeletePrompt,
   } = useContext(PromptbarContext);
 
+  // 使用 useState 定义一些组件级别的状态
   const [showModal, setShowModal] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isRenaming, setIsRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState('');
-
+  // 处理更新操作的函数
   const handleUpdate = (prompt: Prompt) => {
     handleUpdatePrompt(prompt);
     promptDispatch({ field: 'searchTerm', value: '' });
@@ -66,7 +68,7 @@ export const PromptComponent = ({ prompt }: Props) => {
       e.dataTransfer.setData('prompt', JSON.stringify(prompt));
     }
   };
-
+  // 使用 useEffect 钩子函数来监听 isRenaming 和 isDeleting 的变化，并在变化发生时执行相应的操作。
   useEffect(() => {
     if (isRenaming) {
       setIsDeleting(false);
@@ -82,9 +84,12 @@ export const PromptComponent = ({ prompt }: Props) => {
         draggable="true"
         onClick={(e) => {
           e.stopPropagation();
+          // 触发显示一个模态框
           setShowModal(true);
         }}
+        // 处理按钮拖拽事件
         onDragStart={(e) => handleDragStart(e, prompt)}
+        // 鼠标离开按钮时触发  取消删除或重命名操作，并重置相关的状态。
         onMouseLeave={() => {
           setIsDeleting(false);
           setIsRenaming(false);

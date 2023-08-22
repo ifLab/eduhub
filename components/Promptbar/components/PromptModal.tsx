@@ -10,15 +10,21 @@ interface Props {
   onUpdatePrompt: (prompt: Prompt) => void;
 }
 
+// 定义一个名为 PromptModal 的函数组件，用于展示一个提示模态框。
+// onUpdatePrompt 是更新提示内容的回调函数。
 export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
   const { t } = useTranslation('promptbar');
+  // 使用 useState 钩子来定义了四个状态
   const [name, setName] = useState(prompt.name);
   const [description, setDescription] = useState(prompt.description);
   const [content, setContent] = useState(prompt.content);
 
+  // 使用 useRef 钩子定义了两个引用
+  // nameInputRef 是对输入框的引用，modalRef 是对模态框的引用。
   const modalRef = useRef<HTMLDivElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
 
+  // 按下 Enter 键时更新提示的内容并关闭模态框
   const handleEnter = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       onUpdatePrompt({ ...prompt, name, description, content: content.trim() });
@@ -26,6 +32,7 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
     }
   };
 
+  // 实现点击模态框外部区域关闭模态框的功能
   useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
@@ -45,10 +52,12 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
     };
   }, [onClose]);
 
+  // 在模态框打开时自动将焦点设置到输入框，以便用户可以直接进行编辑操作。
   useEffect(() => {
     nameInputRef.current?.focus();
   }, []);
 
+  // 模态框组件的渲染逻辑
   return (
     <div
       className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
@@ -75,6 +84,7 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
               placeholder={t('A name for your prompt.') || ''}
               value={name}
               onChange={(e) => setName(e.target.value)}
+              
             />
 
             <div className="mt-6 text-sm font-bold text-black dark:text-neutral-200">
