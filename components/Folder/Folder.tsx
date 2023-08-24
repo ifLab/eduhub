@@ -20,10 +20,18 @@ import HomeContext from '@/pages/api/home/home.context';
 
 import SidebarActionButton from '@/components/Buttons/SidebarActionButton';
 
+// 展示文件夹的名称，处理文件夹的删除和重命名操作，以及展示与文件夹关联的组件内容。
+// 同时，还提供了拖放功能，可以将会话拖放到文件夹中更新其文件夹信息。
+
+// 定义 Props 接口，包含了以下属性：
 interface Props {
+  // 表示当前文件夹的信息
   currentFolder: FolderInterface;
+  // 搜索词
   searchTerm: string;
+  // 表示拖放操作的处理函数，接受事件对象和文件夹信息作为参数，无返回值。
   handleDrop: (e: any, folder: FolderInterface) => void;
+  // 表示文件夹关联的组件，类型为 ReactElement 数组。
   folderComponent: (ReactElement | undefined)[];
 }
 
@@ -33,6 +41,7 @@ const Folder = ({
   handleDrop,
   folderComponent,
 }: Props) => {
+  // 通过 useContext 钩子获取了上下文中的 handleDeleteFolder 和 handleUpdateFolder 函数。
   const { handleDeleteFolder, handleUpdateFolder } = useContext(HomeContext);
 
   const [isDeleting, setIsDeleting] = useState(false);
@@ -40,6 +49,7 @@ const Folder = ({
   const [renameValue, setRenameValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
+  // 按下 Enter 键时执行重命名操作
   const handleEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -47,12 +57,14 @@ const Folder = ({
     }
   };
 
+  // 执行重命名操作
   const handleRename = () => {
     handleUpdateFolder(currentFolder.id, renameValue);
     setRenameValue('');
     setIsRenaming(false);
   };
 
+  // 处理拖放事件
   const dropHandler = (e: any) => {
     if (e.dataTransfer) {
       setIsOpen(true);
@@ -63,18 +75,22 @@ const Folder = ({
     }
   };
 
+  // 允许拖放事件发生
   const allowDrop = (e: any) => {
     e.preventDefault();
   };
 
+  // 在拖放目标上添加高亮效果。当拖动对象进入文件夹区域时，它会将拖放目标的背景色设置为指定的颜色。
   const highlightDrop = (e: any) => {
     e.target.style.background = '#343541';
   };
 
+  // 移除拖放目标的高亮效果。当拖动对象离开文件夹区域时，它会将拖放目标的背景色恢复为默认值。
   const removeHighlight = (e: any) => {
     e.target.style.background = 'none';
   };
 
+  // 检查当前是否正在进行重命名或删除操作，并根据情况更新另一个状态。
   useEffect(() => {
     if (isRenaming) {
       setIsDeleting(false);
@@ -83,6 +99,7 @@ const Folder = ({
     }
   }, [isRenaming, isDeleting]);
 
+  // 根据搜索词的输入状态自动展开或关闭文件夹。
   useEffect(() => {
     if (searchTerm) {
       setIsOpen(true);
@@ -94,6 +111,8 @@ const Folder = ({
   return (
     <>
       <div className="relative flex items-center">
+        {/* 根据 isRenaming 的状态确定组件的渲染方式。
+        如果正在进行重命名操作，则显示一个带有输入框的区域，用于输入新的文件夹名称。 */}
         {isRenaming ? (
           <div className="flex w-full items-center gap-3 bg-[#343541]/90 p-3">
             {isOpen ? (
@@ -111,6 +130,7 @@ const Folder = ({
             />
           </div>
         ) : (
+          // 如果不在重命名操作，而是正常的文件夹显示状态，则显示一个按钮区域，包括文件夹的展开/折叠图标和文件夹名称。
           <button
             className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#343541]/90`}
             onClick={() => setIsOpen(!isOpen)}
@@ -131,6 +151,7 @@ const Folder = ({
           </button>
         )}
 
+        {/* 在删除或重命名操作时，会显示一个绝对定位的操作按钮区域，其中包括确认和取消按钮。 */}
         {(isDeleting || isRenaming) && (
           <div className="absolute right-1 z-10 flex text-gray-300">
             <SidebarActionButton
@@ -161,6 +182,7 @@ const Folder = ({
           </div>
         )}
 
+        {/* 如果既不在删除/重命名操作，也没有展开文件夹，则不显示任何内容。 */}
         {!isDeleting && !isRenaming && (
           <div className="absolute right-1 z-10 flex text-gray-300">
             <SidebarActionButton
@@ -184,6 +206,7 @@ const Folder = ({
         )}
       </div>
 
+      {/* 根据 isOpen 的状态决定是否显示文件夹内容。 */}
       {isOpen ? folderComponent : null}
     </>
   );

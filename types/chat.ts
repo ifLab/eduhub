@@ -24,3 +24,4 @@ export interface Conversation {
   temperature: number;
   folderId: string | null;
 }
+
