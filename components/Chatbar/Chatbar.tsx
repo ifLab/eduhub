@@ -190,6 +190,31 @@ export const Chatbar = () => {
       e.target.style.background = 'none';
     }
   };
+  
+  // 将指定的对话移动到指定的文件夹中
+  const handleMoveToFolder = useCallback(
+    (conversationId: string, folderId: string | null) => {
+      // 通过使用map方法遍历conversations数组，对每个会话进行检查。
+      const updatedConversations = conversations.map((conversation) => {
+        // 如果会话的id和传入的conversationId相等，表示找到了要移动的会话。
+        if (conversation.id === conversationId) {
+          return {
+            // 那么就创建一个新的会话对象，使用展开运算符...复制原始会话的所有属性，
+            // 并将folderId属性设置为传入的folderId。
+            ...conversation,
+            folderId,
+          };
+        }
+        return conversation;
+      });
+  
+      // 会话列表的状态将被更新为新的数组。
+      homeDispatch({ field: 'conversations', value: updatedConversations });
+      // 将更新后的会话数组保存起来，以便在需要持久化存储时使用。
+      saveConversations(updatedConversations);
+    },
+    [conversations, homeDispatch],
+  );
 
   // 在搜索条件发生变化时，根据条件对对话进行过滤，
   // 并将过滤后的结果更新到 filteredConversations 字段中。
@@ -311,31 +336,6 @@ export const Chatbar = () => {
       saveConversation(conversation);
     });
   }, []);
-
-  // 将指定的对话移动到指定的文件夹中
-  const handleMoveToFolder = useCallback(
-    (conversationId: string, folderId: string | null) => {
-      // 通过使用map方法遍历conversations数组，对每个会话进行检查。
-      const updatedConversations = conversations.map((conversation) => {
-        // 如果会话的id和传入的conversationId相等，表示找到了要移动的会话。
-        if (conversation.id === conversationId) {
-          return {
-            // 那么就创建一个新的会话对象，使用展开运算符...复制原始会话的所有属性，
-            // 并将folderId属性设置为传入的folderId。
-            ...conversation,
-            folderId,
-          };
-        }
-        return conversation;
-      });
-  
-      // 会话列表的状态将被更新为新的数组。
-      homeDispatch({ field: 'conversations', value: updatedConversations });
-      // 将更新后的会话数组保存起来，以便在需要持久化存储时使用。
-      saveConversations(updatedConversations);
-    },
-    [conversations, homeDispatch],
-  );
   
   // 教师助理 移动至文件夹 钩子
   useEffect(() => {
