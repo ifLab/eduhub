@@ -53,6 +53,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       modelError,
       loading,
       prompts,
+
+      lightMode,
     },
     handleUpdateConversation,
     dispatch: homeDispatch,
@@ -348,7 +350,10 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   }, [messagesEndRef]);
 
   return (
-    <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
+    // <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
+    // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : 'bg-white dark:bg-[#343541]'}`}>
+    // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : 'bg-white dark:bg-[#343541]'}`}>
+    <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-[#FBE8E7]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#99DDCC]' : 'bg-white dark:bg-[#343541]'}`}>
       {!(apiKey || serverSideApiKeyIsSet) ? (
         <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
           <div className="text-center text-4xl font-bold text-black dark:text-white">
@@ -482,7 +487,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 {loading && <ChatLoader />}
 
                 <div
-                  className="h-[162px] bg-white dark:bg-[#343541]"
+                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#FBE8E7]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#99DDCC]' : 'bg-white dark:bg-[#343541]'}`}
                   ref={messagesEndRef}
                 />
               </>

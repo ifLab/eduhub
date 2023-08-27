@@ -3,6 +3,9 @@ import { FC } from 'react';
 
 import { useTranslation } from 'next-i18next';
 
+import HomeContext from '@/pages/api/home/home.context';
+import { useContext } from 'react';
+
 interface Props {
   placeholder: string;
   searchTerm: string;
@@ -15,6 +18,9 @@ const Search: FC<Props> = ({ placeholder, searchTerm, onSearch }) => {
     onSearch(e.target.value);
   };
 
+  const {
+    state: { lightMode },} = useContext(HomeContext);
+
   const clearSearch = () => {
     onSearch('');
   };
@@ -22,7 +28,7 @@ const Search: FC<Props> = ({ placeholder, searchTerm, onSearch }) => {
   return (
     <div className="relative flex items-center">
       <input
-        className="w-full flex-1 rounded-md border border-neutral-600 bg-[#202123] px-4 py-3 pr-10 text-[14px] leading-3 text-white"
+        className={`w-full flex-1 rounded-md border border-black/30 px-4 py-3 pr-10 text-[14px] leading-3  text-black dark:text-white ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#A6E3E9]' : lightMode === 'green' ? 'bg-[#61C0BF]' : 'bg-[#FFFBE9] dark:bg-black'}`}
         type="text"
         placeholder={t(placeholder) || ''}
         value={searchTerm}

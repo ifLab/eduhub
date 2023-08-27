@@ -33,7 +33,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
   const { t } = useTranslation('chat');
 
   const {
-    state: { selectedConversation, conversations, currentMessage, messageIsStreaming },
+    state: { selectedConversation, conversations, currentMessage, messageIsStreaming,lightMode },
     dispatch: homeDispatch,
   } = useContext(HomeContext);
 
@@ -127,9 +127,28 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
   return (
     <div
       className={`group md:px-4 ${
-        message.role === 'assistant'
-          ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
-          : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+        // message.role === 'assistant'
+        //   ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+        //   : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+        message.role === 'assistant' && lightMode === 'red'
+        ? 'border-b border-black/10 bg-[#FDE2E2] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+        : lightMode === 'red'
+          ? 'border-b border-black/10 bg-[#FBE8E7] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+          : message.role === 'assistant' && lightMode === 'blue'
+            ? 'border-b border-black/10 bg-[#CBF1F5] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+            : lightMode === 'blue'
+              ? 'border-b border-black/10 bg-[#E3FDFD] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+              : message.role === 'assistant' && lightMode === 'green'
+                ? 'border-b border-black/10 bg-[#99DDCC] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+                : lightMode === 'green'
+                  ? 'border-b border-black/10 bg-[#BBDED6] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                  : message.role === 'assistant' && lightMode === 'dark'
+                    ? 'border-b border-black/10 bg-[#444654] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+                    : lightMode === 'dark'
+                      ? 'border-b border-black/10 bg-[#343541] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                      : message.role === 'assistant' && lightMode === 'light'
+                        ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+                        : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
       }`}
       style={{ overflowWrap: 'anywhere' }}
     >
@@ -149,7 +168,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                 <div className="flex w-full flex-col">
                   <textarea
                     ref={textareaRef}
-                    className="w-full resize-none whitespace-pre-wrap border-none dark:bg-[#343541]"
+                    className={`w-full resize-none whitespace-pre-wrap border-none ${lightMode === 'red' ? 'bg-[#FBE8E7]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#99DDCC]' : 'bg-white dark:bg-[#343541]'}`}
                     value={messageContent}
                     onChange={handleInputChange}
                     onKeyDown={handlePressEnter}

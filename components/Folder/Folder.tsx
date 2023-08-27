@@ -82,7 +82,7 @@ const Folder = ({
 
   // 在拖放目标上添加高亮效果。当拖动对象进入文件夹区域时，它会将拖放目标的背景色设置为指定的颜色。
   const highlightDrop = (e: any) => {
-    e.target.style.background = '#343541';
+    e.target.style.background = '#F7FBFC';
   };
 
   // 移除拖放目标的高亮效果。当拖动对象离开文件夹区域时，它会将拖放目标的背景色恢复为默认值。
@@ -114,14 +114,14 @@ const Folder = ({
         {/* 根据 isRenaming 的状态确定组件的渲染方式。
         如果正在进行重命名操作，则显示一个带有输入框的区域，用于输入新的文件夹名称。 */}
         {isRenaming ? (
-          <div className="flex w-full items-center gap-3 bg-[#343541]/90 p-3">
+          <div className="flex w-full items-center gap-3 bg-gray-500/30 p-3">
             {isOpen ? (
               <IconCaretDown size={18} />
             ) : (
               <IconCaretRight size={18} />
             )}
             <input
-              className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-white outline-none focus:border-neutral-100"
+              className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-black dark:text-white outline-none focus:border-neutral-100"
               type="text"
               value={renameValue}
               onChange={(e) => setRenameValue(e.target.value)}
@@ -132,7 +132,7 @@ const Folder = ({
         ) : (
           // 如果不在重命名操作，而是正常的文件夹显示状态，则显示一个按钮区域，包括文件夹的展开/折叠图标和文件夹名称。
           <button
-            className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-[#343541]/90`}
+            className={`flex w-full cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors duration-200 hover:bg-gray-500/30`}
             onClick={() => setIsOpen(!isOpen)}
             onDrop={(e) => dropHandler(e)}
             onDragOver={allowDrop}

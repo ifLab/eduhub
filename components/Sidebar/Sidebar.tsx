@@ -9,6 +9,10 @@ import {
 
 import Search from '../Search';
 
+
+import HomeContext from '@/pages/api/home/home.context';
+import { useContext } from 'react';
+
 interface Props<T> {
   isOpen: boolean;
   addItemButtonTitle: string;
@@ -42,12 +46,16 @@ const Sidebar = <T,>({
 }: Props<T>) => {
   const { t } = useTranslation('promptbar');
 
+  const {
+    state: { lightMode },
+  } = useContext(HomeContext);
+
   const allowDrop = (e: any) => {
     e.preventDefault();
   };
 
   const highlightDrop = (e: any) => {
-    e.target.style.background = '#343541';
+    e.target.style.background = '#E4F9F5';
   };
 
   const removeHighlight = (e: any) => {
@@ -57,11 +65,13 @@ const Sidebar = <T,>({
   return isOpen ? (
     <div>
       <div
-        className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 text-[14px] transition-all sm:relative sm:top-0`}
+        // className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 text-[14px] transition-all sm:relative sm:top-0`}
+        className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 p-2 text-[14px] transition-all sm:relative sm:top-0  ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#A6E3E9]' : lightMode === 'green' ? 'bg-[#61C0BF]' : 'bg-[#FFFBE9] dark:bg-black'}`}
       >
+        {/* "新建聊天 css" */}
         <div className="flex items-center">
           <button
-            className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-white/20 p-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
+            className="dark:text-white dark:border border-black/30 text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-black/30 p-3 text-black transition-colors duration-200 hover:bg-gray-500/30"
             onClick={() => {
               handleCreateItem();
               handleSearchTerm('');
@@ -71,8 +81,9 @@ const Sidebar = <T,>({
             {addItemButtonTitle}
           </button>
 
+          {/* "新建文件夹 css" */}
           <button
-            className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10"
+            className="dark:text-white ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-black/30 p-3 text-sm text-black transition-colors duration-200 hover:bg-gray-500/30"
             onClick={handleCreateFolder}
           >
             <IconFolderPlus size={16} />
@@ -103,7 +114,7 @@ const Sidebar = <T,>({
               {itemComponent}
             </div>
           ) : (
-            <div className="mt-8 select-none text-center text-white opacity-50">
+            <div className="dark:text-white mt-8 select-none text-center text-black opacity-50">
               <IconMistOff className="mx-auto mb-3" />
               <span className="text-[14px] leading-normal">
                 {t('No data.')}

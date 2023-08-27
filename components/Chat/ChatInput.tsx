@@ -48,7 +48,7 @@ export const ChatInput = ({
   const { t } = useTranslation('chat');
 
   const {
-    state: { selectedConversation, messageIsStreaming, prompts },
+    state: { selectedConversation, messageIsStreaming, prompts,lightMode },
 
     dispatch: homeDispatch,
   } = useContext(HomeContext);
@@ -257,7 +257,8 @@ export const ChatInput = ({
   }, []);
 
   return (
-    <div className="absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2">
+    // <div className={`absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2`}>
+    <div className={`absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent pt-6 dark:border-white/20 ${lightMode === 'red' ? 'via-[#FBE8E7] to-[#FBE8E7]' : lightMode === 'blue' ? 'via-[#CBF1F5] to-[#CBF1F5]' : lightMode === 'green' ? 'via-[#99DDCC] to-[#99DDCC]' : 'via-white to-white dark:via-[#343541] dark:to-[#343541]'} md:pt-2`}>
       <div className="stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[52px] md:last:mb-6 lg:mx-auto lg:max-w-3xl">
         {messageIsStreaming && (
           <button
