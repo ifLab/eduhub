@@ -21,7 +21,7 @@ export const TeachingAssistant: FC<Props> = ({ onTeachingAssistant }) => {
     <div className="flex w-full cursor-pointer items-center rounded-lg py-3 px-3 hover:bg-gray-500/10">
       <IconTrash size={18} />
 
-      <div className="ml-3 flex-1 text-left text-[12.5px] leading-3 text-white">
+      <div className="ml-3 flex-1 text-left text-[12.5px] leading-3 text-black dark:text-white">
         {t('Are you sure?')}
       </div>
 

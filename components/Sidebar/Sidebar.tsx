@@ -66,7 +66,7 @@ const Sidebar = <T,>({
     <div>
       <div
         // className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 text-[14px] transition-all sm:relative sm:top-0`}
-        className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 p-2 text-[14px] transition-all sm:relative sm:top-0  ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#A6E3E9]' : lightMode === 'green' ? 'bg-[#61C0BF]' : 'bg-[#FFFBE9] dark:bg-black'}`}
+        className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 p-2 text-[14px] transition-all sm:relative sm:top-0  ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#A6E3E9]' : lightMode === 'green' ? 'bg-[#61C0BF]' : 'bg-[#F6F6F6] dark:bg-black'}`}
       >
         {/* "新建聊天 css" */}
         <div className="flex items-center">

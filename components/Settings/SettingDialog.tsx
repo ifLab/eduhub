@@ -24,7 +24,10 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
     initialState: settings,
   });
   // 使用useContext钩子函数获取到HomeContext上下文，并将其中的dispatch赋值给homeDispatch变量。
-  const { dispatch: homeDispatch } = useContext(HomeContext);
+  const { state: { lightMode },
+    dispatch: homeDispatch 
+  } = useContext(HomeContext);
+
   // 使用useRef钩子函数创建了一个引用modalRef，该引用指向一个HTMLDivElement元素。
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -84,7 +87,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 
           <div
             ref={modalRef}
-            className="dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all dark:bg-[#202123] sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle"
+            className={`dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#FBE8E7]' : lightMode === 'blue' ? 'bg-[#E3FDFD]' : lightMode === 'green' ? 'bg-[#BBDED6]' : 'bg-white dark:bg-[#343541]'} sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle`}
             // className="dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#BBDED6]' : 'bg-white dark:bg-[#343541]'}` sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle"
             role="dialog"
           >
