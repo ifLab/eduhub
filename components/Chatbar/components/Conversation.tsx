@@ -101,7 +101,7 @@ export const ConversationComponent = ({ conversation }: Props) => {
   }, [isRenaming, isDeleting]);
 
   return (
-    <div className={`relative flex items-center text-black dark:text-white ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#A6E3E9]' : lightMode === 'green' ? 'bg-[#61C0BF]' : 'bg-[#FFFBE9] dark:bg-black'}`}>
+    <div className={`relative flex items-center text-black dark:text-white ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#A6E3E9]' : lightMode === 'green' ? 'bg-[#61C0BF]' : 'bg-[#F6F6F6] dark:bg-black'}`}>
       {isRenaming && selectedConversation?.id === conversation.id ? (
         <div className="flex w-full items-center gap-3 rounded-lg bg-gray-500/30 p-3">
           <IconMessage size={18} />
