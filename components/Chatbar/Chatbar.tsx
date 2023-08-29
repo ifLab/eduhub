@@ -11,7 +11,7 @@ import { exportData, importData } from '@/utils/app/importExport';
 
 import { Conversation } from '@/types/chat';
 import { LatestExportFormat, SupportedExportFormats } from '@/types/export';
-// import { OpenAIModels } from '@/types/openai';
+
 import { OpenAIModels, fallbackModelID } from '@/types/openai';
 import { PluginKey } from '@/types/plugin';
 
@@ -191,7 +191,7 @@ export const Chatbar = () => {
     }
   };
 
-  // // 默认文件夹渲染
+  // 默认文件夹渲染
   useEffect(() => {
     // 页面初始化时创建默认文件夹
     const defaultFolders: FolderInterface[] = [
@@ -205,13 +205,13 @@ export const Chatbar = () => {
         id: uuidv4(),
         name: '智能插件',
         type: 'chat',
-        isDefault: true, // 设置isDefault为true
+        isDefault: true, 
       },
       {
         id: uuidv4(),
         name: '课程助手',
         type: 'chat',
-        isDefault: true, // 设置isDefault为true
+        isDefault: true, 
       },
     ];
     // 获取已存在的文件夹名称
@@ -222,11 +222,12 @@ export const Chatbar = () => {
     );
     // 将默认文件夹添加到文件夹列表中
     const updatedFolders = [...folders, ...filteredDefaultFolders];
+    console.log(updatedFolders)
     homeDispatch({ field: 'folders', value: updatedFolders });
     saveFolders(updatedFolders);
   }, []);
   
-  // // 六个默认会话渲染
+  // 六个默认会话渲染
   useEffect(() => {
     const defaultConversations: Conversation[] = [
       {
