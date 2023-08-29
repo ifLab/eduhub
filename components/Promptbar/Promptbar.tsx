@@ -220,7 +220,7 @@ const Promptbar = () => {
         // 创建新的提示项
         handleCreateItem={handleCreatePrompt}
         // 创建新的文件夹
-        handleCreateFolder={() => handleCreateFolder(t('New folder'), 'prompt')}
+        handleCreateFolder={() => handleCreateFolder(t('New folder'), 'prompt',false)}
         // 处理拖放操作
         handleDrop={handleDrop}
       />
