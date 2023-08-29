@@ -463,7 +463,7 @@ export const Chatbar = () => {
         // 处理创建新会话的函数。
         handleCreateItem={handleNewConversation}
         // 处理创建文件夹的函数。
-        handleCreateFolder={() => handleCreateFolder(t('New folder'), 'chat')}
+        handleCreateFolder={() => handleCreateFolder(t('New folder'), 'chat',false)}
         // 指定一个处理拖放操作的函数。
         handleDrop={handleDrop}
         // 渲染聊天栏设置组件。

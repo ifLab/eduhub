@@ -14,6 +14,11 @@ import {
   useState,
 } from 'react';
 
+import { IconBook, IconCode } from '@tabler/icons-react';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChalkboardUser,faUser,faGlobe,faFileLines,faSquareRootVariable,faServer } from '@fortawesome/free-solid-svg-icons';
+
 import { Conversation } from '@/types/chat';
 
 import HomeContext from '@/pages/api/home/home.context';
@@ -100,6 +105,31 @@ export const ConversationComponent = ({ conversation }: Props) => {
     }
   }, [isRenaming, isDeleting]);
 
+  // 图标变量
+  let icon;
+  switch (conversation.name) {
+    case '教师助理':
+      icon = <FontAwesomeIcon icon={faChalkboardUser} fixedWidth/>;
+      break;
+    case '学生助理':
+      icon = <FontAwesomeIcon icon={faUser} fixedWidth/>;
+      break;
+    case '联网搜索':
+      icon = <FontAwesomeIcon icon={faGlobe} fixedWidth/>;
+      break;
+    case '论文检索':
+      icon = <FontAwesomeIcon icon={faFileLines} fixedWidth/>;
+      break;
+    case '数学计算':
+      icon = <FontAwesomeIcon icon={faSquareRootVariable} fixedWidth/>;
+      break;
+    case '开源软件开发技术':
+      icon = <FontAwesomeIcon icon={faServer} fixedWidth/>;
+      break;
+    default:
+      icon = <IconMessage size={18} />;
+  }
+
   return (
     <div className={`relative flex items-center text-black dark:text-white ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'}`}>
       {isRenaming && selectedConversation?.id === conversation.id ? (
@@ -128,7 +158,9 @@ export const ConversationComponent = ({ conversation }: Props) => {
           draggable="true"
           onDragStart={(e) => handleDragStart(e, conversation)}
         >
-          <IconMessage size={18} />
+          {/* <IconMessage size={18} /> */}
+          {/* 图标元素 */}
+          {icon}
           <div
             className={`relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3 ${
               selectedConversation?.id === conversation.id ? 'pr-12' : 'pr-1'

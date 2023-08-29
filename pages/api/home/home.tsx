@@ -112,11 +112,12 @@ const Home = ({
 
   // FOLDER OPERATIONS  --------------------------------------------
 
-  const handleCreateFolder = (name: string, type: FolderType) => {
+  const handleCreateFolder = (name: string, type: FolderType,isDefault:false) => {
     const newFolder: FolderInterface = {
       id: uuidv4(),
       name,
       type,
+      isDefault,
     };
 
     const updatedFolders = [...folders, newFolder];
