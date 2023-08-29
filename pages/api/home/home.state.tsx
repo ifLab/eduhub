@@ -10,7 +10,7 @@ export interface HomeInitialState {
   apiKey: string;
   pluginKeys: PluginKey[];
   loading: boolean;
-  lightMode: 'light' | 'dark' | 'red' | 'blue' | 'green';
+  lightMode: 'light' | 'dark' | 'red' | 'blue' | 'green' | 'purple' | 'brown';
   messageIsStreaming: boolean;
   modelError: ErrorMessage | null;
   models: OpenAIModel[];

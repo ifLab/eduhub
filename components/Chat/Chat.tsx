@@ -353,13 +353,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
     // <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
     // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : 'bg-white dark:bg-[#343541]'}`}>
     // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : 'bg-white dark:bg-[#343541]'}`}>
-    <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-[#FBE8E7]' : lightMode === 'blue' ? 'bg-[#E3FDFD]' : lightMode === 'green' ? 'bg-[#BBDED6]' : 'bg-white dark:bg-[#343541]'}`}>
+    <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'}`}>
       {!(apiKey || serverSideApiKeyIsSet) ? (
         <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
-          <div className="text-center text-4xl font-bold text-black dark:text-white">
+          <div className={`text-center text-4xl font-bold ${lightMode === 'brown' ? 'text-white' : 'text-black dark:text-white'}`}>
             Welcome to BISTU Copilot
           </div>
-          <div className="text-center text-lg text-black dark:text-white">
+          <div className={`text-center text-lg ${lightMode === 'brown' ? 'text-white' : 'text-black dark:text-white'}`}>
             <div className="mb-8">{`BISTU Copilot is an open source clone of OpenAI's ChatGPT UI.`}</div>
             <div className="mb-2 font-bold">
               Important: BISTU Copilot is 100% unaffiliated with OpenAI.
@@ -445,7 +445,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ) : (
               <>
               {/* 顶部导航栏 */}
-                <div className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${lightMode === 'red' ? 'bg-[#FDE2E2]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#99DDCC]' : 'bg-neutral-100 dark:bg-[#444654]'} dark:text-neutral-200`}>
+                <div className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'} dark:text-neutral-200`}>
                   {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
                   : {selectedConversation?.temperature} |
                   <button
@@ -489,7 +489,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 
                 {/* 回复消息下方的空白区域 */}
                 <div
-                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#FBE8E7]' : lightMode === 'blue' ? 'bg-[#E3FDFD]' : lightMode === 'green' ? 'bg-[#BBDED6]' : 'bg-white dark:bg-[#343541]'}`}
+                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'}`}
                   ref={messagesEndRef}
                 />
               </>

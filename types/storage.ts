@@ -8,7 +8,7 @@ export interface LocalStorage {
   apiKey: string;
   conversationHistory: Conversation[];
   selectedConversation: Conversation;
-  theme: 'light' | 'dark' | 'red' | 'blue' | 'green';
+  theme: 'light' | 'dark' | 'red' | 'blue' | 'green' | 'purple' | 'brown';
   // added folders (3/23/23)
   folders: FolderInterface[];
   // added prompts (3/26/23)

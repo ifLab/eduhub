@@ -132,24 +132,34 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
         //   : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
         // 助手和用户的样式设置
         message.role === 'assistant' && lightMode === 'red'
-        ? 'border-b border-black/10 bg-[#FDE2E2] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+        ? 'border-b border-black/10 bg-[#9A3B3B] text-gray-100 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
         : lightMode === 'red'
-          ? 'border-b border-black/10 bg-[#FBE8E7] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+          ? 'border-b border-black/10 bg-[#9A3B3B] text-gray-100 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
           : message.role === 'assistant' && lightMode === 'blue'
-            ? 'border-b border-black/10 bg-[#CBF1F5] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+            ? 'border-b border-black/10 bg-[#4682A9] text-gray-100 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
             : lightMode === 'blue'
-              ? 'border-b border-black/10 bg-[#E3FDFD] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+              ? 'border-b border-black/10 bg-[#4682A9] text-gray-100 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
               : message.role === 'assistant' && lightMode === 'green'
-                ? 'border-b border-black/10 bg-[#99DDCC] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+                ? 'border-b border-black/10 bg-[#435334] text-gray-100 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
                 : lightMode === 'green'
-                  ? 'border-b border-black/10 bg-[#BBDED6] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                  ? 'border-b border-black/10 bg-[#435334] text-gray-100 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
                   : message.role === 'assistant' && lightMode === 'dark'
-                    ? 'border-b border-black/10 bg-[#444654] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+                    ? 'border-b border-black/10 bg-[#444654] text-gray-100 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
                     : lightMode === 'dark'
-                      ? 'border-b border-black/10 bg-[#343541] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                      ? 'border-b border-black/10 bg-[#343541] text-gray-100 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
                       : message.role === 'assistant' && lightMode === 'light'
                         ? 'border-b border-black/10 bg-gray-50 text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
-                        : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                        : lightMode === 'light'
+                          ? 'border-b border-black/10 bg-[#343541] text-gray-100 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                            :message.role === 'assistant' && lightMode === 'purple'
+                              ? 'border-b border-black/10 bg-[#4A55A2] text-gray-100 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+                              : lightMode === 'purple'
+                                ? 'border-b border-black/10 bg-[#4A55A2] text-gray-100 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                                : message.role === 'assistant' && lightMode === 'brown'
+                                  ? 'border-b border-black/10 bg-[#393646] text-gray-100 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
+                                  : lightMode === 'brown'
+                                    ? 'border-b border-black/10 bg-[#393646] text-gray-100 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
+                                    : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
       }`}
       style={{ overflowWrap: 'anywhere' }}
     >
@@ -162,15 +172,15 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
           )}
         </div>
 
-        <div className="prose mt-[-2px] w-full dark:prose-invert">
+        <div className={`prose mt-[-2px] w-full dark:prose-invert ${lightMode === 'light' ? 'text-black' : 'text-gray-100'}`}>
           {message.role === 'user' ? (
-            <div className="flex w-full">
+            <div className={`flex w-full ${lightMode === 'light' ? 'text-black' : 'text-gray-100'}`}>
               {isEditing ? (
                 <div className="flex w-full flex-col">
                   {/* 修改已发送的消息时 输入框的样式设置 */}
                   <textarea
                     ref={textareaRef}
-                    className={`w-full resize-none whitespace-pre-wrap border-none ${lightMode === 'red' ? 'bg-[#FBE8E7]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#99DDCC]' : 'bg-white dark:bg-[#343541]'}`}
+                    className={`w-full resize-none whitespace-pre-wrap border-none ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'}`}
                     value={messageContent}
                     onChange={handleInputChange}
                     onKeyDown={handlePressEnter}
