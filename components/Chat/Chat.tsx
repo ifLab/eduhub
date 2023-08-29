@@ -410,7 +410,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         <Spinner size="16px" className="mx-auto" />
                       </div>
                     ) : (
-                      'BISTU Copilot'
+                      <img src="bistu.png" alt="bistu logo" className="mx-auto" width="400px" height="auto" />
                     )}
                   </div>
 
@@ -489,7 +489,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 
                 {/* 回复消息下方的空白区域 */}
                 <div
-                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
+                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'}`}
                   ref={messagesEndRef}
                 />
               </>
