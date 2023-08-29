@@ -199,16 +199,19 @@ export const Chatbar = () => {
         id: uuidv4(),
         name: '校园助理',
         type: 'chat',
+        isDefault: true, // 设置isDefault为true
       },
       {
         id: uuidv4(),
         name: '智能插件',
         type: 'chat',
+        isDefault: true, // 设置isDefault为true
       },
       {
         id: uuidv4(),
         name: '课程助手',
         type: 'chat',
+        isDefault: true, // 设置isDefault为true
       },
     ];
     // 获取已存在的文件夹名称

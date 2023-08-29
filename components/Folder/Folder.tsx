@@ -5,6 +5,9 @@ import {
   IconPencil,
   IconTrash,
   IconX,
+
+  IconFolder,
+  IconActivityHeartbeat,
 } from '@tabler/icons-react';
 import {
   KeyboardEvent,
@@ -13,6 +16,10 @@ import {
   useEffect,
   useState,
 } from 'react';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown, faCaretRight,faArrowRight,faLightbulb,faGraduationCap,faCode,faBook } from '@fortawesome/free-solid-svg-icons';
+
 
 import { FolderInterface } from '@/types/folder';
 
@@ -139,10 +146,24 @@ const Folder = ({
             onDragEnter={highlightDrop}
             onDragLeave={removeHighlight}
           >
-            {isOpen ? (
+            {/* {isOpen ? (
               <IconCaretDown size={18} />
             ) : (
               <IconCaretRight size={18} />
+            )} */}
+
+          {currentFolder.isDefault ? (
+              currentFolder.name === "课程助手" ? (
+                <FontAwesomeIcon icon={faBook} fixedWidth />
+              ) : currentFolder.name === "校园助理" ? (
+                <FontAwesomeIcon icon={faGraduationCap} fixedWidth />
+              ) : currentFolder.name === "智能插件" ? (
+                <FontAwesomeIcon icon={faCode} fixedWidth />
+              ) : (
+                isOpen ? <IconCaretDown size={18} /> : <IconCaretRight size={18} />
+              )
+            ) : (
+              isOpen ? <IconCaretDown size={18} /> : <IconCaretRight size={18} />
             )}
 
             <div className="relative max-h-5 flex-1 overflow-hidden text-ellipsis whitespace-nowrap break-all text-left text-[12.5px] leading-3">
