@@ -23,13 +23,18 @@ export const PromptList: FC<Props> = ({
 
   // 根据 lightMode 的值来设置 bgColor 的值
   if (lightMode === 'red') {
-    bgColor = 'bg-[#FDE2E2]';
+    bgColor = 'bg-[#F2ECBE]';
   } else if (lightMode === 'blue') {
-    bgColor = 'bg-[#CBF1F5]';
+    bgColor = 'bg-[#F6F4EB]';
   } else if (lightMode === 'green') {
-    bgColor = 'bg-[#BBDED6]';
+    bgColor = 'bg-[#FAF1E4]';
+  } else if (lightMode === 'purple') {
+    bgColor = 'bg-[#C5DFF8]';
+  } else if (lightMode === 'brown') {
+    bgColor = 'bg-[#F4EEE0]';
   }
 
+  // 输入 / 时弹出的对话框背景色
   return (
     <ul
       ref={promptListRef}
