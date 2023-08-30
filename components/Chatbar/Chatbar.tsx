@@ -232,6 +232,7 @@ export const Chatbar = () => {
     const defaultConversations: Conversation[] = [
       {
         id: uuidv4(),
+        dify_id: '',
         name: '教师助理',
         messages: [],
         model: OpenAIModels[fallbackModelID],
@@ -241,6 +242,7 @@ export const Chatbar = () => {
       },
       {
         id: uuidv4(),
+        dify_id: '',
         name: '学生助理',
         messages: [],
         model: OpenAIModels[fallbackModelID],
@@ -250,6 +252,7 @@ export const Chatbar = () => {
       },
       {
         id: uuidv4(),
+        dify_id: '',
         name: '联网搜索',
         messages: [],
         model: OpenAIModels[fallbackModelID],
@@ -259,6 +262,7 @@ export const Chatbar = () => {
       },
       {
         id: uuidv4(),
+        dify_id: '',
         name: '论文检索',
         messages: [],
         model: OpenAIModels[fallbackModelID],
@@ -268,6 +272,7 @@ export const Chatbar = () => {
       },
       {
         id: uuidv4(),
+        dify_id: '',
         name: '数学计算',
         messages: [],
         model: OpenAIModels[fallbackModelID],
@@ -277,12 +282,14 @@ export const Chatbar = () => {
       },
       {
         id: uuidv4(),
+        dify_id: '',
         name: '开源软件开发技术',
         messages: [],
         model: OpenAIModels[fallbackModelID],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: null,
+        
       },
     ];
     // 将默认会话添加到会话列表中

@@ -101,6 +101,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           key: apiKey,
           prompt: updatedConversation.prompt,
           temperature: updatedConversation.temperature,
+          Dify_ConversationId: updatedConversation.dify_id,
         };
         const endpoint = getEndpoint(plugin);
         let body;
@@ -153,6 +154,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           const decoder = new TextDecoder();
           let done = false;
           let isFirst = true;
+          let accumulatedText = "";
           let text = '';
           while (!done) {
             if (stopConversationRef.current === true) {
@@ -162,7 +164,20 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             }
             const { value, done: doneReading } = await reader.read();
             done = doneReading;
-            const chunkValue = decoder.decode(value);
+
+            accumulatedText += decoder.decode(value);
+
+            // 使用换行符（或其他分隔符）分割累积的文本，并处理每一个完整的 JSON 对象
+            while (accumulatedText.includes("\n")) {
+              const splitIndex = accumulatedText.indexOf("\n");
+              const jsonText = accumulatedText.slice(0, splitIndex);
+
+              const parsedMessage = JSON.parse(jsonText);
+              const { answer: answer, conversation_id: newConversationId } = parsedMessage;
+              console.log('answer', answer);
+              
+            const chunkValue = answer;
+
             text += chunkValue;
             if (isFirst) {
               isFirst = false;
@@ -198,7 +213,18 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 value: updatedConversation,
               });
             }
+            accumulatedText = accumulatedText.slice(splitIndex + 1);
+            
+            // update conversation id
+            if (newConversationId) {
+            updatedConversation = {
+              ...updatedConversation,
+              dify_id: newConversationId,
+            };
           }
+          }
+          }
+
           saveConversation(updatedConversation);
           const updatedConversations: Conversation[] = conversations.map(
             (conversation) => {

@@ -9,6 +9,106 @@ import {
   createParser,
 } from 'eventsource-parser';
 
+// 其他依赖和OpenAIError类定义保持不变
+
+export const DifyStream = async (
+  query: string,
+  key: string,
+  user: string,
+  existingConversationId: string = ""
+  // onNewConversationId: (id: string) => void  // 用于更新conversation_id
+) => {
+  // 更新URL
+  const url = `https://api.dify.ai/v1/chat-messages`;
+
+  // 发起HTTP请求
+  const res = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${key || process.env.DIFY_API_KEY}`
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      inputs: {}, // 这里可以根据API文档进行适当的调整
+      query: query,
+      response_mode: 'streaming',
+      user: user,
+      conversation_id: existingConversationId // 使用存在的conversation_id
+    }),
+  });
+
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+
+
+
+  // 处理非200的HTTP状态
+  if (res.status !== 200) {
+    const result = await res.json();
+    if (result.error) {
+      throw new OpenAIError(
+        result.error.message,
+        result.error.type,
+        result.error.param,
+        result.error.code,
+      );
+    } else {
+      throw new Error(`API returned an error: ${decoder.decode(result?.value) || result.statusText}`);
+    }
+  }
+
+  // 处理成功响应并创建一个ReadableStream
+  const stream = new ReadableStream({
+    async start(controller) {
+      // 添加超时逻辑
+      let timeoutId: ReturnType<typeof setTimeout>;
+      const timeoutDuration = 5000; // 5秒
+
+      const resetTimeout = () => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          controller.close(); // 关闭流
+        }, timeoutDuration);
+      };
+
+      resetTimeout(); // 初始化超时
+
+      const onParse = (event: ParsedEvent | ReconnectInterval) => {
+        if (event.type === 'event') {
+          const data = JSON.parse(event.data);
+
+          // 更新conversation_id
+          const newConversationId = data.conversation_id;
+
+          // 如果需要，可以将其他字段也解析出来
+          const answer = data.answer;
+
+          // 每次收到数据，重置超时
+          resetTimeout();
+
+          // 将解析后的数据加入stream
+// 将解析后的数据加入stream，并在每个对象后添加换行符作为分隔符
+          const queue = encoder.encode(JSON.stringify({ conversation_id: newConversationId, answer: answer }) + "\n");
+          controller.enqueue(queue);
+
+        }
+      };
+      // console.log('new||ConversationId', newConversationId);
+
+      const parser = createParser(onParse);
+
+      for await (const chunk of res.body as any) {
+        parser.feed(decoder.decode(chunk));
+      }
+    },
+  });
+
+
+  return {
+    stream
+  };
+};
+
 export class OpenAIError extends Error {
   type: string;
   param: string;
