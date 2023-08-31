@@ -15,11 +15,10 @@ export const DifyStream = async (
   query: string,
   key: string,
   user: string,
-  existingConversationId: string = ""
-  // onNewConversationId: (id: string) => void  // 用于更新conversation_id
+  existingConversationId: string,
 ) => {
   // 更新URL
-  const url = `https://api.dify.ai/v1/chat-messages`;
+  const url = process.env.DIFY_API_URL || 'https://api.dify.ai/v1/chat-messages';
 
   // 发起HTTP请求
   const res = await fetch(url, {
@@ -62,7 +61,7 @@ export const DifyStream = async (
     async start(controller) {
       // 添加超时逻辑
       let timeoutId: ReturnType<typeof setTimeout>;
-      const timeoutDuration = 5000; // 5秒
+      const timeoutDuration = Number(process.env.DIFY_API_TIMEOUT || 5000);
 
       const resetTimeout = () => {
         clearTimeout(timeoutId);
