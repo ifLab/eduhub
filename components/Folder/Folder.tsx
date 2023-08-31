@@ -89,7 +89,7 @@ const Folder = ({
 
   // 在拖放目标上添加高亮效果。当拖动对象进入文件夹区域时，它会将拖放目标的背景色设置为指定的颜色。
   const highlightDrop = (e: any) => {
-    e.target.style.background = '#F7FBFC';
+    e.target.style.background = '#343541';
   };
 
   // 移除拖放目标的高亮效果。当拖动对象离开文件夹区域时，它会将拖放目标的背景色恢复为默认值。
@@ -128,7 +128,8 @@ const Folder = ({
               <IconCaretRight size={18} />
             )}
             <input
-              className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-black dark:text-white outline-none focus:border-neutral-100"
+              // className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-black dark:text-white outline-none focus:border-neutral-100"
+              className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-white outline-none focus:border-neutral-100"
               type="text"
               value={renameValue}
               onChange={(e) => setRenameValue(e.target.value)}
@@ -154,11 +155,11 @@ const Folder = ({
 
           {currentFolder.isDefault ? (
               currentFolder.name === "课程助手" ? (
-                <FontAwesomeIcon icon={faBook} fixedWidth />
+                <FontAwesomeIcon icon={faBook} style={{ height: '16px', width: '16px' }} fixedWidth />
               ) : currentFolder.name === "校园助理" ? (
-                <FontAwesomeIcon icon={faGraduationCap} fixedWidth />
+                <FontAwesomeIcon icon={faGraduationCap} style={{ height: '16px', width: '16px'}} fixedWidth />
               ) : currentFolder.name === "智能插件" ? (
-                <FontAwesomeIcon icon={faCode} fixedWidth />
+                <FontAwesomeIcon icon={faCode} style={{ height: '16px', width: '16px' }} fixedWidth />
               ) : (
                 isOpen ? <IconCaretDown size={18} /> : <IconCaretRight size={18} />
               )

@@ -53,7 +53,8 @@ export const ChatFolders = ({ searchTerm }: Props) => {
   // 在组件的返回部分，使用 flex 布局，并遍历聊天栏的文件夹列表。
   // 对于每个文件夹，使用 Folder 组件来渲染文件夹项，传入相应的属性和子组件（即文件夹关联的会话列表）。
   return (
-    <div className="flex w-full flex-col pt-2 text-black dark:text-white">
+    // <div className="flex w-full flex-col pt-2 text-black dark:text-white">
+    <div className="flex w-full flex-col pt-2">
       {folders
         .filter((folder) => folder.type === 'chat')
         // .sort((a, b) => a.name.localeCompare(b.name))

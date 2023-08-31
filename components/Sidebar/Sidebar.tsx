@@ -55,7 +55,7 @@ const Sidebar = <T,>({
   };
 
   const highlightDrop = (e: any) => {
-    e.target.style.background = '#E4F9F5';
+    e.target.style.background = '#343541';
   };
 
   const removeHighlight = (e: any) => {
@@ -66,12 +66,13 @@ const Sidebar = <T,>({
     <div>
       <div
         // className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 bg-[#202123] p-2 text-[14px] transition-all sm:relative sm:top-0`}
-        className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 p-2 text-[14px] transition-all sm:relative sm:top-0  ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'}`}
+        // 两侧侧边栏的背景色
+        className={`fixed top-0 ${side}-0 z-40 flex h-full w-[260px] flex-none flex-col space-y-2 p-2 text-[14px] transition-all sm:relative sm:top-0  ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-[#202123] dark:bg-[#202123]'}`}
       >
-        {/* "新建聊天 css" */}
+        {/* "新建聊天"按钮 样式设置 */}
         <div className="flex items-center">
           <button
-            className="dark:text-white dark:border border-black/30 text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-black/30 p-3 text-black transition-colors duration-200 hover:bg-gray-500/30"
+            className="text-sidebar flex w-[190px] flex-shrink-0 cursor-pointer select-none items-center gap-3 rounded-md border border-white/20 p-3 text-white transition-colors duration-200 hover:bg-gray-500/10"
             onClick={() => {
               handleCreateItem();
               handleSearchTerm('');
@@ -81,9 +82,9 @@ const Sidebar = <T,>({
             {addItemButtonTitle}
           </button>
 
-          {/* "新建文件夹 css" */}
+          {/* "新建文件夹"按钮 样式设置 */}
           <button
-            className="dark:text-white ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-black/30 p-3 text-sm text-black transition-colors duration-200 hover:bg-gray-500/30"
+            className="ml-2 flex flex-shrink-0 cursor-pointer items-center gap-3 rounded-md border border-white/20 p-3 text-sm text-white transition-colors duration-200 hover:bg-gray-500/10"
             onClick={handleCreateFolder}
           >
             <IconFolderPlus size={16} />
@@ -114,7 +115,7 @@ const Sidebar = <T,>({
               {itemComponent}
             </div>
           ) : (
-            <div className="dark:text-white mt-8 select-none text-center text-black opacity-50">
+            <div className="mt-8 select-none text-center text-white opacity-50">
               <IconMistOff className="mx-auto mb-3" />
               <span className="text-[14px] leading-normal">
                 {t('No data.')}

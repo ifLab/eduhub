@@ -15,66 +15,48 @@ interface Props {
   onClose: () => void;
 }
 
-export const SettingDialog: FC<Props> = ({ open, onClose }) => {
-  const { t } = useTranslation('settings');
-  // 通过getSettings函数获取与设置相关的配置信息，并将其赋值给settings变量。
-  const settings: Settings = getSettings();
-  // 使用useCreateReducer自定义钩子函数，创建了一个可管理Settings类型状态的state和dispatch。
-  const { state, dispatch } = useCreateReducer<Settings>({
-    initialState: settings,
-  });
-  // 使用useContext钩子函数获取到HomeContext上下文，并将其中的dispatch赋值给homeDispatch变量。
+export const LogoDialog: FC<Props> = ({ open, onClose }) => {
+  const { t } = useTranslation('BISTU');
+//   const settings: Settings = getSettings();
+//   const { state, dispatch } = useCreateReducer<Settings>({
+//     initialState: settings,
+//   });
   const { state: { lightMode },
     dispatch: homeDispatch 
   } = useContext(HomeContext);
-
-  // 使用useRef钩子函数创建了一个引用modalRef，该引用指向一个HTMLDivElement元素。
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // 通过鼠标事件监听器实现了在用户点击对话框外部区域时关闭对话框的功能，
-  // 并且在组件卸载时清除了相关的事件监听器，以避免内存泄漏。
-  // 使用useEffect钩子函数来注册鼠标事件监听器，并在组件卸载时取消事件监听。
+  // 通过鼠标事件监听器实现了在用户点击对话框外部区域时关闭对话框的功能
   useEffect(() => {
-    // 定义handleMouseDown函数来处理鼠标按下事件。
     const handleMouseDown = (e: MouseEvent) => {
-      // 通过检查modalRef.current是否存在且鼠标点击的目标不在对话框内（即鼠标点击了对话框外部），
-      // 来确定用户是否希望关闭对话框。如果需要关闭对话框，则注册handleMouseUp函数作为mouseup事件的处理函数。
       if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         window.addEventListener('mouseup', handleMouseUp);
       }
     };
 
     const handleMouseUp = (e: MouseEvent) => {
-      // 移除mouseup事件监听器，然后调用onClose函数来关闭对话框。
       window.removeEventListener('mouseup', handleMouseUp);
       onClose();
     };
 
-    // 将handleMouseDown函数注册为mousedown事件的处理函数，以便捕获鼠标按下事件。
     window.addEventListener('mousedown', handleMouseDown);
 
     return () => {
-      // 在组件卸载时调用该函数，移除mousedown事件监听器。
       window.removeEventListener('mousedown', handleMouseDown);
     };
   }, [onClose]);
-  
-  // 保存设置并更新主题
-  const handleSave = () => {
-    homeDispatch({ field: 'lightMode', value: state.theme });
-    saveSettings(state);
 
-    console.log(state.theme); // 输出state.theme的值
+  const handleSave = () => {
+    // homeDispatch({ field: 'lightMode', value: state.theme });
+    // saveSettings(state);
   };
 
-  // Render nothing if the dialog is not open.
   // 在对话框未打开时不渲染任何内容。
   if (!open) {
     return <></>;
   }
 
   // Render the dialog.
-  // 渲染对话框  呈现一个位于屏幕中心的对话框，其中包含一个下拉列表和一个保存按钮。
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div className="fixed inset-0 z-10 overflow-hidden">
@@ -87,18 +69,17 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
           <div
             ref={modalRef}
             className={`dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'} sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle`}
-            // className="dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#BBDED6]' : 'bg-white dark:bg-[#343541]'}` sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle"
             role="dialog"
           >
             <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
-              {t('Settings')}
+              {t('开源软件开发技术')}
             </div>
 
             <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
-              {t('Theme')}
+              {t('这是BISTU')}
             </div>
 
-            <select
+            {/* <select
               className="w-full cursor-pointer bg-transparent p-2 text-neutral-700 dark:text-neutral-200"
               value={state.theme}
               onChange={(event) =>
@@ -107,13 +88,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             >
               <option value="dark">{t('Dark mode')}</option>
               <option value="light">{t('Light mode')}</option>
-
-              <option value="red">{t('红色模式')}</option>
-              <option value="blue">{t('蓝色模式')}</option>
-              <option value="green">{t('绿色模式')}</option>
-              <option value="purple">{t('紫色模式')}</option>
-              <option value="brown">{t('褐色模式')}</option>
-            </select>
+            </select> */}
 
             <button
               type="button"
@@ -123,7 +98,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 onClose();
               }}
             >
-              {t('Save')}
+              {t('关闭')}
             </button>
           </div>
         </div>

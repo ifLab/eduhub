@@ -109,34 +109,35 @@ export const ConversationComponent = ({ conversation }: Props) => {
   let icon;
   switch (conversation.name) {
     case '教师助理':
-      icon = <FontAwesomeIcon icon={faChalkboardUser} fixedWidth/>;
+      icon = <FontAwesomeIcon icon={faChalkboardUser} style={{ height: '16px', width: '16px' }}/>;
       break;
     case '学生助理':
-      icon = <FontAwesomeIcon icon={faUser} fixedWidth/>;
+      icon = <FontAwesomeIcon icon={faUser} style={{ height: '16px', width: '16px' }}/>;
       break;
     case '联网搜索':
-      icon = <FontAwesomeIcon icon={faGlobe} fixedWidth/>;
+      icon = <FontAwesomeIcon icon={faGlobe} style={{ height: '16px', width: '16px' }}/>;
       break;
     case '论文检索':
-      icon = <FontAwesomeIcon icon={faFileLines} fixedWidth/>;
+      icon = <FontAwesomeIcon icon={faFileLines} style={{ height: '16px', width: '16px' }}/>;
       break;
     case '数学计算':
-      icon = <FontAwesomeIcon icon={faSquareRootVariable} fixedWidth/>;
+      icon = <FontAwesomeIcon icon={faSquareRootVariable} style={{ height: '16px', width: '16px' }}/>;
       break;
     case '开源软件开发技术':
-      icon = <FontAwesomeIcon icon={faServer} fixedWidth/>;
+      icon = <FontAwesomeIcon icon={faServer} style={{ height: '16px', width: '16px' }}/>;
       break;
     default:
       icon = <IconMessage size={18} />;
   }
 
   return (
-    <div className={`relative flex items-center text-black dark:text-white ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-white dark:bg-[#343541]'}`}>
+    // 侧边栏中会话的背景色、字体设置
+    <div className={`relative flex items-center ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-[#202123] dark:bg-[#202123]'}`}>
       {isRenaming && selectedConversation?.id === conversation.id ? (
-        <div className="flex w-full items-center gap-3 rounded-lg bg-gray-500/30 p-3">
+        <div className="flex w-full items-center gap-3 rounded-lg bg-[#343541]/90 p-3">
           <IconMessage size={18} />
           <input
-            className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-black dark:text-white outline-none focus:border-neutral-100"
+            className="mr-12 flex-1 overflow-hidden overflow-ellipsis border-neutral-400 bg-transparent text-left text-[12.5px] leading-3 text-white outline-none focus:border-neutral-100"
             type="text"
             value={renameValue}
             onChange={(e) => setRenameValue(e.target.value)}

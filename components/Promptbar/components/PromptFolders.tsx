@@ -39,7 +39,8 @@ export const PromptFolders = () => {
       .map((prompt, index) => {
         if (prompt.folderId === currentFolder.id) {
           return (
-            <div key={index} className="ml-5 gap-2 border-l pl-2 text-black dark:text-white">
+            // <div key={index} className="ml-5 gap-2 border-l pl-2 text-black dark:text-white">
+            <div key={index} className="ml-5 gap-2 border-l pl-2">
               <PromptComponent prompt={prompt} />
             </div>
           );
@@ -47,7 +48,8 @@ export const PromptFolders = () => {
       });
 
   return (
-    <div className="flex w-full flex-col pt-2 text-black dark:text-white">
+    // <div className="flex w-full flex-col pt-2 text-black dark:text-white">
+    <div className="flex w-full flex-col pt-2">
       {folders
         .filter((folder) => folder.type === 'prompt')
         .sort((a, b) => a.name.localeCompare(b.name))

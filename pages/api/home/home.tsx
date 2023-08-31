@@ -381,7 +381,8 @@ const Home = ({
       {selectedConversation && (
         // <main>：主要的聊天界面容器
         <main
-          className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
+          // className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
+          className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
         >
           {/* 固定在页面顶部，在小屏幕设备上隐藏的导航栏组件 */}
           <div className="fixed top-0 w-full sm:hidden">

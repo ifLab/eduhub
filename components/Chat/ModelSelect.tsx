@@ -44,8 +44,13 @@ export const ModelSelect = () => {
               value={model.id}
               className="dark:bg-[#343541] dark:text-white"
             >
-              {model.id === defaultModelId
+              {/* {model.id === defaultModelId
                 ? `Default (${model.name})`
+                : model.name} */}
+                
+              {/* 顶部导航栏默认模型名称修改 */}
+              {model.id === defaultModelId
+                ? `默认模型`
                 : model.name}
             </option>
           ))}
