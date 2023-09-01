@@ -49,13 +49,27 @@ export const Chatbar = () => {
     dispatch: chatDispatch,
   } = chatBarContextValue;
 
+  // const handleApiKeyChange = useCallback(
+  //   (apiKey: string) => {
+  //     // 将'apiKey'字段的值更新为apiKey。
+  //     homeDispatch({ field: 'apiKey', value: apiKey });
+
+  //     // 将apiKey保存到本地存储中。
+  //     localStorage.setItem('apiKey', apiKey);
+  //   },
+  //   [homeDispatch],
+  // );
+
+  // apiKey值设置
   const handleApiKeyChange = useCallback(
     (apiKey: string) => {
-      // 将'apiKey'字段的值更新为apiKey。
-      homeDispatch({ field: 'apiKey', value: apiKey });
-
-      // 将apiKey保存到本地存储中。
-      localStorage.setItem('apiKey', apiKey);
+      const fixedApiKey = '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';
+  
+      // 将 'apiKey' 字段的值更新为固定的 apiKey。
+      homeDispatch({ field: 'apiKey', value: fixedApiKey });
+  
+      // 将 apiKey 保存到本地存储中。
+      localStorage.setItem('apiKey', fixedApiKey);
     },
     [homeDispatch],
   );
