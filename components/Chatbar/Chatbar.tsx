@@ -63,7 +63,7 @@ export const Chatbar = () => {
   // apiKey值设置
   const handleApiKeyChange = useCallback(
     (apiKey: string) => {
-      const fixedApiKey = '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';
+      const fixedApiKey = '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';
   
       // 将 'apiKey' 字段的值更新为固定的 apiKey。
       homeDispatch({ field: 'apiKey', value: fixedApiKey });
