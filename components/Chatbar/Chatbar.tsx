@@ -49,30 +49,30 @@ export const Chatbar = () => {
     dispatch: chatDispatch,
   } = chatBarContextValue;
 
-  // const handleApiKeyChange = useCallback(
-  //   (apiKey: string) => {
-  //     // 将'apiKey'字段的值更新为apiKey。
-  //     homeDispatch({ field: 'apiKey', value: apiKey });
-
-  //     // 将apiKey保存到本地存储中。
-  //     localStorage.setItem('apiKey', apiKey);
-  //   },
-  //   [homeDispatch],
-  // );
-
-  // apiKey值设置
   const handleApiKeyChange = useCallback(
     (apiKey: string) => {
-      const fixedApiKey = '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';
-  
-      // 将 'apiKey' 字段的值更新为固定的 apiKey。
-      homeDispatch({ field: 'apiKey', value: fixedApiKey });
-  
-      // 将 apiKey 保存到本地存储中。
-      localStorage.setItem('apiKey', fixedApiKey);
+      // 将'apiKey'字段的值更新为apiKey。
+      homeDispatch({ field: 'apiKey', value: apiKey });
+
+      // 将apiKey保存到本地存储中。
+      localStorage.setItem('apiKey', apiKey);
     },
     [homeDispatch],
   );
+
+  // apiKey值设置
+  // const handleApiKeyChange = useCallback(
+  //   (apiKey: string) => {
+  //     const fixedApiKey = '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';
+  
+  //     // 将 'apiKey' 字段的值更新为固定的 apiKey。
+  //     homeDispatch({ field: 'apiKey', value: fixedApiKey });
+  
+  //     // 将 apiKey 保存到本地存储中。
+  //     localStorage.setItem('apiKey', fixedApiKey);
+  //   },
+  //   [homeDispatch],
+  // );
 
   const handlePluginKeyChange = (pluginKey: PluginKey) => {
     if (pluginKeys.some((key) => key.pluginId === pluginKey.pluginId)) {
@@ -303,7 +303,7 @@ export const Chatbar = () => {
         id: uuidv4(),
         dify_id: '',
         name: '开源软件开发技术',
-        originalName: '开源软件开发技术',
+        originalName: '教师助理',
         messages: [],
         model: OpenAIModels[fallbackModelID],
         prompt: DEFAULT_SYSTEM_PROMPT,

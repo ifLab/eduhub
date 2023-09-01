@@ -380,47 +380,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
     // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : 'bg-white dark:bg-[#343541]'}`}>
     // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : 'bg-white dark:bg-[#343541]'}`}>
     <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}>
-      {!(apiKey || serverSideApiKeyIsSet) ? (
-        <div className="mx-auto flex h-full w-[300px] flex-col justify-center space-y-6 sm:w-[600px]">
-          <div className="text-center text-4xl font-bold text-black dark:text-white">
-            Welcome to BISTU Copilot
-          </div>
-          <div className="text-center text-lg text-black dark:text-white">
-            <div className="mb-8">{`BISTU Copilot is an open source clone of OpenAI's ChatGPT UI.`}</div>
-            <div className="mb-2 font-bold">
-              Important: BISTU Copilot is 100% unaffiliated with OpenAI.
-            </div>
-          </div>
-          <div className="text-center text-gray-500 dark:text-gray-400">
-            <div className="mb-2">
-            BISTU Copilot allows you to plug in your API key to use this UI with
-              their API.
-            </div>
-            <div className="mb-2">
-              It is <span className="italic">only</span> used to communicate
-              with their API.
-            </div>
-            <div className="mb-2">
-              {t(
-                'Please set your OpenAI API key in the bottom left of the sidebar.',
-              )}
-            </div>
-            <div>
-              {t("If you don't have an OpenAI API key, you can get one here: ")}
-              <a
-                href="https://platform.openai.com/account/api-keys"
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                openai.com
-              </a>
-            </div>
-          </div>
-        </div>
-      ) : modelError ? (
-        <ErrorMessageDiv error={modelError} />
-      ) : (
         <>
           <div
             className="max-h-full overflow-x-hidden"
@@ -431,16 +390,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               <>
                 <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
                   <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                    {models.length === 0 ? (
-                      <div>
-                        <Spinner size="16px" className="mx-auto" />
-                      </div>
-                    ) : (
-                      <img src="bistu.png" alt="bistu logo" className="mx-auto" width="200px" height="auto" />
-                    )}
+                    <img src="bistu.png" alt="bistu logo" className="mx-auto" width="200px" height="auto" />
                   </div>
 
-                  {models.length > 0 && (
                     <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                       <ModelSelect />
 
@@ -465,7 +417,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         }
                       />
                     </div>
-                  )}
                 </div>
               </>
             ) : (
@@ -538,7 +489,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             showScrollDownButton={showScrollDownButton}
           />
         </>
-      )}
+      
     </div>
   );
 });

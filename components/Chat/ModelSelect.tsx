@@ -38,6 +38,7 @@ export const ModelSelect = () => {
           value={selectedConversation?.model?.id || defaultModelId}
           onChange={handleChange}
         >
+          <option value="" className="dark:bg-[#343541] dark:text-white">默认模型</option>
           {models.map((model) => (
             <option
               key={model.id}
