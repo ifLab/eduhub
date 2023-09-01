@@ -304,7 +304,7 @@ export const Chatbar = () => {
         id: uuidv4(),
         dify_id: '',
         name: '开源软件开发技术',
-        originalName: '教师助理',
+        originalName: '开源软件开发技术',
         messages: [],
         model: OpenAIModels[fallbackModelID],
         prompt: DEFAULT_SYSTEM_PROMPT,
