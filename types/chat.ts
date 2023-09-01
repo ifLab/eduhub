@@ -19,6 +19,7 @@ export interface ChatBody {
 export interface Conversation {
   id: string;
   name: string;
+  originalName: string;
   messages: Message[];
   model: OpenAIModel;
   prompt: string;
