@@ -8,8 +8,8 @@ import {
 } from '@tabler/icons-react';
 
 import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleDot,faCircleUser,faAtom } from '@fortawesome/free-solid-svg-icons';
 // import { faHeadSideGear } from '@fortawesome/free-solid-svg-icons';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUser, faHeadSideGear } from '@fortawesome/free-solid-svg-icons';
@@ -173,10 +173,18 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
     >
       <div className="relative m-auto flex p-4 text-base md:max-w-2xl md:gap-6 md:py-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
         <div className="min-w-[40px] text-right font-bold">
-          {message.role === 'assistant' ? (
+          {/* {message.role === 'assistant' ? (
             <IconRobot size={30} />
           ) : (
             <IconUser size={30} />
+          )} */}
+          
+          {/* 对话时的 logo */}
+           {message.role === 'assistant' ? (
+            // <FontAwesomeIcon icon={faCircleDot} style={{ height: '25px', width: '25px' }} fixedWidth />
+            <FontAwesomeIcon icon={faAtom}  style={{ height: '25px', width: '25px' }} fixedWidth />              
+          ) : (
+            <FontAwesomeIcon icon={faCircleUser} style={{ height: '25px', width: '25px' }} fixedWidth />
           )}
         </div>
 
