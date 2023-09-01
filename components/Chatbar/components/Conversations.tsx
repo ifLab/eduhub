@@ -2,6 +2,7 @@ import { Conversation } from '@/types/chat';
 
 import { ConversationComponent } from './Conversation';
 
+// 会话列表组件，用于展示多个会话
 interface Props {
   conversations: Conversation[];
 }

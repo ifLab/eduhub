@@ -29,6 +29,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { FolderInterface } from '@/types/folder';
 
+// 聊天栏组件，用于显示和管理聊天相关的内容
 export const Chatbar = () => {
   const { t } = useTranslation('sidebar');
 
@@ -312,12 +313,21 @@ export const Chatbar = () => {
         
       },
     ];
+    // 获取已存在的会话名称
+    const existingConversationNames = conversations.map(conversation => conversation.name);
+    // 筛选出不存在的默认会话
+    const filteredDefaultConversations = defaultConversations.filter(conversation =>
+      !existingConversationNames.includes(conversation.name)
+    );
     // 将默认会话添加到会话列表中
-    homeDispatch({ field: 'conversations', value: defaultConversations });
+    const updatedConversations = [...conversations, ...filteredDefaultConversations];
+    console.log(conversations);
+    homeDispatch({ field: 'conversations', value: updatedConversations });
     // 将默认会话保存到本地存储中
-    defaultConversations.forEach((conversation) => {
-      saveConversation(conversation);
-    });
+    // defaultConversations.forEach((conversation) => {
+    //   saveConversation(conversation);
+    // });
+    saveConversations(updatedConversations);
   }, []);
 
   // 将会话移动至文件夹

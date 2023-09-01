@@ -30,6 +30,7 @@ interface Props {
   conversation: Conversation;
 }
 
+// 单个会话的删除、重命名等操作
 export const ConversationComponent = ({ conversation }: Props) => {
   const {
     state: { selectedConversation, messageIsStreaming,lightMode },
@@ -130,6 +131,7 @@ export const ConversationComponent = ({ conversation }: Props) => {
       icon = <IconMessage size={18} />;
   }
 
+  // 单个会话 重命名、删除和选择会话 等显示
   return (
     // 侧边栏中会话的背景色、字体设置
     <div className={`relative flex items-center ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-[#202123] dark:bg-[#202123]'}`}>
