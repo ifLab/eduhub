@@ -48,7 +48,13 @@ export const ChatInput = ({
   const { t } = useTranslation('chat');
 
   const {
-    state: { selectedConversation, messageIsStreaming, prompts,lightMode },
+    state: {
+      selectedConversation,
+      messageIsStreaming,
+      prompts,
+      activePromptID,
+      lightMode,
+    },
 
     dispatch: homeDispatch,
   } = useContext(HomeContext);
@@ -56,7 +62,7 @@ export const ChatInput = ({
   const [content, setContent] = useState<string>();
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [showPromptList, setShowPromptList] = useState(false);
-  const [activePromptIndex, setActivePromptIndex] = useState(0);
+  const [activePromptIndex, setActivePromptIndex] = useState(-1);
   const [promptInputValue, setPromptInputValue] = useState('');
   const [variables, setVariables] = useState<string[]>([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -135,6 +141,30 @@ export const ChatInput = ({
     }
     setShowPromptList(false);
   };
+  // id => index
+  useEffect(() => {
+    
+    if (activePromptID) {
+      const index = prompts.findIndex((prompt) => prompt.id === activePromptID);
+      console.log('Found index:', index);
+  
+      if (index !== -1 && index !== activePromptIndex) {
+        setActivePromptIndex(index);
+        setContent(prompts[index].content)
+      }
+    }
+  }, [activePromptID]);
+  
+  // index=>id
+  useEffect(() => {
+    // 根据index获取id
+    if (activePromptIndex >= 0) {
+      const id = prompts[activePromptIndex].id;
+      if (id !== activePromptID) {
+        homeDispatch({ field: 'activePromptID', value: id });
+      }
+    }
+  }, [activePromptIndex]);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (showPromptList) {
@@ -259,11 +289,37 @@ export const ChatInput = ({
   return (
     // <div className={`absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent via-white to-white pt-6 dark:border-white/20 dark:via-[#343541] dark:to-[#343541] md:pt-2`}>
     // 输入框附件的渐变色
-    <div className={`absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent pt-6 dark:border-white/20 ${lightMode === 'red' ? 'via-[#F2ECBE] to-[#F2ECBE]' : lightMode === 'blue' ? 'via-[#F6F4EB] to-[#F6F4EB]' : lightMode === 'green' ? 'via-[#FAF1E4] to-[#FAF1E4]' : lightMode === 'purple' ? 'via-[#C5DFF8] to-[#C5DFF8]' : lightMode === 'brown' ? 'via-[#F4EEE0] to-[#F4EEE0]' : 'via-white to-white dark:via-[#343541] dark:to-[#343541]'} md:pt-2`}>
+    <div
+      className={`absolute bottom-0 left-0 w-full border-transparent bg-gradient-to-b from-transparent pt-6 dark:border-white/20 ${
+        lightMode === 'red'
+          ? 'via-[#F2ECBE] to-[#F2ECBE]'
+          : lightMode === 'blue'
+          ? 'via-[#F6F4EB] to-[#F6F4EB]'
+          : lightMode === 'green'
+          ? 'via-[#FAF1E4] to-[#FAF1E4]'
+          : lightMode === 'purple'
+          ? 'via-[#C5DFF8] to-[#C5DFF8]'
+          : lightMode === 'brown'
+          ? 'via-[#F4EEE0] to-[#F4EEE0]'
+          : 'via-white to-white dark:via-[#343541] dark:to-[#343541]'
+      } md:pt-2`}
+    >
       <div className="stretch mx-2 mt-4 flex flex-row gap-3 last:mb-2 md:mx-4 md:mt-[52px] md:last:mb-6 lg:mx-auto lg:max-w-3xl">
         {messageIsStreaming && (
           <button
-            className={`absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-white md:mb-0 md:mt-2`}
+            className={`absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 ${
+              lightMode === 'red'
+                ? 'bg-[#F2ECBE]'
+                : lightMode === 'blue'
+                ? 'bg-[#F6F4EB]'
+                : lightMode === 'green'
+                ? 'bg-[#FAF1E4]'
+                : lightMode === 'purple'
+                ? 'bg-[#C5DFF8]'
+                : lightMode === 'brown'
+                ? 'bg-[#F4EEE0]'
+                : 'bg-[#F6F6F6] dark:bg-[#343541]'
+            } dark:text-white md:mb-0 md:mt-2`}
             onClick={handleStopConversation}
           >
             <IconPlayerStop size={16} /> {t('Stop Generating')}
@@ -274,14 +330,40 @@ export const ChatInput = ({
           selectedConversation &&
           selectedConversation.messages.length > 0 && (
             <button
-              className={`absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-white md:mb-0 md:mt-2`}
+              className={`absolute top-0 left-0 right-0 mx-auto mb-3 flex w-fit items-center gap-3 rounded border border-neutral-200 py-2 px-4 text-black hover:opacity-50 dark:border-neutral-600 ${
+                lightMode === 'red'
+                  ? 'bg-[#F2ECBE]'
+                  : lightMode === 'blue'
+                  ? 'bg-[#F6F4EB]'
+                  : lightMode === 'green'
+                  ? 'bg-[#FAF1E4]'
+                  : lightMode === 'purple'
+                  ? 'bg-[#C5DFF8]'
+                  : lightMode === 'brown'
+                  ? 'bg-[#F4EEE0]'
+                  : 'bg-[#F6F6F6] dark:bg-[#343541]'
+              } dark:text-white md:mb-0 md:mt-2`}
               onClick={onRegenerate}
             >
               <IconRepeat size={16} /> {t('Regenerate response')}
             </button>
           )}
 
-        <div className={`relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4`}>
+        <div
+          className={`relative mx-2 flex w-full flex-grow flex-col rounded-md border border-black/10 shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:border-gray-900/50 ${
+            lightMode === 'red'
+              ? 'bg-[#F2ECBE]'
+              : lightMode === 'blue'
+              ? 'bg-[#F6F4EB]'
+              : lightMode === 'green'
+              ? 'bg-[#FAF1E4]'
+              : lightMode === 'purple'
+              ? 'bg-[#C5DFF8]'
+              : lightMode === 'brown'
+              ? 'bg-[#F4EEE0]'
+              : 'bg-[#F6F6F6] dark:bg-[#343541]'
+          } dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4`}
+        >
           <button
             className="absolute left-2 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
             onClick={() => setShowPluginSelect(!showPluginSelect)}
