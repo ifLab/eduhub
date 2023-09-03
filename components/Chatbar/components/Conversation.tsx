@@ -106,7 +106,7 @@ export const ConversationComponent = ({ conversation }: Props) => {
     }
   }, [isRenaming, isDeleting]);
 
-  // 图标变量
+  // 图标变量 TODO: 优化
   let icon;
   switch (conversation.name) {
     case '教师助理':

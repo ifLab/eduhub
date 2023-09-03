@@ -112,12 +112,12 @@ const Home = ({
 
   // FOLDER OPERATIONS  --------------------------------------------
 
-  const handleCreateFolder = (name: string, type: FolderType,isDefault:false) => {
+  const handleCreateFolder = (name: string, type: FolderType) => {
     const newFolder: FolderInterface = {
       id: uuidv4(),
       name,
       type,
-      isDefault,
+      deletable: true,
     };
 
     const updatedFolders = [...folders, newFolder];
@@ -196,7 +196,8 @@ const Home = ({
       prompt: DEFAULT_SYSTEM_PROMPT,
       temperature: lastConversation?.temperature ?? DEFAULT_TEMPERATURE,
       folderId: null,
-      dify_id: ''
+      conversationID: '',
+      deletable: true,
     };
 
     const updatedConversations = [...conversations, newConversation];
@@ -347,6 +348,8 @@ const Home = ({
           prompt: DEFAULT_SYSTEM_PROMPT,
           temperature: lastConversation?.temperature ?? DEFAULT_TEMPERATURE,
           folderId: null,
+          conversationID: '',
+          deletable: true,
         },
       });
     }

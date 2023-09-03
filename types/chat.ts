@@ -26,5 +26,6 @@ export interface Conversation {
   temperature: number;
   folderId: string | null;
   conversationID: string; // Dify Conversation ID
+  deletable: boolean;
 }
 

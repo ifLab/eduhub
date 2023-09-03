@@ -4,6 +4,10 @@
 ## 开发进展
 
 - [ ] 规范配置名称
+    - [ ] ENDPOINT <-> URL 配置文件中
+    - [x] isDefault <-> deletable 项目文件夹,conversation,prompt中
+    - [ ] 图标写入conversation结构
+
 - [ ] 优化按钮表现效果
 - [ ] 规范功能开关，禁用修改删除
 - [ ] 功能开关固定模型

@@ -143,6 +143,8 @@ export const Chatbar = () => {
           prompt: DEFAULT_SYSTEM_PROMPT,
           temperature: DEFAULT_TEMPERATURE,
           folderId: null,
+          conversationID: '',
+          deletable: true,
         },
       });
 
@@ -185,6 +187,8 @@ export const Chatbar = () => {
             prompt: DEFAULT_SYSTEM_PROMPT,
             temperature: DEFAULT_TEMPERATURE,
             folderId: null,
+            conversationID: '',
+            deletable: true,
           },
         });
 
@@ -214,19 +218,19 @@ export const Chatbar = () => {
         id: uuidv4(),
         name: '校园助理',
         type: 'chat',
-        isDefault: true, // 设置isDefault为true
+        deletable: false, 
       },
       {
         id: uuidv4(),
         name: '智能插件',
         type: 'chat',
-        isDefault: true, 
+        deletable: false, 
       },
       {
         id: uuidv4(),
         name: '课程助手',
         type: 'chat',
-        isDefault: true, 
+        deletable: false, 
       },
     ];
     // 获取已存在的文件夹名称
@@ -247,7 +251,7 @@ export const Chatbar = () => {
     const defaultConversations: Conversation[] = [
       {
         id: uuidv4(),
-        dify_id: '',
+        conversationID: '',
         name: '教师助理',
         originalName: '教师助理', // 保存原始名称
         messages: [],
@@ -255,10 +259,11 @@ export const Chatbar = () => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: null,
+        deletable: false,
       },
       {
         id: uuidv4(),
-        dify_id: '',
+        conversationID: '',
         name: '学生助理',
         originalName: '学生助理',
         messages: [],
@@ -266,10 +271,11 @@ export const Chatbar = () => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: null,
+        deletable: false,
       },
       {
         id: uuidv4(),
-        dify_id: '',
+        conversationID: '',
         name: '联网搜索',
         originalName: '联网搜索',
         messages: [],
@@ -277,10 +283,11 @@ export const Chatbar = () => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: null,
+        deletable: false,
       },
       {
         id: uuidv4(),
-        dify_id: '',
+        conversationID: '',
         name: '论文检索',
         originalName: '论文检索',
         messages: [],
@@ -288,10 +295,11 @@ export const Chatbar = () => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: null,
+        deletable: false,
       },
       {
         id: uuidv4(),
-        dify_id: '',
+        conversationID: '',
         name: '数学计算',
         originalName: '数学计算',
         messages: [],
@@ -299,10 +307,11 @@ export const Chatbar = () => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: null,
+        deletable: false,
       },
       {
         id: uuidv4(),
-        dify_id: '',
+        conversationID: '',
         name: '开源软件开发技术',
         originalName: '开源软件开发技术',
         messages: [],
@@ -310,6 +319,7 @@ export const Chatbar = () => {
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: null,
+        deletable: false,
         
       },
     ];

@@ -153,7 +153,7 @@ const Folder = ({
               <IconCaretRight size={18} />
             )} */}
 
-          {currentFolder.isDefault ? (
+          {!currentFolder.deletable ? (
               currentFolder.name === "课程助手" ? (
                 <FontAwesomeIcon icon={faBook} style={{ height: '16px', width: '16px' }} fixedWidth />
               ) : currentFolder.name === "校园助理" ? (
@@ -205,7 +205,7 @@ const Folder = ({
         )}
 
         {/* 如果既不在删除/重命名操作，也没有展开文件夹，则不显示任何内容。 */}
-        {!isDeleting && !isRenaming && (
+        {currentFolder.deletable && !isDeleting && !isRenaming && (
           <div className="absolute right-1 z-10 flex text-gray-300">
             <SidebarActionButton
               handleClick={(e) => {
