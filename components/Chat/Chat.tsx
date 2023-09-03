@@ -101,7 +101,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           key: apiKey,
           prompt: updatedConversation.prompt,
           temperature: updatedConversation.temperature,
-          Dify_ConversationId: updatedConversation.dify_id,
+          conversationID: updatedConversation.conversationID,
         };
         const endpoint = getEndpoint(plugin);
         let body;
@@ -219,7 +219,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             if (newConversationId) {
             updatedConversation = {
               ...updatedConversation,
-              dify_id: newConversationId,
+              conversationID: newConversationId,
             };
           }
           }

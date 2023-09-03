@@ -13,7 +13,7 @@ export interface ChatBody {
   key: string;
   prompt: string;
   temperature: number;
-  Dify_ConversationId: string;
+  conversationID: string;
 }
 
 export interface Conversation {
@@ -25,6 +25,6 @@ export interface Conversation {
   prompt: string;
   temperature: number;
   folderId: string | null;
-  dify_id: string;
+  conversationID: string; // Dify Conversation ID
 }
 

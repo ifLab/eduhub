@@ -16,7 +16,7 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { model, messages, key, prompt, temperature, Dify_ConversationId } = (await req.json()) as ChatBody;
+    const { model, messages, key, prompt, temperature, conversationID: Dify_ConversationId } = (await req.json()) as ChatBody;
 
     
 
