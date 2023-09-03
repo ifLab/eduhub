@@ -194,7 +194,8 @@ export const ConversationComponent = ({ conversation }: Props) => {
           </div>
         )}
 
-      {selectedConversation?.id === conversation.id &&
+      {selectedConversation?.deletable &&
+      selectedConversation?.id === conversation.id &&
         !isDeleting &&
         !isRenaming && (
           <div className="absolute right-1 z-10 flex text-gray-300">
