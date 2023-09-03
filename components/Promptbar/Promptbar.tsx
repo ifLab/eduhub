@@ -66,6 +66,7 @@ const Promptbar = () => {
         content: '',
         model: OpenAIModels[defaultModelId],
         folderId: null,
+        deletable: true,
       };     
       // 将新的提示对象添加到现有的 prompts 数组中，得到更新后的 updatedPrompts 数组。
       const updatedPrompts = [...prompts, newPrompt];
@@ -137,7 +138,7 @@ const Promptbar = () => {
   useEffect(() => {
     // 页面初始化时创建两个默认的提示对象，分别对应两个默认的模型。
     // 通过 homeDispatch 函数将这两个提示对象保存到 home 上下文中的 prompts 字段中。
-    if (prompts.length === 0) {
+    if (prompts.length === 0) { // TODO: 我觉得这个触发条件不太标准，应该只加载一次
       const defaultPrompts = [
         {
           id: uuidv4(),
@@ -146,6 +147,7 @@ const Promptbar = () => {
           content: '我想让你扮演一名人工智能辅助医生。 我将为您提供患者的详细信息，您的任务是使用最新的人工智能工具，例如医学成像软件和其他机器学习程序，以诊断最可能导致其症状的原因。 您还应该将体检、实验室测试等传统方法纳入您的评估过程，以确保准确性。 我的第一个请求是:',
           model: OpenAIModels,
           folderId: null,
+          deletable: false,
         },
         {
           id: uuidv4(),
@@ -154,6 +156,7 @@ const Promptbar = () => {
           content: '我想让你在学校扮演讲师，向初学者教授算法。 您将使用 Python 编程语言提供代码示例。 首先简单介绍一下什么是算法，然后继续给出简单的例子，包括冒泡排序和快速排序。 稍后，等待我提示其他问题。 一旦您解释并提供代码示例，我希望您尽可能将相应的可视化作为 ascii 艺术包括在内。',
           model: OpenAIModels,
           folderId: null,
+          deletable: false,
         },
       ];
   
