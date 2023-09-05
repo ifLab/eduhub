@@ -202,7 +202,7 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
               </button>
               <button
                 type="button"
-                className="w-full px-4 py-2 mt-6 border rounded-lg shadow bg-black text-white hover:bg-gray-900 focus:outline-none"
+                className="w-full px-4 py-2 mt-6 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
                 onClick={() => {
                   // 保存
                   const updatedPrompt = {
