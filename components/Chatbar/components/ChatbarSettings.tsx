@@ -51,11 +51,11 @@ export const ChatbarSettings = () => {
 
       <Import onImport={handleImportConversations} />
 
-      {/* <SidebarButton
+      <SidebarButton
         text={t('Export data')}
         icon={<IconFileExport size={18} />}
         onClick={() => handleExportData()}
-      /> */}
+      />
 
       <SidebarButton
         text={t('Settings')}
@@ -81,12 +81,7 @@ export const ChatbarSettings = () => {
         icon={<img src="bistu.png" alt="Logo" style={{ height: '27px', width: '130px' }} />}
         onClick={() => setIsLogoDialog(true)}
       />
-      {/* <SidebarButton
-        text={t('BISTU Copilot')}
-        icon={<img src="bistu-logo-440.ico" alt="Logo" style={{ height: '16px', width: '16px' }} />}
-        onClick={() => setIsLogoDialog(true)}
-      /> */}
-
+      
       <SettingDialog
         open={isSettingDialogOpen}
         onClose={() => {
