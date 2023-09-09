@@ -423,8 +423,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               <>
               {/* 顶部导航栏 */}
                 <div className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-neutral-200`}>
-                  {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
-                  : {selectedConversation?.temperature} |
+                  {/* {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
+                  : {selectedConversation?.temperature} | */}
                   <button
                     className="ml-2 cursor-pointer hover:opacity-50"
                     onClick={handleSettings}

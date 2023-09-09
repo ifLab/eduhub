@@ -103,6 +103,15 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               {t('Settings')}
             </div>
 
+            <a
+              type="button"
+              className="mb-5 cursor-pointer"
+              onClick={() => handleClearCache(true)}
+            >
+              {t('清除缓存')}
+            </a>
+            <hr className="mb-5"/>
+
             <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
               {t('Theme')}
             </div>
@@ -124,23 +133,16 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               <option value="brown">{t('褐色模式')}</option>
             </select>
 
-            <div className="flex justify-center">
-              <button
-                type="button"
-                className="w-1/2 px-4 py-2 mt-6 mr-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
-                onClick={() => handleClearCache(true)}
-              >
-                {t('清除缓存')}
-              </button>
 
               <button
                 type="button"
-                className="w-1/2 px-4 py-2 mt-6 ml-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
+                className="w-full px-4 py-2 mt-6 ml-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
                 onClick={handleSave}
               >
                 {t('保存')}
               </button>
-            </div>
+
+          
 
           </div>
         </div>
