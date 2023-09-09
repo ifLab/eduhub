@@ -215,19 +215,19 @@ export const Chatbar = () => {
     // 页面初始化时创建默认文件夹
     const defaultFolders: FolderInterface[] = [
       {
-        id: uuidv4(),
+        id: "ad308d23-9f8a-495c-8211-d54448e13684",
         name: '校园助理',
         type: 'chat',
         deletable: false, 
       },
       {
-        id: uuidv4(),
+        id: "95a43638-afed-4fd3-8d08-224535ba08a3",
         name: '智能插件',
         type: 'chat',
         deletable: false, 
       },
       {
-        id: uuidv4(),
+        id: "5786786f-f7eb-4d18-9e40-59ee4cfe5366",
         name: '课程助手',
         type: 'chat',
         deletable: false, 
@@ -255,10 +255,10 @@ export const Chatbar = () => {
         name: '教师助理',
         originalName: '教师助理', // 保存原始名称
         messages: [],
-        model: OpenAIModels[fallbackModelID],
+        model: OpenAIModels["gpt-3.5-turbo"],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
-        folderId: null,
+        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
         deletable: false,
       },
       {
@@ -267,10 +267,46 @@ export const Chatbar = () => {
         name: '学生助理',
         originalName: '学生助理',
         messages: [],
-        model: OpenAIModels[fallbackModelID],
+        model: OpenAIModels["gpt-3.5-turbo"],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
-        folderId: null,
+        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
+        deletable: false,
+      },
+      {
+        id: uuidv4(),
+        conversationID: '',
+        name: '信息网络问答',
+        originalName: '信息网络问答',
+        messages: [],
+        model: OpenAIModels["信息网络问答"],
+        prompt: DEFAULT_SYSTEM_PROMPT,
+        temperature: DEFAULT_TEMPERATURE,
+        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
+        deletable: false,
+      },
+      {
+        id: uuidv4(),
+        conversationID: '',
+        name: '财务问答',
+        originalName: '财务问答',
+        messages: [],
+        model: OpenAIModels["CW问答"],
+        prompt: DEFAULT_SYSTEM_PROMPT,
+        temperature: DEFAULT_TEMPERATURE,
+        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
+        deletable: false,
+      },
+      {
+        id: uuidv4(),
+        conversationID: '',
+        name: '教务问答',
+        originalName: '教务问答',
+        messages: [],
+        model: OpenAIModels["教务问答"],
+        prompt: DEFAULT_SYSTEM_PROMPT,
+        temperature: DEFAULT_TEMPERATURE,
+        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
         deletable: false,
       },
       {
@@ -279,10 +315,10 @@ export const Chatbar = () => {
         name: '联网搜索',
         originalName: '联网搜索',
         messages: [],
-        model: OpenAIModels[fallbackModelID],
+        model: OpenAIModels["临时智能插件"],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
-        folderId: null,
+        folderId: "95a43638-afed-4fd3-8d08-224535ba08a3",
         deletable: false,
       },
       {
@@ -291,10 +327,10 @@ export const Chatbar = () => {
         name: '论文检索',
         originalName: '论文检索',
         messages: [],
-        model: OpenAIModels[fallbackModelID],
+        model: OpenAIModels["临时智能插件"],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
-        folderId: null,
+        folderId: "95a43638-afed-4fd3-8d08-224535ba08a3",
         deletable: false,
       },
       {
@@ -303,10 +339,10 @@ export const Chatbar = () => {
         name: '数学计算',
         originalName: '数学计算',
         messages: [],
-        model: OpenAIModels[fallbackModelID],
+        model: OpenAIModels["临时智能插件"],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
-        folderId: null,
+        folderId: "95a43638-afed-4fd3-8d08-224535ba08a3",
         deletable: false,
       },
       {
@@ -315,10 +351,10 @@ export const Chatbar = () => {
         name: '开源软件开发技术',
         originalName: '开源软件开发技术',
         messages: [],
-        model: OpenAIModels[fallbackModelID],
+        model: OpenAIModels["开源软件开发技术问答"],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
-        folderId: null,
+        folderId: "5786786f-f7eb-4d18-9e40-59ee4cfe5366",
         deletable: false,
         
       },
@@ -341,114 +377,114 @@ export const Chatbar = () => {
   }, []);
 
   // 将会话移动至文件夹
-  useEffect(() => {
-    const handleMoveToFolder = async (conversationId: string, folderId: string | null) => {
-      const updatedConversations = conversations.map((conversation) => {
-        if (conversation.id === conversationId) {
-          return {
-            ...conversation,
-            folderId,
-          };
-        }
-        return conversation;
-      });
+  // useEffect(() => {
+  //   const handleMoveToFolder = async (conversationId: string, folderId: string | null) => {
+  //     const updatedConversations = conversations.map((conversation) => {
+  //       if (conversation.id === conversationId) {
+  //         return {
+  //           ...conversation,
+  //           folderId,
+  //         };
+  //       }
+  //       return conversation;
+  //     });
   
-      homeDispatch({ field: 'conversations', value: updatedConversations });
-      saveConversations(updatedConversations);
-    };
+  //     homeDispatch({ field: 'conversations', value: updatedConversations });
+  //     saveConversations(updatedConversations);
+  //   };
   
-    const moveConversationsToFolder = async () => {
-      const campusAssistantFolder = folders.find((folder) => folder.name === '校园助理');
+  //   const moveConversationsToFolder = async () => {
+  //     const campusAssistantFolder = folders.find((folder) => folder.name === '校园助理');
   
-      if (campusAssistantFolder) {
-        const studentAssistantConversation = conversations.find(
-          (conversation) => conversation.name === '学生助理'
-        );
+  //     if (campusAssistantFolder) {
+  //       const studentAssistantConversation = conversations.find(
+  //         (conversation) => conversation.name === '学生助理'
+  //       );
   
-        if (studentAssistantConversation && studentAssistantConversation.folderId !== campusAssistantFolder.id) {
-          try {
-            await handleMoveToFolder(studentAssistantConversation.id, campusAssistantFolder.id);
-            console.log('学生助理会话移动完成');
-          } catch (error) {
-            console.error('移动学生助理会话时出错:', error);
-          }
-        }
+  //       if (studentAssistantConversation && studentAssistantConversation.folderId !== campusAssistantFolder.id) {
+  //         try {
+  //           await handleMoveToFolder(studentAssistantConversation.id, campusAssistantFolder.id);
+  //           console.log('学生助理会话移动完成');
+  //         } catch (error) {
+  //           console.error('移动学生助理会话时出错:', error);
+  //         }
+  //       }
   
-        const teacherAssistantConversation = conversations.find(
-          (conversation) => conversation.name === '教师助理'
-        );
+  //       const teacherAssistantConversation = conversations.find(
+  //         (conversation) => conversation.name === '教师助理'
+  //       );
   
-        if (teacherAssistantConversation && teacherAssistantConversation.folderId !== campusAssistantFolder.id) {
-          try {
-            await handleMoveToFolder(teacherAssistantConversation.id, campusAssistantFolder.id);
-            console.log('教师助理会话移动完成');
-          } catch (error) {
-            console.error('移动教师助理会话时出错:', error);
-          }
-        }
-      }
+  //       if (teacherAssistantConversation && teacherAssistantConversation.folderId !== campusAssistantFolder.id) {
+  //         try {
+  //           await handleMoveToFolder(teacherAssistantConversation.id, campusAssistantFolder.id);
+  //           console.log('教师助理会话移动完成');
+  //         } catch (error) {
+  //           console.error('移动教师助理会话时出错:', error);
+  //         }
+  //       }
+  //     }
 
-      const courseAssistantFolder = folders.find((folder) => folder.name === '课程助手');
-      if (courseAssistantFolder) {
-        // 查找 开源软件开发技术 会话
-        const openTechnologyConversation = conversations.find(
-          (conversation) => conversation.name === '开源软件开发技术'
-        );
+  //     const courseAssistantFolder = folders.find((folder) => folder.name === '课程助手');
+  //     if (courseAssistantFolder) {
+  //       // 查找 开源软件开发技术 会话
+  //       const openTechnologyConversation = conversations.find(
+  //         (conversation) => conversation.name === '开源软件开发技术'
+  //       );
     
-        if (openTechnologyConversation && openTechnologyConversation.folderId !== courseAssistantFolder.id) {
-          try {
-            await handleMoveToFolder(openTechnologyConversation.id, courseAssistantFolder.id);
-            console.log('开源软件开发技术会话移动完成');
-          } catch (error) {
-            console.error('移动开源软件开发技术会话时出错:', error);
-          }
-        }
-      }   
+  //       if (openTechnologyConversation && openTechnologyConversation.folderId !== courseAssistantFolder.id) {
+  //         try {
+  //           await handleMoveToFolder(openTechnologyConversation.id, courseAssistantFolder.id);
+  //           console.log('开源软件开发技术会话移动完成');
+  //         } catch (error) {
+  //           console.error('移动开源软件开发技术会话时出错:', error);
+  //         }
+  //       }
+  //     }   
        
-      const intelligentPluginFolder = folders.find((folder) => folder.name === '智能插件');
-      if (intelligentPluginFolder) {
-        // 查找联网搜索会话
-        const networkedSearchConversation = conversations.find(
-          (conversation) => conversation.name === '联网搜索'
-        );
-        if (networkedSearchConversation && networkedSearchConversation.folderId !== intelligentPluginFolder.id) {
-          try {
-            await handleMoveToFolder(networkedSearchConversation.id, intelligentPluginFolder.id);
-            console.log('联网搜索会话移动完成');
-          } catch (error) {
-            console.error('移动联网搜索会话时出错:', error);
-          }
-        }
+  //     const intelligentPluginFolder = folders.find((folder) => folder.name === '智能插件');
+  //     if (intelligentPluginFolder) {
+  //       // 查找联网搜索会话
+  //       const networkedSearchConversation = conversations.find(
+  //         (conversation) => conversation.name === '联网搜索'
+  //       );
+  //       if (networkedSearchConversation && networkedSearchConversation.folderId !== intelligentPluginFolder.id) {
+  //         try {
+  //           await handleMoveToFolder(networkedSearchConversation.id, intelligentPluginFolder.id);
+  //           console.log('联网搜索会话移动完成');
+  //         } catch (error) {
+  //           console.error('移动联网搜索会话时出错:', error);
+  //         }
+  //       }
 
-        // 查找论文检索会话
-        const paperRetrievalConversation = conversations.find(
-          (conversation) => conversation.name === '论文检索'
-        );
-        if (paperRetrievalConversation && paperRetrievalConversation.folderId !== intelligentPluginFolder.id) {
-          try {
-            await handleMoveToFolder(paperRetrievalConversation.id, intelligentPluginFolder.id);
-            console.log('论文检索会话移动完成');
-          } catch (error) {
-            console.error('移动论文检索会话时出错:', error);
-          }
-        }
+  //       // 查找论文检索会话
+  //       const paperRetrievalConversation = conversations.find(
+  //         (conversation) => conversation.name === '论文检索'
+  //       );
+  //       if (paperRetrievalConversation && paperRetrievalConversation.folderId !== intelligentPluginFolder.id) {
+  //         try {
+  //           await handleMoveToFolder(paperRetrievalConversation.id, intelligentPluginFolder.id);
+  //           console.log('论文检索会话移动完成');
+  //         } catch (error) {
+  //           console.error('移动论文检索会话时出错:', error);
+  //         }
+  //       }
 
-        // 查找数学计算会话
-        const mathCalculationsConversation = conversations.find(
-          (conversation) => conversation.name === '数学计算'
-        );
-        if (mathCalculationsConversation && mathCalculationsConversation.folderId !== intelligentPluginFolder.id) {
-          try {
-            await handleMoveToFolder(mathCalculationsConversation.id, intelligentPluginFolder.id);
-            console.log('数学计算会话移动完成');
-          } catch (error) {
-            console.error('移动数学计算会话时出错:', error);
-          }
-        }
-      }
-    };
-    moveConversationsToFolder();
-  }, [homeDispatch, folders, conversations]);  
+  //       // 查找数学计算会话
+  //       const mathCalculationsConversation = conversations.find(
+  //         (conversation) => conversation.name === '数学计算'
+  //       );
+  //       if (mathCalculationsConversation && mathCalculationsConversation.folderId !== intelligentPluginFolder.id) {
+  //         try {
+  //           await handleMoveToFolder(mathCalculationsConversation.id, intelligentPluginFolder.id);
+  //           console.log('数学计算会话移动完成');
+  //         } catch (error) {
+  //           console.error('移动数学计算会话时出错:', error);
+  //         }
+  //       }
+  //     }
+  //   };
+  //   moveConversationsToFolder();
+  // }, [homeDispatch, folders, conversations]);  
 
   // 在搜索条件发生变化时，根据条件对对话进行过滤，
   // 并将过滤后的结果更新到 filteredConversations 字段中。

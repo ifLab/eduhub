@@ -5,13 +5,19 @@ export interface OpenAIModel {
   name: string;
   maxLength: number; // maximum length of a message
   tokenLimit: number;
+  key: string;
 }
 
 export enum OpenAIModelID {
   GPT_3_5 = 'gpt-3.5-turbo',
-  GPT_3_5_AZ = 'gpt-35-turbo',
-  GPT_4 = 'gpt-4',
-  GPT_4_32K = 'gpt-4-32k',
+  信息网络问答 = '信息网络问答',
+  CW问答 = 'CW问答',
+  教务问答 = '教务问答',
+  开源软件开发技术问答 = '开源软件开发技术问答',
+  临时智能插件 = '临时智能插件',
+  // GPT_3_5_AZ = 'gpt-35-turbo',
+  // GPT_4 = 'gpt-4',
+  // GPT_4_32K = 'gpt-4-32k',
 }
 
 // in case the `DEFAULT_MODEL` environment variable is not set or set to an unsupported model
@@ -35,23 +41,41 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     name: '默认模型',
     maxLength: 12000,
     tokenLimit: 4000,
+    key: process.env.OPENAI_API_KEY || '',
   },
-  [OpenAIModelID.GPT_3_5_AZ]: {
-    id: OpenAIModelID.GPT_3_5_AZ,
-    name: '默认模型',
+  [OpenAIModelID.信息网络问答]: {
+    id: OpenAIModelID.信息网络问答,
+    name: '信息网络问答',
     maxLength: 12000,
     tokenLimit: 4000,
+    key: "app-hWKy5TqXu6aqJCCk5YjvKOSU"
   },
-  [OpenAIModelID.GPT_4]: {
-    id: OpenAIModelID.GPT_4,
-    name: 'GPT-4',
-    maxLength: 24000,
-    tokenLimit: 8000,
+  [OpenAIModelID.CW问答]: {
+    id: OpenAIModelID.CW问答,
+    name: 'CW问答',
+    maxLength: 12000,
+    tokenLimit: 4000,
+    key: "app-fWrnEufV91wOR7wHkNxDp0nD"
   },
-  [OpenAIModelID.GPT_4_32K]: {
-    id: OpenAIModelID.GPT_4_32K,
-    name: 'GPT-4-32K',
-    maxLength: 96000,
-    tokenLimit: 32000,
+  [OpenAIModelID.教务问答]: {
+    id: OpenAIModelID.教务问答,
+    name: '教务问答',
+    maxLength: 12000,
+    tokenLimit: 4000,
+    key: "app-H1PhlZXBEWueIAV7Ur4lO0cW"
+  },
+  [OpenAIModelID.开源软件开发技术问答]: {
+    id: OpenAIModelID.开源软件开发技术问答,
+    name: '开源软件开发技术',
+    maxLength: 12000,
+    tokenLimit: 4000,
+    key: "app-N8HGM3yPkMWu8SqhmSsKS8co"
+  },
+  [OpenAIModelID.临时智能插件]: {
+    id: OpenAIModelID.临时智能插件,
+    name: '临时智能插件',
+    maxLength: 12000,
+    tokenLimit: 4000,
+    key: "app-H0htKhCMXKbjJ27yMbBdp9UK"
   },
 };

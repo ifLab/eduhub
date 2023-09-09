@@ -23,7 +23,7 @@ const handler = async (req: Request): Promise<Response> => {
     let query = messages[messages.length - 1].content;
 
 
-    const { stream } = await DifyStream(query, key, 'user-abc-123', Dify_ConversationId);
+    const { stream } = await DifyStream(query, key, 'build-230903', Dify_ConversationId);
 
 
 
