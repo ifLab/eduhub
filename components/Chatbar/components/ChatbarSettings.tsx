@@ -1,4 +1,4 @@
-import { IconFileExport, IconSettings } from '@tabler/icons-react';
+import { IconFileExport, IconSettings, IconTrash } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -8,6 +8,7 @@ import HomeContext from '@/pages/api/home/home.context';
 import { SettingDialog } from '@/components/Settings/SettingDialog';
 
 import { LogoDialog } from '@/components/Settings/LogoDialog';
+import { ClearCacheDialog } from '@/components/Settings/ClearCacheDialog';
 
 import { Import } from '../../Settings/Import';
 import { Key } from '../../Settings/Key';
@@ -21,6 +22,7 @@ export const ChatbarSettings = () => {
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
 
   const [isLogoDialogOpen, setIsLogoDialog] = useState<boolean>(false);
+  const [isClearCacheDialogOpen, setIsClearCacheDialog] = useState<boolean>(false);
 
   const {
     state: {
@@ -61,6 +63,12 @@ export const ChatbarSettings = () => {
         onClick={() => setIsSettingDialog(true)}
       />
 
+      <SidebarButton
+        text={t('清除缓存')}
+        icon={<IconTrash size={18} />}
+        onClick={() => setIsClearCacheDialog(true)}
+      />
+
       {!serverSideApiKeyIsSet ? (
         <Key apiKey={apiKey} onApiKeyChange={handleApiKeyChange} />
       ) : null}
@@ -83,6 +91,12 @@ export const ChatbarSettings = () => {
         open={isSettingDialogOpen}
         onClose={() => {
           setIsSettingDialog(false);
+        }}
+      />
+      <ClearCacheDialog
+        open={isClearCacheDialogOpen}
+        onClose={() => {
+          setIsClearCacheDialog(false);
         }}
       />
       <LogoDialog

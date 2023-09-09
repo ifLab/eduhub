@@ -20,6 +20,8 @@ import { PromptbarInitialState, initialState } from './Promptbar.state';
 
 import { v4 as uuidv4 } from 'uuid';
 
+import promptsData from '../../prompt.json'
+
 const Promptbar = () => {
   const { t } = useTranslation('promptbar');
 
@@ -182,7 +184,30 @@ const Promptbar = () => {
     }
   }, [searchTerm, prompts]);
 
-
+  // // 以下方法无法添加新提示：点击“新建提示”时没有反应
+  // useEffect(() => {
+  //   // 从prompt.json文件中导入默认提示对象
+  //   const defaultPrompts = promptsData.defaultPrompts;
+  
+  //   homeDispatch({ field: 'prompts', value: defaultPrompts });
+  
+  //   if (searchTerm) {
+  //     promptDispatch({
+  //       field: 'filteredPrompts',
+  //       value: defaultPrompts.filter((prompt) => {
+  //         const searchable =
+  //           prompt.name.toLowerCase() +
+  //           ' ' +
+  //           prompt.description.toLowerCase() +
+  //           ' ' +
+  //           prompt.content.toLowerCase();
+  //         return searchable.includes(searchTerm.toLowerCase());
+  //       }),
+  //     });
+  //   } else {
+  //     promptDispatch({ field: 'filteredPrompts', value: defaultPrompts });
+  //   }
+  // }, [searchTerm]);
 
 
   return (
