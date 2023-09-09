@@ -109,20 +109,29 @@ export const ConversationComponent = ({ conversation }: Props) => {
   // 图标变量 TODO: 优化
   let icon;
   switch (conversation.name) {
-    case '教师助理':
+    // case '教师助理':
+    //   icon = <FontAwesomeIcon icon={faChalkboardUser} style={{ height: '16px', width: '16px' }}/>;
+    //   break;
+    // case '学生助理':
+    //   icon = <FontAwesomeIcon icon={faUser} style={{ height: '16px', width: '16px' }}/>;
+    //   break;
+    // case '联网搜索':
+    //   icon = <FontAwesomeIcon icon={faGlobe} style={{ height: '16px', width: '16px' }}/>;
+    //   break;
+    // case '论文检索':
+    //   icon = <FontAwesomeIcon icon={faFileLines} style={{ height: '16px', width: '16px' }}/>;
+    //   break;
+    // case '数学计算':
+    //   icon = <FontAwesomeIcon icon={faSquareRootVariable} style={{ height: '16px', width: '16px' }}/>;
+    //   break;
+    case '信息网络问答':
       icon = <FontAwesomeIcon icon={faChalkboardUser} style={{ height: '16px', width: '16px' }}/>;
       break;
-    case '学生助理':
+    case '财务问答':
       icon = <FontAwesomeIcon icon={faUser} style={{ height: '16px', width: '16px' }}/>;
       break;
-    case '联网搜索':
-      icon = <FontAwesomeIcon icon={faGlobe} style={{ height: '16px', width: '16px' }}/>;
-      break;
-    case '论文检索':
+    case '教务问答':
       icon = <FontAwesomeIcon icon={faFileLines} style={{ height: '16px', width: '16px' }}/>;
-      break;
-    case '数学计算':
-      icon = <FontAwesomeIcon icon={faSquareRootVariable} style={{ height: '16px', width: '16px' }}/>;
       break;
     case '开源软件开发技术':
       icon = <FontAwesomeIcon icon={faServer} style={{ height: '16px', width: '16px' }}/>;
