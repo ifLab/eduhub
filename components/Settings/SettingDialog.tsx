@@ -67,6 +67,15 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
     console.log(state.theme); // 输出state.theme的值
   };
 
+  const handleClearCache = (clearCache: boolean) => {
+    if (clearCache) {
+      // 清除该页面的缓存
+      sessionStorage.clear();
+      localStorage.clear();
+      alert(t('清除缓存成功'));
+    }
+    onClose();
+  };
   // Render nothing if the dialog is not open.
   // 在对话框未打开时不渲染任何内容。
   if (!open) {
@@ -115,16 +124,24 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               <option value="brown">{t('褐色模式')}</option>
             </select>
 
-            <button
-              type="button"
-              className="w-full px-4 py-2 mt-6 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
-              onClick={() => {
-                handleSave();
-                onClose();
-              }}
-            >
-              {t('Save')}
-            </button>
+            <div className="flex justify-center">
+              <button
+                type="button"
+                className="w-1/2 px-4 py-2 mt-6 mr-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
+                onClick={() => handleClearCache(true)}
+              >
+                {t('清除缓存')}
+              </button>
+
+              <button
+                type="button"
+                className="w-1/2 px-4 py-2 mt-6 ml-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
+                onClick={handleSave}
+              >
+                {t('保存')}
+              </button>
+            </div>
+
           </div>
         </div>
       </div>

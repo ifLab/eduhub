@@ -63,11 +63,11 @@ export const ChatbarSettings = () => {
         onClick={() => setIsSettingDialog(true)}
       />
 
-      <SidebarButton
+      {/* <SidebarButton
         text={t('清除缓存')}
         icon={<IconTrash size={18} />}
         onClick={() => setIsClearCacheDialog(true)}
-      />
+      /> */}
 
       {!serverSideApiKeyIsSet ? (
         <Key apiKey={apiKey} onApiKeyChange={handleApiKeyChange} />
