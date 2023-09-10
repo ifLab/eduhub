@@ -373,6 +373,11 @@ export const Chatbar = () => {
     //   saveConversation(conversation);
     // });
     saveConversations(updatedConversations);
+
+     homeDispatch({
+      field: 'selectedConversation',
+      value: updatedConversations[updatedConversations.length - 1],
+    });
   }, []);
 
   // 将会话移动至文件夹
