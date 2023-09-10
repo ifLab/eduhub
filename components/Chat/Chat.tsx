@@ -247,7 +247,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           );
           // 如果会话列表为空，说明之前的会话列表中没有与选中会话相同的ID，将updatedConversation添加到会话列表中。
           if (updatedConversations.length === 0) {
-          // if (updatedConversations.length === 4) {
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
@@ -277,7 +276,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             },
           );
           if (updatedConversations.length === 0) {
-          // if (updatedConversations.length === 4) {
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
@@ -349,13 +347,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   };
   const throttledScrollDown = throttle(scrollDown, 250);
 
-  useEffect(() => {
-    console.log('currentMessage', currentMessage);
-    if (currentMessage) {
-      handleSend(currentMessage);
-      homeDispatch({ field: 'currentMessage', value: undefined });
-    }
-  }, [currentMessage]);
+  // useEffect(() => {
+  //   console.log('currentMessage', currentMessage);
+  //   if (currentMessage) {
+  //     handleSend(currentMessage);
+  //     homeDispatch({ field: 'currentMessage', value: undefined });
+  //   }
+  // }, [currentMessage]);
 
   useEffect(() => {
     throttledScrollDown();
