@@ -35,10 +35,12 @@ import { Chat } from '@/components/Chat/Chat';
 import { Chatbar } from '@/components/Chatbar/Chatbar';
 import { Navbar } from '@/components/Mobile/Navbar';
 import Promptbar from '@/components/Promptbar';
+import LoginNotice from '@/components/Settings/loginNotice';
 
 import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
+import Cookie from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
@@ -52,11 +54,21 @@ const Home = ({
   serverSidePluginKeysSet,
   defaultModelId,
 }: Props) => {
+  function CheckLogin() {
+    const user = Cookie.get('user');
+    console.log(user);
+    if (user) {
+      return user;
+    } else {
+      return '';
+    }
+  }
+
   const { t } = useTranslation('chat');
   const { getModels } = useApiService();
   const { getModelsError } = useErrorService();
   const [initialRender, setInitialRender] = useState<boolean>(true);
-
+  const [user, setUser] = useState<string>('');
   const contextValue = useCreateReducer<HomeInitialState>({
     initialState,
   });
@@ -185,7 +197,7 @@ const Home = ({
     const newConversation: Conversation = {
       id: uuidv4(),
       name: t('New Conversation'),
-      originalName: (''),
+      originalName: '',
       messages: [],
       model: OpenAIModels[defaultModelId],
       prompt: DEFAULT_SYSTEM_PROMPT,
@@ -250,6 +262,8 @@ const Home = ({
   // ON LOAD --------------------------------------------
 
   useEffect(() => {
+    setUser(CheckLogin());
+
     // 获取并设置用户的主题设置。
     const settings = getSettings();
     if (settings.theme) {
@@ -260,7 +274,7 @@ const Home = ({
     }
 
     // 获取并设置存储在本地的API密钥。
-    const apiKey = localStorage.getItem('apiKey');
+    // const apiKey = localStorage.getItem('apiKey');
 
     if (serverSideApiKeyIsSet) {
       dispatch({ field: 'apiKey', value: '' });
@@ -377,8 +391,7 @@ const Home = ({
         />
         <link rel="icon" href="/bistu-logo-440.ico" />
       </Head>
-      {selectedConversation && (
-        // <main>：主要的聊天界面容器
+      {selectedConversation && user ? (
         <main
           // className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
           className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
@@ -394,7 +407,7 @@ const Home = ({
           {/* 使用Flex布局的容器，包含三个子元素 */}
           <div className="flex h-full w-full pt-[48px] sm:pt-0">
             {/* 固定在页面左侧的导航栏组件 */}
-            <Chatbar />   
+            <Chatbar />
 
             {/* 聊天栏组件 */}
             <div className="flex flex-1">
@@ -406,7 +419,9 @@ const Home = ({
             <Promptbar />
           </div>
         </main>
-      )}
+      ) : !user ? (
+        <LoginNotice content="您还没有登录，请登录！" showButton={true} />
+      ) : null}
     </HomeContext.Provider>
   );
 };
