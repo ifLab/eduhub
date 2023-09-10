@@ -72,8 +72,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
 
   const handleSend = useCallback(
     async (message: Message, deleteCount = 0, plugin: Plugin | null = null) => {
+      // 是否存在选定的会话
       if (selectedConversation) {
         let updatedConversation: Conversation;
+        // 如果deleteCount大于0，则从当前会话的消息数组中删除最后deleteCount条消息，
+        // 并创建一个新的更新后的会话对象updatedConversation，将新的消息添加到其中。
         if (deleteCount) {
           const updatedMessages = [...selectedConversation.messages];
           for (let i = 0; i < deleteCount; i++) {
@@ -84,6 +87,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             messages: [...updatedMessages, message],
           };
         } else {
+          // 如果deleteCount等于0，则直接创建一个新的更新后的会话对象updatedConversation，
+          // 将新的消息添加到当前会话的消息数组中。
           updatedConversation = {
             ...selectedConversation,
             messages: [...selectedConversation.messages, message],
@@ -141,9 +146,11 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
         }
         if (!plugin) {
           if (updatedConversation.messages.length === 1) {
+            // 获取消息对象的content属性，并根据内容长度进行定制化处理，将截取的内容作为会话的名称。
             const { content } = message;
             const customName =
               content.length > 30 ? content.substring(0, 30) + '...' : content;
+            // 通过扩展运算符将新的会话名称添加到updatedConversation对象中。
             updatedConversation = {
               ...updatedConversation,
               name: customName,
@@ -179,16 +186,20 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             const chunkValue = answer;
 
             text += chunkValue;
+            // 第一次读取响应的数据块
             if (isFirst) {
               isFirst = false;
+              // 创建一个新的消息数组updatedMessages，将当前会话（updatedConversation）原有的消息对象和一个新的消息对象添加进去。
               const updatedMessages: Message[] = [
                 ...updatedConversation.messages,
                 { role: 'assistant', content: chunkValue },
               ];
+              // 更新updatedConversation对象，将新的消息数组updatedMessages赋值给messages字段。
               updatedConversation = {
                 ...updatedConversation,
                 messages: updatedMessages,
               };
+              // 将更新后的updatedConversation对象派发给主页组件（Home），以更新选中的会话。
               homeDispatch({
                 field: 'selectedConversation',
                 value: updatedConversation,
@@ -234,7 +245,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               return conversation;
             },
           );
-          if (updatedConversations.length === 0) {
+          // 如果会话列表为空，说明之前的会话列表中没有与选中会话相同的ID，将updatedConversation添加到会话列表中。
+          // if (updatedConversations.length === 0) {
+          if (updatedConversations.length === 4) {
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
@@ -263,7 +276,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               return conversation;
             },
           );
-          if (updatedConversations.length === 0) {
+          // if (updatedConversations.length === 0) {
+          if (updatedConversations.length === 4) {
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
@@ -335,13 +349,13 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   };
   const throttledScrollDown = throttle(scrollDown, 250);
 
-  // useEffect(() => {
-  //   console.log('currentMessage', currentMessage);
-  //   if (currentMessage) {
-  //     handleSend(currentMessage);
-  //     homeDispatch({ field: 'currentMessage', value: undefined });
-  //   }
-  // }, [currentMessage]);
+  useEffect(() => {
+    console.log('currentMessage', currentMessage);
+    if (currentMessage) {
+      handleSend(currentMessage);
+      homeDispatch({ field: 'currentMessage', value: undefined });
+    }
+  }, [currentMessage]);
 
   useEffect(() => {
     throttledScrollDown();
