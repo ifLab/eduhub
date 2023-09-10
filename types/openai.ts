@@ -41,7 +41,7 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     name: '默认模型',
     maxLength: 12000,
     tokenLimit: 4000,
-    key: process.env.OPENAI_API_KEY || '',
+    key: process.env.DIFY_API_KEY || '',
   },
   [OpenAIModelID.信息网络问答]: {
     id: OpenAIModelID.信息网络问答,

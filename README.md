@@ -37,7 +37,7 @@ npm install
 ```bash
 cp .env.local.example .env.local
 ```
-你需要提供要的配置，请尤其关注`DIFY_API_KEY` 和 `DIFY_API_URL` 
+你需要提供必要的配置，请尤其关注`DIFY_API_KEY` 和 `DIFY_API_URL` 
 
 **4. 构建并运行**
 
