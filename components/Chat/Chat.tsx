@@ -246,8 +246,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             },
           );
           // 如果会话列表为空，说明之前的会话列表中没有与选中会话相同的ID，将updatedConversation添加到会话列表中。
-          // if (updatedConversations.length === 0) {
-          if (updatedConversations.length === 4) {
+          if (updatedConversations.length === 0) {
+          // if (updatedConversations.length === 4) {
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
@@ -276,8 +276,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               return conversation;
             },
           );
-          // if (updatedConversations.length === 0) {
-          if (updatedConversations.length === 4) {
+          if (updatedConversations.length === 0) {
+          // if (updatedConversations.length === 4) {
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
