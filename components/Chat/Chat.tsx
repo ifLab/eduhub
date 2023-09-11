@@ -53,7 +53,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
       modelError,
       loading,
       prompts,
-
+      user,
       lightMode,
     },
     handleUpdateConversation,
@@ -107,6 +107,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           prompt: updatedConversation.prompt,
           temperature: updatedConversation.temperature,
           conversationID: updatedConversation.conversationID,
+          user: user,
         };
         const endpoint = getEndpoint(plugin);
         let body;

@@ -29,6 +29,7 @@ export interface HomeInitialState {
   defaultModelId: OpenAIModelID | undefined;
   serverSideApiKeyIsSet: boolean;
   serverSidePluginKeysSet: boolean;
+  user: string;
 }
 
 // 首页的初始状态
@@ -55,4 +56,5 @@ export const initialState: HomeInitialState = {
   defaultModelId: undefined,
   serverSideApiKeyIsSet: true,
   serverSidePluginKeysSet: false,
+  user: 'unknown-230911',
 };

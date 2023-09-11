@@ -1,7 +1,7 @@
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from '@/utils/app/const';
 import { OpenAIError, OpenAIStream } from '@/utils/server';
+import { DifyStream } from '@/utils/server';
 
-import { DifyStream } from '@/utils/server'; 
 import { ChatBody, Message } from '@/types/chat';
 
 // @ts-expect-error
@@ -16,16 +16,18 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { model, messages, key, prompt, temperature, conversationID: Dify_ConversationId } = (await req.json()) as ChatBody;
-
-    
+    const {
+      model,
+      messages,
+      key,
+      prompt,
+      temperature,
+      conversationID: Dify_ConversationId,
+      user,
+    } = (await req.json()) as ChatBody;
 
     let query = messages[messages.length - 1].content;
-
-
-    const { stream } = await DifyStream(query, key, 'build-230903', Dify_ConversationId);
-
-
+    const { stream } = await DifyStream(query, key, user, Dify_ConversationId);
 
     return new Response(stream);
   } catch (error) {
