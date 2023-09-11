@@ -82,7 +82,7 @@ const Home = ({
       selectedConversation,
       prompts,
       temperature,
-    },
+          },
     dispatch,
   } = contextValue;
 
@@ -262,8 +262,14 @@ const Home = ({
   // ON LOAD --------------------------------------------
 
   useEffect(() => {
-    setUser(CheckLogin());
+    if (user) {
+      dispatch({ field: 'user', value: user });
+      console.log(user + '33');
+    }
+  }, [user]);
 
+  useEffect(() => {
+    setUser(CheckLogin()); // 检查是否登录并设置用户，执行一次即可
     // 获取并设置用户的主题设置。
     const settings = getSettings();
     if (settings.theme) {
