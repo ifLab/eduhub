@@ -103,6 +103,8 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
                 ? 'bg-[#C5DFF8]'
                 : lightMode === 'brown'
                 ? 'bg-[#F4EEE0]'
+                : lightMode === 'BISTU' 
+                ? 'bg-[#eef5fd]' 
                 : 'bg-[#F6F6F6] dark:bg-[#343541]'
             } sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle`}
             role="dialog"
@@ -123,6 +125,8 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
                   ? 'bg-[#C5DFF8]'
                   : lightMode === 'brown'
                   ? 'bg-[#F4EEE0]'
+                  : lightMode === 'BISTU' 
+                  ? 'bg-[#eef5fd]' 
                   : 'bg-[#F6F6F6] dark:bg-[#343541]'
               } dark:text-neutral-100`}
               placeholder={t('A name for your prompt.') || ''}
@@ -145,6 +149,8 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
                   ? 'bg-[#C5DFF8]'
                   : lightMode === 'brown'
                   ? 'bg-[#F4EEE0]'
+                  : lightMode === 'BISTU' 
+                  ? 'bg-[#eef5fd]' 
                   : 'bg-[#F6F6F6] dark:bg-[#343541]'
               } dark:text-neutral-100`}
               style={{ resize: 'none' }}
@@ -169,6 +175,8 @@ export const PromptModal: FC<Props> = ({ prompt, onClose, onUpdatePrompt }) => {
                   ? 'bg-[#C5DFF8]'
                   : lightMode === 'brown'
                   ? 'bg-[#F4EEE0]'
+                  : lightMode === 'BISTU' 
+                  ? 'bg-[#eef5fd]' 
                   : 'bg-[#F6F6F6] dark:bg-[#343541]'
               } dark:text-neutral-100`}
               style={{ resize: 'none' }}

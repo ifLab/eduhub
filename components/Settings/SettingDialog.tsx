@@ -97,8 +97,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 
           <div
             ref={modalRef}
-            className={`dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'} sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle`}
-            // className="dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#FFC7C7]' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : lightMode === 'green' ? 'bg-[#BBDED6]' : 'bg-white dark:bg-[#343541]'}` sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle"
+            className={`dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]'  : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'} sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle`}
             role="dialog"
           >
             <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
@@ -107,13 +106,16 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 
             <a
               type="button"
-              className="mb-5 cursor-pointer"
+              className="mb-5 cursor-pointer text-neutral-700 dark:text-neutral-200"
               onClick={() => handleClearCache(true)}
             >
               {t('清除缓存')}
             </a>
-            <hr className="mb-5"/>
 
+            <div className="mb-5 bg-neutral-500 border-neutral-500 h-0.5">
+              <hr/>
+            </div>
+            
             <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
               {t('Theme')}
             </div>
@@ -133,6 +135,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               <option value="green">{t('绿色模式')}</option>
               <option value="purple">{t('紫色模式')}</option>
               <option value="brown">{t('褐色模式')}</option>
+              <option value="BISTU">{t('BISTU')}</option>
             </select>
 
 

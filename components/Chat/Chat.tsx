@@ -388,10 +388,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   }, [messagesEndRef]);
 
   return (
-    // <div className="relative flex-1 overflow-hidden bg-white dark:bg-[#343541]">
-    // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : 'bg-white dark:bg-[#343541]'}`}>
-    // <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-red-200' : lightMode === 'blue' ? 'bg-[#CBF1F5]' : 'bg-white dark:bg-[#343541]'}`}>
-    <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}>
+    <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}>
         <>
           <div
             className="max-h-full overflow-x-hidden"
@@ -434,7 +431,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             ) : (
               <>
               {/* 顶部导航栏 */}
-                <div className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-neutral-200`}>
+                <div className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' : lightMode === 'BISTU' ? 'bg-[#eef5fd]' : 'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-neutral-200`}>
                   {/* {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
                   : {selectedConversation?.temperature} | */}
                   <button
@@ -478,7 +475,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 
                 {/* 回复消息下方的空白区域 */}
                 <div
-                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
+                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
                   ref={messagesEndRef}
                 />
               </>

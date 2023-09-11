@@ -143,7 +143,7 @@ export const ConversationComponent = ({ conversation }: Props) => {
   // 单个会话 重命名、删除和选择会话 等显示
   return (
     // 侧边栏中会话的背景色、字体设置
-    <div className={`relative flex items-center ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]' :'bg-[#202123] dark:bg-[#202123]'}`}>
+    <div className={`relative flex items-center ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]'  : lightMode === 'BISTU' ? 'bg-[#004098]' :'bg-[#202123] dark:bg-[#202123]'}`}>
       {isRenaming && selectedConversation?.id === conversation.id ? (
         <div className="flex w-full items-center gap-3 rounded-lg bg-[#343541]/90 p-3">
           <IconMessage size={18} />

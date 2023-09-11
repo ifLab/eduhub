@@ -41,3 +41,7 @@ html {
 pre:has(div.codeblock) {
   padding: 0;
 }
+
+input::-webkit-input-placeholder {
+  color: #f2f2f2;
+}

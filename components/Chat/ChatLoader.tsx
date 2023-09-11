@@ -11,7 +11,7 @@ export const ChatLoader: FC<Props> = () => {
   const { state: { lightMode } } = useContext(HomeContext);
   return (
     <div
-      className={`group border-b border-black/10 text-gray-800 dark:border-gray-900/50 dark:text-gray-100 ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
+      className={`group border-b border-black/10 text-gray-800 dark:border-gray-900/50 dark:text-gray-100 ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]'  : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
       style={{ overflowWrap: 'anywhere' }}
     >
       <div className="m-auto flex gap-4 p-4 text-base md:max-w-2xl md:gap-6 md:py-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">

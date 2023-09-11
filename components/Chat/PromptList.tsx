@@ -32,6 +32,8 @@ export const PromptList: FC<Props> = ({
     bgColor = 'bg-[#C5DFF8]';
   } else if (lightMode === 'brown') {
     bgColor = 'bg-[#F4EEE0]';
+  } else if (lightMode === 'BISTU') {
+    bgColor = 'bg-[#eef5fd]';
   }
 
   // 输入 / 时弹出的对话框背景色
