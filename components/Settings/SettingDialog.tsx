@@ -28,7 +28,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
   });
   // 使用useContext钩子函数获取到HomeContext上下文，并将其中的dispatch赋值给homeDispatch变量。
   const {
-    state: { lightMode },
+    state: { lightMode, user },
     dispatch: homeDispatch,
   } = useContext(HomeContext);
 
@@ -126,6 +126,9 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             </div>
 
             <div className="flex justify-between">
+              <div className="mb-5 text-white dark:text-white">
+                您好，{user}！
+              </div>
               <a
                 type="button"
                 className="mb-5 cursor-pointer text-white dark:text-white"
