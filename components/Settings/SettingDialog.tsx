@@ -1,6 +1,7 @@
 import { FC, useContext, useEffect, useReducer, useRef } from 'react';
 
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import { useCreateReducer } from '@/hooks/useCreateReducer';
 
@@ -9,7 +10,9 @@ import { getSettings, saveSettings } from '@/utils/app/settings';
 import { Settings } from '@/types/settings';
 
 import HomeContext from '@/pages/api/home/home.context';
-import { useRouter } from 'next/router';
+
+import Cookies from 'js-cookie';
+
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -24,8 +27,9 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
     initialState: settings,
   });
   // 使用useContext钩子函数获取到HomeContext上下文，并将其中的dispatch赋值给homeDispatch变量。
-  const { state: { lightMode },
-    dispatch: homeDispatch 
+  const {
+    state: { lightMode },
+    dispatch: homeDispatch,
   } = useContext(HomeContext);
 
   // 使用useRef钩子函数创建了一个引用modalRef，该引用指向一个HTMLDivElement元素。
@@ -58,7 +62,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
       window.removeEventListener('mousedown', handleMouseDown);
     };
   }, [onClose]);
-  
+
   // 保存设置并更新主题
   const handleSave = () => {
     homeDispatch({ field: 'lightMode', value: state.theme });
@@ -70,15 +74,16 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
   };
   const router = useRouter();
   const handleClearCache = () => {
-    
-    
     // 清除该页面的缓存
     sessionStorage.clear();
     localStorage.clear();
-    alert(t('清除缓存成功'));
+    alert('清除缓存成功');
     router.reload();
-    
-    onClose();
+  };
+  const handleLogout = () => {
+    Cookies.remove('user');
+    alert('退出登录成功');
+    router.reload();
   };
   // Render nothing if the dialog is not open.
   // 在对话框未打开时不渲染任何内容。
@@ -99,25 +104,49 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 
           <div
             ref={modalRef}
-            className={`dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]'  : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'} sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle`}
+            className={`dark:border-netural-400 inline-block max-h-[400px] transform overflow-y-auto rounded-lg border border-gray-300 px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all ${
+              lightMode === 'red'
+                ? 'bg-[#F2ECBE]'
+                : lightMode === 'blue'
+                ? 'bg-[#F6F4EB]'
+                : lightMode === 'green'
+                ? 'bg-[#FAF1E4]'
+                : lightMode === 'purple'
+                ? 'bg-[#C5DFF8]'
+                : lightMode === 'brown'
+                ? 'bg-[#F4EEE0]'
+                : lightMode === 'BISTU'
+                ? 'bg-[#eef5fd]'
+                : 'bg-[#F6F6F6] dark:bg-[#343541]'
+            } sm:my-8 sm:max-h-[600px] sm:w-full sm:max-w-lg sm:p-6 sm:align-middle`}
             role="dialog"
           >
             <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
               {t('Settings')}
             </div>
 
-            <a
-              type="button"
-              className="mb-5 cursor-pointer text-neutral-700 dark:text-neutral-200"
-              onClick={handleClearCache}
-            >
-              {t('清除缓存')}
-            </a>
+            <div className="flex justify-between">
+              <a
+                type="button"
+                className="mb-5 cursor-pointer text-white dark:text-white"
+                onClick={handleClearCache}
+              >
+                清除缓存
+              </a>
+
+              <a
+                type="button"
+                className="mb-5 cursor-pointer text-white dark:text-white"
+                onClick={handleLogout}
+              >
+                退出登录
+              </a>
+            </div>
 
             <div className="mb-5 bg-neutral-500 border-neutral-500 h-0.5">
-              <hr/>
+              <hr />
             </div>
-            
+
             <div className="text-sm font-bold mb-2 text-black dark:text-neutral-200">
               {t('Theme')}
             </div>
@@ -140,13 +169,12 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               <option value="BISTU">{t('BISTU')}</option>
             </select>
 
-
             <button
               type="button"
               className="w-full px-4 py-2 mt-6 ml-2 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
               onClick={handleSave}
             >
-              {t('保存')}
+              保存
             </button>
           </div>
         </div>

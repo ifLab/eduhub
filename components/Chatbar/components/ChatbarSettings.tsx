@@ -5,10 +5,8 @@ import { useTranslation } from 'next-i18next';
 
 import HomeContext from '@/pages/api/home/home.context';
 
-import { SettingDialog } from '@/components/Settings/SettingDialog';
-
 import { LogoDialog } from '@/components/Settings/LogoDialog';
-import { ClearCacheDialog } from '@/components/Settings/ClearCacheDialog';
+import { SettingDialog } from '@/components/Settings/SettingDialog';
 
 import { Import } from '../../Settings/Import';
 import { Key } from '../../Settings/Key';
@@ -22,7 +20,6 @@ export const ChatbarSettings = () => {
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
 
   const [isLogoDialogOpen, setIsLogoDialog] = useState<boolean>(false);
-  const [isClearCacheDialogOpen, setIsClearCacheDialog] = useState<boolean>(false);
 
   const {
     state: {
@@ -41,7 +38,6 @@ export const ChatbarSettings = () => {
     handleExportData,
     handleApiKeyChange,
   } = useContext(ChatbarContext);
-
 
   return (
     <div className="flex flex-col items-center space-y-1 border-t border-white/20 pt-1 text-sm">
@@ -63,12 +59,6 @@ export const ChatbarSettings = () => {
         onClick={() => setIsSettingDialog(true)}
       />
 
-      {/* <SidebarButton
-        text={t('清除缓存')}
-        icon={<IconTrash size={18} />}
-        onClick={() => setIsClearCacheDialog(true)}
-      /> */}
-
       {!serverSideApiKeyIsSet ? (
         <Key apiKey={apiKey} onApiKeyChange={handleApiKeyChange} />
       ) : null}
@@ -78,20 +68,20 @@ export const ChatbarSettings = () => {
       {/* 左下logo按钮 */}
       <SidebarButton
         text={t('')}
-        icon={<img src="bistu.png" alt="Logo" style={{ height: '27px', width: '130px' }} />}
+        icon={
+          <img
+            src="bistu.png"
+            alt="Logo"
+            style={{ height: '27px', width: '130px' }}
+          />
+        }
         onClick={() => setIsLogoDialog(true)}
       />
-      
+
       <SettingDialog
         open={isSettingDialogOpen}
         onClose={() => {
           setIsSettingDialog(false);
-        }}
-      />
-      <ClearCacheDialog
-        open={isClearCacheDialogOpen}
-        onClose={() => {
-          setIsClearCacheDialog(false);
         }}
       />
       <LogoDialog
