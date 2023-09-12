@@ -9,7 +9,7 @@ import { getSettings, saveSettings } from '@/utils/app/settings';
 import { Settings } from '@/types/settings';
 
 import HomeContext from '@/pages/api/home/home.context';
-
+import { useRouter } from 'next/router';
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -68,14 +68,16 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 
     onClose();
   };
-
-  const handleClearCache = (clearCache: boolean) => {
-    if (clearCache) {
-      // 清除该页面的缓存
-      sessionStorage.clear();
-      localStorage.clear();
-      alert(t('清除缓存成功'));
-    }
+  const router = useRouter();
+  const handleClearCache = () => {
+    
+    
+    // 清除该页面的缓存
+    sessionStorage.clear();
+    localStorage.clear();
+    alert(t('清除缓存成功'));
+    router.reload();
+    
     onClose();
   };
   // Render nothing if the dialog is not open.
@@ -107,7 +109,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             <a
               type="button"
               className="mb-5 cursor-pointer text-neutral-700 dark:text-neutral-200"
-              onClick={() => handleClearCache(true)}
+              onClick={handleClearCache}
             >
               {t('清除缓存')}
             </a>

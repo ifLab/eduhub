@@ -69,6 +69,7 @@ const Home = ({
   const { getModelsError } = useErrorService();
   const [initialRender, setInitialRender] = useState<boolean>(true);
   const [user, setUser] = useState<string>('');
+  const [ready , setReady] = useState<boolean>(false);
   const contextValue = useCreateReducer<HomeInitialState>({
     initialState,
   });
@@ -270,6 +271,7 @@ const Home = ({
 
   useEffect(() => {
     setUser(CheckLogin()); // 检查是否登录并设置用户，执行一次即可
+    setReady(true);
     // 获取并设置用户的主题设置。
     const settings = getSettings();
     if (settings.theme) {
@@ -397,7 +399,8 @@ const Home = ({
         />
         <link rel="icon" href="/bistu-logo-440.ico" />
       </Head>
-      {selectedConversation && user ? (
+      {ready ? (
+      selectedConversation && user ? (
         <main
           // className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
           className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
@@ -427,7 +430,9 @@ const Home = ({
         </main>
       ) : !user ? (
         <LoginNotice content="您还没有登录，请登录！" showButton={true} />
-      ) : null}
+      ) : null
+      ) : null
+      }
     </HomeContext.Provider>
   );
 };
