@@ -29,10 +29,10 @@ import Spinner from '../Spinner';
 import { ChatInput } from './ChatInput';
 import { ChatLoader } from './ChatLoader';
 import { ErrorMessageDiv } from './ErrorMessageDiv';
+import { MemoizedChatMessage } from './MemoizedChatMessage';
 import { ModelSelect } from './ModelSelect';
 import { SystemPrompt } from './SystemPrompt';
 import { TemperatureSlider } from './Temperature';
-import { MemoizedChatMessage } from './MemoizedChatMessage';
 
 interface Props {
   stopConversationRef: MutableRefObject<boolean>;
@@ -162,7 +162,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           const decoder = new TextDecoder();
           let done = false;
           let isFirst = true;
-          let accumulatedText = "";
+          let accumulatedText = '';
           let text = '';
           while (!done) {
             if (stopConversationRef.current === true) {
@@ -176,65 +176,66 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             accumulatedText += decoder.decode(value);
 
             // 使用换行符（或其他分隔符）分割累积的文本，并处理每一个完整的 JSON 对象
-            while (accumulatedText.includes("\n")) {
-              const splitIndex = accumulatedText.indexOf("\n");
+            while (accumulatedText.includes('\n')) {
+              const splitIndex = accumulatedText.indexOf('\n');
               const jsonText = accumulatedText.slice(0, splitIndex);
 
               const parsedMessage = JSON.parse(jsonText);
-              const { answer: answer, conversation_id: newConversationId } = parsedMessage;
+              const { answer: answer, conversation_id: newConversationId } =
+                parsedMessage;
               console.log('answer', answer);
-              
-            const chunkValue = answer;
 
-            text += chunkValue;
-            // 第一次读取响应的数据块
-            if (isFirst) {
-              isFirst = false;
-              // 创建一个新的消息数组updatedMessages，将当前会话（updatedConversation）原有的消息对象和一个新的消息对象添加进去。
-              const updatedMessages: Message[] = [
-                ...updatedConversation.messages,
-                { role: 'assistant', content: chunkValue },
-              ];
-              // 更新updatedConversation对象，将新的消息数组updatedMessages赋值给messages字段。
-              updatedConversation = {
-                ...updatedConversation,
-                messages: updatedMessages,
-              };
-              // 将更新后的updatedConversation对象派发给主页组件（Home），以更新选中的会话。
-              homeDispatch({
-                field: 'selectedConversation',
-                value: updatedConversation,
-              });
-            } else {
-              const updatedMessages: Message[] =
-                updatedConversation.messages.map((message, index) => {
-                  if (index === updatedConversation.messages.length - 1) {
-                    return {
-                      ...message,
-                      content: text,
-                    };
-                  }
-                  return message;
+              const chunkValue = answer;
+
+              text += chunkValue;
+              // 第一次读取响应的数据块
+              if (isFirst) {
+                isFirst = false;
+                // 创建一个新的消息数组updatedMessages，将当前会话（updatedConversation）原有的消息对象和一个新的消息对象添加进去。
+                const updatedMessages: Message[] = [
+                  ...updatedConversation.messages,
+                  { role: 'assistant', content: chunkValue },
+                ];
+                // 更新updatedConversation对象，将新的消息数组updatedMessages赋值给messages字段。
+                updatedConversation = {
+                  ...updatedConversation,
+                  messages: updatedMessages,
+                };
+                // 将更新后的updatedConversation对象派发给主页组件（Home），以更新选中的会话。
+                homeDispatch({
+                  field: 'selectedConversation',
+                  value: updatedConversation,
                 });
-              updatedConversation = {
-                ...updatedConversation,
-                messages: updatedMessages,
-              };
-              homeDispatch({
-                field: 'selectedConversation',
-                value: updatedConversation,
-              });
+              } else {
+                const updatedMessages: Message[] =
+                  updatedConversation.messages.map((message, index) => {
+                    if (index === updatedConversation.messages.length - 1) {
+                      return {
+                        ...message,
+                        content: text,
+                      };
+                    }
+                    return message;
+                  });
+                updatedConversation = {
+                  ...updatedConversation,
+                  messages: updatedMessages,
+                };
+                homeDispatch({
+                  field: 'selectedConversation',
+                  value: updatedConversation,
+                });
+              }
+              accumulatedText = accumulatedText.slice(splitIndex + 1);
+
+              // update conversation id
+              if (newConversationId) {
+                updatedConversation = {
+                  ...updatedConversation,
+                  conversationID: newConversationId,
+                };
+              }
             }
-            accumulatedText = accumulatedText.slice(splitIndex + 1);
-            
-            // update conversation id
-            if (newConversationId) {
-            updatedConversation = {
-              ...updatedConversation,
-              conversationID: newConversationId,
-            };
-          }
-          }
           }
 
           saveConversation(updatedConversation);
@@ -248,7 +249,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           );
           // console.log('updatedConversations', updatedConversations);
           // 如果会话列表为空，说明之前的会话列表中没有与选中会话相同的ID，将updatedConversation添加到会话列表中。
-          if (updatedConversations.length === 4) { // TODO: 应将应用独立出来，单独创建一个PINED_CONVERSATION
+          if (updatedConversations.length === 4) {
+            // TODO: 应将应用独立出来，单独创建一个PINED_CONVERSATION
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
@@ -390,21 +392,43 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
   }, [messagesEndRef]);
 
   return (
-    <div className={`relative flex-1 overflow-hidden ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}>
-        <>
-          <div
-            className="max-h-full overflow-x-hidden"
-            ref={chatContainerRef}
-            onScroll={handleScroll}
-          >
-            {selectedConversation?.messages.length === 0 ? (
-              <>
-                <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
-                  <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
-                    <img src="bistu.png" alt="bistu logo" className="mx-auto" width="200px" height="auto" />
-                  </div>
+    <div
+      className={`relative flex-1 overflow-hidden ${
+        lightMode === 'red'
+          ? 'bg-[#F2ECBE]'
+          : lightMode === 'blue'
+          ? 'bg-[#F6F4EB]'
+          : lightMode === 'green'
+          ? 'bg-[#FAF1E4]'
+          : lightMode === 'purple'
+          ? 'bg-[#C5DFF8]'
+          : lightMode === 'brown'
+          ? 'bg-[#F4EEE0]'
+          : lightMode === 'BISTU'
+          ? 'bg-[#eef5fd]'
+          : 'bg-[#F6F6F6] dark:bg-[#343541]'
+      }`}
+    >
+      <>
+        <div
+          className="max-h-full overflow-x-hidden"
+          ref={chatContainerRef}
+          onScroll={handleScroll}
+        >
+          {selectedConversation?.messages.length === 0 ? (
+            <>
+              <div className="mx-auto flex flex-col space-y-5 md:space-y-10 px-3 pt-5 md:pt-12 sm:max-w-[600px]">
+                <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
+                  <img
+                    src="bistu.png"
+                    alt="bistu logo"
+                    className="mx-auto"
+                    width="200px"
+                    height="auto"
+                  />
+                </div>
 
-                    {/* <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+                {/* <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                       <ModelSelect />
 
                       <SystemPrompt
@@ -428,82 +452,109 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                         }
                       />
                     </div> */}
-                </div>
-              </>
-            ) : (
-              <>
+              </div>
+            </>
+          ) : (
+            <>
               {/* 顶部导航栏 */}
-                <div className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' : lightMode === 'BISTU' ? 'bg-[#eef5fd]' : 'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-neutral-200`}>
-                  {/* {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
+              <div
+                className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${
+                  lightMode === 'red'
+                    ? 'bg-[#F2ECBE]'
+                    : lightMode === 'blue'
+                    ? 'bg-[#F6F4EB]'
+                    : lightMode === 'green'
+                    ? 'bg-[#FAF1E4]'
+                    : lightMode === 'purple'
+                    ? 'bg-[#C5DFF8]'
+                    : lightMode === 'brown'
+                    ? 'bg-[#F4EEE0]'
+                    : lightMode === 'BISTU'
+                    ? 'bg-[#eef5fd]'
+                    : 'bg-[#F6F6F6] dark:bg-[#343541]'
+                } dark:text-neutral-200`}
+              >
+                {/* {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
                   : {selectedConversation?.temperature} | */}
-                  {/* <button
+                {/* <button
                     className="ml-2 cursor-pointer hover:opacity-50"
                     onClick={handleSettings}
                   >
                     <IconSettings size={18} />
                   </button> */}
-                  <button
-                    className="ml-2 cursor-pointer hover:opacity-50"
-                    onClick={onClearAll}
-                  >
-                    <IconClearAll size={18} />
-                  </button>
-                </div>
-                {showSettings && (
-                  <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
-                    <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
-                      <ModelSelect />
-                    </div>
+                <button
+                  className="ml-2 cursor-pointer hover:opacity-50"
+                  onClick={onClearAll}
+                >
+                  <IconClearAll size={18} />
+                </button>
+              </div>
+              {showSettings && (
+                <div className="flex flex-col space-y-10 md:mx-auto md:max-w-xl md:gap-6 md:py-3 md:pt-6 lg:max-w-2xl lg:px-0 xl:max-w-3xl">
+                  <div className="flex h-full flex-col space-y-4 border-b border-neutral-200 p-4 dark:border-neutral-600 md:rounded-lg md:border">
+                    <ModelSelect />
                   </div>
-                )}
+                </div>
+              )}
 
-                {selectedConversation?.messages.map((message, index) => (
-                  <MemoizedChatMessage
-                    key={index}
-                    message={message}
-                    messageIndex={index}
-                    onEdit={(editedMessage) => {
-                      setCurrentMessage(editedMessage);
-                      // discard edited message and the ones that come after then resend
-                      handleSend(
-                        editedMessage,
-                        selectedConversation?.messages.length - index,
-                      );
-                    }}
-                  />
-                ))}
-
-                {loading && <ChatLoader />}
-                
-                {/* 回复消息下方的空白区域 */}
-                <div
-                  className={`h-[162px] ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
-                  ref={messagesEndRef}
+              {selectedConversation?.messages.map((message, index) => (
+                <MemoizedChatMessage
+                  key={index}
+                  message={message}
+                  messageIndex={index}
+                  onEdit={(editedMessage) => {
+                    setCurrentMessage(editedMessage);
+                    // discard edited message and the ones that come after then resend
+                    handleSend(
+                      editedMessage,
+                      selectedConversation?.messages.length - index,
+                    );
+                  }}
                 />
-              </>
-            )}
-          </div>
+              ))}
 
-          <ChatInput
-            stopConversationRef={stopConversationRef}
-            textareaRef={textareaRef}
-            onSend={(message, plugin) => {
-              setCurrentMessage(message);
-              handleSend(message, 0, plugin);
-            }}
-            onScrollDownClick={handleScrollDown}
-            onRegenerate={() => {
-              if (currentMessage) {
-                handleSend(currentMessage, 2, null);
-              }
-            }}
-            showScrollDownButton={showScrollDownButton}
-          />
-        </>
-      
+              {loading && <ChatLoader />}
+
+              {/* 回复消息下方的空白区域 */}
+              <div
+                className={`h-[162px] ${
+                  lightMode === 'red'
+                    ? 'bg-[#F2ECBE]'
+                    : lightMode === 'blue'
+                    ? 'bg-[#F6F4EB]'
+                    : lightMode === 'green'
+                    ? 'bg-[#FAF1E4]'
+                    : lightMode === 'purple'
+                    ? 'bg-[#C5DFF8]'
+                    : lightMode === 'brown'
+                    ? 'bg-[#F4EEE0]'
+                    : lightMode === 'BISTU'
+                    ? 'bg-[#eef5fd]'
+                    : 'bg-[#F6F6F6] dark:bg-[#343541]'
+                }`}
+                ref={messagesEndRef}
+              />
+            </>
+          )}
+        </div>
+
+        <ChatInput
+          stopConversationRef={stopConversationRef}
+          textareaRef={textareaRef}
+          onSend={(message, plugin) => {
+            setCurrentMessage(message);
+            handleSend(message, 0, plugin);
+          }}
+          onScrollDownClick={handleScrollDown}
+          onRegenerate={() => {
+            if (currentMessage) {
+              handleSend(currentMessage, 2, null);
+            }
+          }}
+          showScrollDownButton={showScrollDownButton}
+        />
+      </>
     </div>
   );
 });
 Chat.displayName = 'Chat';
-
-

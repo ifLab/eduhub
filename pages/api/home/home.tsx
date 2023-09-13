@@ -57,7 +57,7 @@ const Home = ({
   function CheckLogin() {
     const user = Cookie.get('user');
     console.log(user);
-    return user ?? "";
+    return user ?? '';
   }
 
   const { t } = useTranslation('chat');
@@ -65,7 +65,7 @@ const Home = ({
   // const { getModelsError } = useErrorService();
   const [initialRender, setInitialRender] = useState<boolean>(true);
   const [user, setUser] = useState<string>('');
-  const [ready , setReady] = useState<boolean>(false);
+  const [ready, setReady] = useState<boolean>(false);
   const contextValue = useCreateReducer<HomeInitialState>({
     initialState,
   });
@@ -79,7 +79,7 @@ const Home = ({
       selectedConversation,
       prompts,
       temperature,
-          },
+    },
     dispatch,
   } = contextValue;
 
@@ -395,39 +395,38 @@ const Home = ({
         <link rel="icon" href="/bistu-logo-440.ico" />
       </Head>
       {ready ? (
-      selectedConversation && user ? (
-        <main
-          // className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
-          className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
-        >
-          {/* 固定在页面顶部，在小屏幕设备上隐藏的导航栏组件 */}
-          <div className="fixed top-0 w-full sm:hidden">
-            <Navbar
-              selectedConversation={selectedConversation}
-              onNewConversation={handleNewConversation}
-            />
-          </div>
-
-          {/* 使用Flex布局的容器，包含三个子元素 */}
-          <div className="flex h-full w-full pt-[48px] sm:pt-0">
-            {/* 固定在页面左侧的导航栏组件 */}
-            <Chatbar />
-
-            {/* 聊天栏组件 */}
-            <div className="flex flex-1">
-              {/* 聊天内容展示组件，通过传递stopConversationRef作为属性给Chat组件。 */}
-              <Chat stopConversationRef={stopConversationRef} />
+        selectedConversation && user ? (
+          <main
+            // className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
+            className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
+          >
+            {/* 固定在页面顶部，在小屏幕设备上隐藏的导航栏组件 */}
+            <div className="fixed top-0 w-full sm:hidden">
+              <Navbar
+                selectedConversation={selectedConversation}
+                onNewConversation={handleNewConversation}
+              />
             </div>
 
-            {/* 固定在页面右侧的提示栏组件。 */}
-            <Promptbar />
-          </div>
-        </main>
-      ) : !user ? (
-        <LoginNotice content="您还没有登录，请登录！" showButton={true} />
-      ) : null
-      ) : null
-      }
+            {/* 使用Flex布局的容器，包含三个子元素 */}
+            <div className="flex h-full w-full pt-[48px] sm:pt-0">
+              {/* 固定在页面左侧的导航栏组件 */}
+              <Chatbar />
+
+              {/* 聊天栏组件 */}
+              <div className="flex flex-1">
+                {/* 聊天内容展示组件，通过传递stopConversationRef作为属性给Chat组件。 */}
+                <Chat stopConversationRef={stopConversationRef} />
+              </div>
+
+              {/* 固定在页面右侧的提示栏组件。 */}
+              <Promptbar />
+            </div>
+          </main>
+        ) : !user ? (
+          <LoginNotice content="您还没有登录，请登录！" showButton={true} />
+        ) : null
+      ) : null}
     </HomeContext.Provider>
   );
 };

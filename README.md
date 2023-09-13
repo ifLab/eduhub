@@ -1,22 +1,17 @@
 # Chatbot UI for BistuCopilot
 
 
-## 开发进展
-
+## TODOS
 - [ ] 规范配置名称
     - [ ] ENDPOINT <-> URL 配置文件中
     - [x] isDefault <-> deletable 项目文件夹,conversation,prompt中
     - [ ] 图标写入conversation结构
 
-- [ ] 完善对话新建机制（自动）
-- [ ] 对话显示所属模块
-- [x] 规范功能开关，禁用修改删除
+- [x] 完善对话新建机制（自动）
+    - [ ] 重构PINED_CONVERSATION类型，把应用与对话分离
 - [ ] 功能开关与模型对接
 - [ ] 规范Prompt的调用方式（隐式添加）
 - [ ] 完善Prompt "/" 检测
-
-- [ ] logo 添加地址配置
-
 
 ## 本地部署方法
 
