@@ -57,16 +57,12 @@ const Home = ({
   function CheckLogin() {
     const user = Cookie.get('user');
     console.log(user);
-    if (user) {
-      return user;
-    } else {
-      return '';
-    }
+    return user ?? "";
   }
 
   const { t } = useTranslation('chat');
-  const { getModels } = useApiService();
-  const { getModelsError } = useErrorService();
+  // const { getModels } = useApiService();
+  // const { getModelsError } = useErrorService();
   const [initialRender, setInitialRender] = useState<boolean>(true);
   const [user, setUser] = useState<string>('');
   const [ready , setReady] = useState<boolean>(false);
@@ -89,28 +85,28 @@ const Home = ({
 
   const stopConversationRef = useRef<boolean>(false);
 
-  const { data, error, refetch } = useQuery(
-    ['GetModels', apiKey, serverSideApiKeyIsSet],
-    ({ signal }) => {
-      if (!apiKey && !serverSideApiKeyIsSet) return null;
+  // const { data, error, refetch } = useQuery(
+  //   ['GetModels', apiKey, serverSideApiKeyIsSet],
+  //   ({ signal }) => {
+  //     if (!apiKey && !serverSideApiKeyIsSet) return null;
 
-      return getModels(
-        {
-          key: apiKey,
-        },
-        signal,
-      );
-    },
-    { enabled: true, refetchOnMount: false },
-  );
+  //     return getModels(
+  //       {
+  //         key: apiKey,
+  //       },
+  //       signal,
+  //     );
+  //   },
+  //   { enabled: true, refetchOnMount: false },
+  // );
 
-  useEffect(() => {
-    if (data) dispatch({ field: 'models', value: data });
-  }, [data, dispatch]);
+  // useEffect(() => {
+  //   if (data) dispatch({ field: 'models', value: data });
+  // }, [data, dispatch]);
 
-  useEffect(() => {
-    dispatch({ field: 'modelError', value: getModelsError(error) });
-  }, [dispatch, error, getModelsError]);
+  // useEffect(() => {
+  //   dispatch({ field: 'modelError', value: getModelsError(error) });
+  // }, [dispatch, error, getModelsError]);
 
   // FETCH MODELS ----------------------------------------------
 
@@ -265,7 +261,6 @@ const Home = ({
   useEffect(() => {
     if (user) {
       dispatch({ field: 'user', value: user });
-      console.log(user + '33');
     }
   }, [user]);
 
