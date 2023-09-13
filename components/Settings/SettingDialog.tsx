@@ -126,12 +126,12 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             </div>
 
             <div className="flex justify-between">
-              <div className="mb-5 text-white dark:text-white">
+              <div className="mb-5 text-neutral-700 dark:text-neutral-200">
                 您好，{user}！
               </div>
               <a
                 type="button"
-                className="mb-5 cursor-pointer text-white dark:text-white"
+                className="mb-5 cursor-pointer text-neutral-700 dark:text-neutral-200"
                 onClick={handleClearCache}
               >
                 清除缓存
@@ -139,7 +139,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
 
               <a
                 type="button"
-                className="mb-5 cursor-pointer text-white dark:text-white"
+                className="mb-5 cursor-pointer text-neutral-700 dark:text-neutral-200"
                 onClick={handleLogout}
               >
                 退出登录
@@ -161,6 +161,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
                 dispatch({ field: 'theme', value: event.target.value })
               }
             >
+              <option value="BISTU">{t('BISTU')}</option>
               <option value="dark">{t('Dark mode')}</option>
               <option value="light">{t('Light mode')}</option>
 
@@ -169,7 +170,6 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
               <option value="green">{t('绿色模式')}</option>
               <option value="purple">{t('紫色模式')}</option>
               <option value="brown">{t('褐色模式')}</option>
-              <option value="BISTU">{t('BISTU')}</option>
             </select>
 
             <button

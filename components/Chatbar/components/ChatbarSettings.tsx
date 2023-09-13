@@ -70,7 +70,7 @@ export const ChatbarSettings = () => {
         text={t('')}
         icon={
           <img
-            src="bistu.png"
+            src="bistu2.png"
             alt="Logo"
             style={{ height: '27px', width: '130px' }}
           />
