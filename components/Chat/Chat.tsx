@@ -246,8 +246,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               return conversation;
             },
           );
+          // console.log('updatedConversations', updatedConversations);
           // 如果会话列表为空，说明之前的会话列表中没有与选中会话相同的ID，将updatedConversation添加到会话列表中。
-          if (updatedConversations.length === 0) {
+          if (updatedConversations.length === 4) { // TODO: 应将应用独立出来，单独创建一个PINED_CONVERSATION
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
@@ -403,7 +404,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     <img src="bistu.png" alt="bistu logo" className="mx-auto" width="200px" height="auto" />
                   </div>
 
-                    <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
+                    {/* <div className="flex h-full flex-col space-y-4 rounded-lg border border-neutral-200 p-4 dark:border-neutral-600">
                       <ModelSelect />
 
                       <SystemPrompt
@@ -426,7 +427,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                           })
                         }
                       />
-                    </div>
+                    </div> */}
                 </div>
               </>
             ) : (
@@ -435,12 +436,12 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 <div className={`sticky top-0 z-10 flex justify-center border border-b-neutral-300 py-2 text-sm text-neutral-500 dark:border-none ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]' : lightMode === 'BISTU' ? 'bg-[#eef5fd]' : 'bg-[#F6F6F6] dark:bg-[#343541]'} dark:text-neutral-200`}>
                   {/* {t('Model')}: {selectedConversation?.model.name} | {t('Temp')}
                   : {selectedConversation?.temperature} | */}
-                  <button
+                  {/* <button
                     className="ml-2 cursor-pointer hover:opacity-50"
                     onClick={handleSettings}
                   >
                     <IconSettings size={18} />
-                  </button>
+                  </button> */}
                   <button
                     className="ml-2 cursor-pointer hover:opacity-50"
                     onClick={onClearAll}
