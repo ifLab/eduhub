@@ -11,7 +11,7 @@ export interface OpenAIModel {
 export enum OpenAIModelID {
   GPT_3_5 = 'gpt-3.5-turbo',
   信息网络问答 = '信息网络问答',
-  CW问答 = 'CW问答',
+  财务问答 = '财务问答',
   教务问答 = '教务问答',
   开源软件开发技术问答 = '开源软件开发技术问答',
   临时智能插件 = '临时智能插件',
@@ -50,9 +50,9 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     tokenLimit: 4000,
     key: "app-hWKy5TqXu6aqJCCk5YjvKOSU"
   },
-  [OpenAIModelID.CW问答]: {
-    id: OpenAIModelID.CW问答,
-    name: 'CW问答',
+  [OpenAIModelID.财务问答]: {
+    id: OpenAIModelID.财务问答,
+    name: '财务问答',
     maxLength: 12000,
     tokenLimit: 4000,
     key: "app-fWrnEufV91wOR7wHkNxDp0nD"

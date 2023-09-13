@@ -153,7 +153,7 @@ export const Chatbar = () => {
     localStorage.removeItem('conversationHistory');
     localStorage.removeItem('selectedConversation');
 
-    const updatedFolders = folders.filter((f) => f.type !== 'chat');
+    const updatedFolders = folders.filter((f) => f.type !== 'chat'|| f.deletable === false);
 
     homeDispatch({ field: 'folders', value: updatedFolders });
     saveFolders(updatedFolders);
@@ -291,7 +291,7 @@ export const Chatbar = () => {
         name: '财务问答',
         originalName: '财务问答',
         messages: [],
-        model: OpenAIModels["CW问答"],
+        model: OpenAIModels["财务问答"],
         prompt: DEFAULT_SYSTEM_PROMPT,
         temperature: DEFAULT_TEMPERATURE,
         folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
