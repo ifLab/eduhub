@@ -70,6 +70,8 @@ export const LogoDialog: FC<Props> = ({ open, onClose }) => {
               <br />
               <br />
               {t('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Contributors 周翌旭，孙达，肖克强，王肄文，李若妍，吕正日')}
+              <br />
+              {('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0如果你有AI应用开发经验，有兴趣参与开发，请联系 zz@bistu.edu.cn')}
             </div>
 
             <button
