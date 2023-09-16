@@ -49,7 +49,6 @@ export function cleanData(data: SupportedExportFormats): LatestExportFormat {
         name: chatFolder.name,
         type: 'chat',
         deletable: true,
-        openable: true,
       })),
       prompts: [],
     };

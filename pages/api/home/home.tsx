@@ -127,7 +127,6 @@ const Home = ({
       name,
       type,
       deletable: true,
-      openable: true,
     };
 
     const updatedFolders = [...folders, newFolder];
