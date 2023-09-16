@@ -3,6 +3,7 @@ export interface FolderInterface {
   name: string;
   type: FolderType;
   deletable: boolean; 
+  openable: boolean; 
 }
 
 export type FolderType = 'chat' | 'prompt';

@@ -54,7 +54,7 @@ const Folder = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [isRenaming, setIsRenaming] = useState(false);
   const [renameValue, setRenameValue] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   // 按下 Enter 键时执行重命名操作
   const handleEnterDown = (e: KeyboardEvent<HTMLDivElement>) => {

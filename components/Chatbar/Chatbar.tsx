@@ -219,6 +219,7 @@ export const Chatbar = () => {
         name: '校园助理',
         type: 'chat',
         deletable: false, 
+        openable: true,
       },
       // {
       //   id: "95a43638-afed-4fd3-8d08-224535ba08a3",
@@ -231,6 +232,7 @@ export const Chatbar = () => {
         name: '课程助手',
         type: 'chat',
         deletable: false, 
+        openable: true,
       },
     ];
     // 获取已存在的文件夹名称
