@@ -16,10 +16,9 @@ export default function LoginNotice(props: Props) {
 
   // 在对话框未打开时不渲染任何内容。
 
-  // Render the dialog.
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-1/3 flex flex-col">
+      <div className="bg-white rounded-lg shadow-lg p-6 sm:w-2/3 md:w-1/3 flex flex-col">
         <div className="flex-grow">
           <div className="text-2xl font-semibold mb-4">登录提示</div>
           <div className="text-base mb-6">{props.content}</div>

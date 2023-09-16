@@ -126,15 +126,15 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
             </div>
 
             <div className="flex justify-between">
-              <div className="mb-5 text-neutral-700 dark:text-neutral-200">
+              <div className="mb-5 mr-3 text-neutral-700 dark:text-neutral-200">
                 您好，{user}！
               </div>
               <a
                 type="button"
-                className="mb-5 cursor-pointer text-neutral-700 dark:text-neutral-200"
+                className="mb-5 mr-3 cursor-pointer text-neutral-700 dark:text-neutral-200"
                 onClick={handleClearCache}
               >
-                清除缓存
+                清除缓存 
               </a>
 
               <a
