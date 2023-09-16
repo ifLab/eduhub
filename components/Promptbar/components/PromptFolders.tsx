@@ -60,6 +60,7 @@ export const PromptFolders = () => {
             currentFolder={folder}
             handleDrop={handleDrop}
             folderComponent={PromptFolders(folder)}
+            openable={true}
           />
         ))}
     </div>
