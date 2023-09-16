@@ -40,6 +40,7 @@ interface Props {
   handleDrop: (e: any, folder: FolderInterface) => void;
   // 表示文件夹关联的组件，类型为 ReactElement 数组。
   folderComponent: (ReactElement | undefined)[];
+  openable: boolean;
 }
 
 const Folder = ({
@@ -47,6 +48,7 @@ const Folder = ({
   searchTerm,
   handleDrop,
   folderComponent,
+  openable,
 }: Props) => {
   // 通过 useContext 钩子获取了上下文中的 handleDeleteFolder 和 handleUpdateFolder 函数。
   const { handleDeleteFolder, handleUpdateFolder } = useContext(HomeContext);
@@ -109,6 +111,14 @@ const Folder = ({
   // 根据搜索词的输入状态自动展开或关闭文件夹。
   useEffect(() => {
     if (searchTerm) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (openable === true) {
       setIsOpen(true);
     } else {
       setIsOpen(false);

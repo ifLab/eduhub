@@ -65,6 +65,7 @@ export const ChatFolders = ({ searchTerm }: Props) => {
             currentFolder={folder}
             handleDrop={handleDrop}
             folderComponent={ChatFolders(folder)}
+            openable={true}
           />
         ))}
     </div>
