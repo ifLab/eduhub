@@ -249,7 +249,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           );
           // console.log('updatedConversations', updatedConversations);
           // 如果会话列表为空，说明之前的会话列表中没有与选中会话相同的ID，将updatedConversation添加到会话列表中。
-          if (updatedConversations.length === 4) {
+          if (updatedConversations.length === 4 && updatedConversation.deletable===true) {
             // TODO: 应将应用独立出来，单独创建一个PINED_CONVERSATION
             updatedConversations.push(updatedConversation);
           }
