@@ -48,14 +48,14 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     name: '信息网络问答',
     maxLength: 12000,
     tokenLimit: 4000,
-    key: "app-hWKy5TqXu6aqJCCk5YjvKOSU"
+    key: process.env.DIFY_API_KEY || ''
   },
   [OpenAIModelID.财务问答]: {
     id: OpenAIModelID.财务问答,
     name: '财务问答',
     maxLength: 12000,
     tokenLimit: 4000,
-    key: "app-fWrnEufV91wOR7wHkNxDp0nD"
+    key: process.env.DIFY_API_KEY || ''
   },
   [OpenAIModelID.教务问答]: {
     id: OpenAIModelID.教务问答,
@@ -69,13 +69,13 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     name: '开源软件开发技术',
     maxLength: 12000,
     tokenLimit: 4000,
-    key: "app-N8HGM3yPkMWu8SqhmSsKS8co"
+    key: process.env.DIFY_API_KEY || ''
   },
   [OpenAIModelID.临时智能插件]: {
     id: OpenAIModelID.临时智能插件,
     name: '临时智能插件',
     maxLength: 12000,
     tokenLimit: 4000,
-    key: "app-H0htKhCMXKbjJ27yMbBdp9UK"
+    key: process.env.DIFY_API_KEY || ''
   },
 };
