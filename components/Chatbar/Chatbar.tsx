@@ -274,7 +274,7 @@ export const Chatbar = () => {
       //   deletable: false,
       // },
       {
-        id: uuidv4(),
+        id: "5edf4dcf-20cd-4266-a22e-20ae94f5089b",
         conversationID: '',
         name: '信息网络问答',
         originalName: '信息网络问答',
@@ -286,7 +286,7 @@ export const Chatbar = () => {
         deletable: false,
       },
       {
-        id: uuidv4(),
+        id: "257b35c0-e515-446a-94c2-8cadc2bcc694",
         conversationID: '',
         name: '财务问答',
         originalName: '财务问答',
@@ -298,7 +298,7 @@ export const Chatbar = () => {
         deletable: false,
       },
       {
-        id: uuidv4(),
+        id: "91a5ab01-06c2-4ecb-9af4-51c8b701b807",
         conversationID: '',
         name: '教务问答',
         originalName: '教务问答',
@@ -346,7 +346,7 @@ export const Chatbar = () => {
       //   deletable: false,
       // },
       {
-        id: uuidv4(),
+        id: "5d1c0466-729f-4c41-ba79-b947523749b3",
         conversationID: '',
         name: '开源软件开发技术',
         originalName: '开源软件开发技术',
@@ -359,10 +359,10 @@ export const Chatbar = () => {
       },
     ];
     // 获取已存在的会话名称
-    const existingConversationNames = conversations.map(conversation => conversation.name);
+    const existingConversationID = conversations.map(conversation => conversation.id);
     // 筛选出不存在的默认会话
     const filteredDefaultConversations = defaultConversations.filter(conversation =>
-      !existingConversationNames.includes(conversation.name)
+      !existingConversationID.includes(conversation.id)
     );
     // 将默认会话添加到会话列表中
     const updatedConversations = [...conversations, ...filteredDefaultConversations];
