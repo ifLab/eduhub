@@ -40,6 +40,7 @@ import LoginNotice from '@/components/Settings/loginNotice';
 import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
+import whitelist from '@/whitelist.json';
 import Cookie from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -395,7 +396,9 @@ const Home = ({
         <link rel="icon" href="/bistu-logo-440.ico" />
       </Head>
       {ready ? (
-        selectedConversation && user ? (
+        // selectedConversation && whitelist.includes(user) ? (
+        selectedConversation ? (
+
           <main
             // className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
             className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
@@ -425,6 +428,8 @@ const Home = ({
           </main>
         ) : !user ? (
           <LoginNotice content="您还没有登录，请登录！" showButton={true} />
+        ) : !whitelist.includes(user) ? (
+          <LoginNotice content="您没有权限访问该页面！" showButton={false} />
         ) : null
       ) : null}
     </HomeContext.Provider>
