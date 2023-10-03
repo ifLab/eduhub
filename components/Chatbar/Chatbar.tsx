@@ -28,6 +28,12 @@ import { ChatbarInitialState, initialState } from './Chatbar.state';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FolderInterface } from '@/types/folder';
+import defaultData from '@/chat.json'
+import { type } from 'os';
+// import fs from 'fs';
+// import { GetStaticProps } from 'next';
+// import path from 'path';
+
 
 // 聊天栏组件，用于显示和管理聊天相关的内容
 export const Chatbar = () => {
@@ -61,19 +67,6 @@ export const Chatbar = () => {
     [homeDispatch],
   );
 
-  // apiKey值设置
-  // const handleApiKeyChange = useCallback(
-  //   (apiKey: string) => {
-  //     const fixedApiKey = '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';
-  
-  //     // 将 'apiKey' 字段的值更新为固定的 apiKey。
-  //     homeDispatch({ field: 'apiKey', value: fixedApiKey });
-  
-  //     // 将 apiKey 保存到本地存储中。
-  //     localStorage.setItem('apiKey', fixedApiKey);
-  //   },
-  //   [homeDispatch],
-  // );
 
   const handlePluginKeyChange = (pluginKey: PluginKey) => {
     if (pluginKeys.some((key) => key.pluginId === pluginKey.pluginId)) {
@@ -213,26 +206,30 @@ export const Chatbar = () => {
   // 默认文件夹渲染
   useEffect(() => {
     // 页面初始化时创建默认文件夹
-    const defaultFolders: FolderInterface[] = [
-      {
-        id: "ad308d23-9f8a-495c-8211-d54448e13684",
-        name: '校园助理',
-        type: 'chat',
-        deletable: false, 
-      },
-      // {
-      //   id: "95a43638-afed-4fd3-8d08-224535ba08a3",
-      //   name: '智能插件',
-      //   type: 'chat',
-      //   deletable: false, 
-      // },
-      {
-        id: "5786786f-f7eb-4d18-9e40-59ee4cfe5366",
-        name: '课程助手',
-        type: 'chat',
-        deletable: false, 
-      },
-    ];
+    const defaultFolders: FolderInterface[] = defaultData.Folders.map(folder => ({
+    // const defaultFolders: FolderInterface[] = defaultData.Folders.map(folder => ({
+      ...folder,
+      type: 'chat'}))
+    // [
+    //   {
+    //     id: "ad308d23-9f8a-495c-8211-d54448e13684",
+    //     name: '校园助理',
+    //     type: 'chat',
+    //     deletable: false, 
+    //   },
+    //   // {
+    //   //   id: "95a43638-afed-4fd3-8d08-224535ba08a3",
+    //   //   name: '智能插件',
+    //   //   type: 'chat',
+    //   //   deletable: false, 
+    //   // },
+    //   {
+    //     id: "5786786f-f7eb-4d18-9e40-59ee4cfe5366",
+    //     name: '课程助手',
+    //     type: 'chat',
+    //     deletable: false, 
+    //   },
+    // ];
     // 获取已存在的文件夹名称
     const existingFolderNames = folders.map(folder => folder.name);
     // 筛选出不存在的默认文件夹
@@ -241,14 +238,25 @@ export const Chatbar = () => {
     );
     // 将默认文件夹添加到文件夹列表中
     const updatedFolders = [...folders, ...filteredDefaultFolders];
-    console.log(updatedFolders)
+    // console.log(updatedFolders)
     homeDispatch({ field: 'folders', value: updatedFolders });
     saveFolders(updatedFolders);
   }, []);
   
   // 六个默认会话渲染
   useEffect(() => {
-    const defaultConversations: Conversation[] = [
+    const defaultConversations: Conversation[] = defaultData.Chats.map(chat => ({
+      ...chat,
+      conversationID: '',
+      originalName: chat.name,
+      messages: [],
+      model: OpenAIModels[chat.name as keyof typeof OpenAIModels],
+      prompt: DEFAULT_SYSTEM_PROMPT,
+      temperature: DEFAULT_TEMPERATURE,
+      deletable: false,
+    }))
+
+    // [
       // {
       //   id: uuidv4(),
       //   conversationID: '',
@@ -273,42 +281,42 @@ export const Chatbar = () => {
       //   folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
       //   deletable: false,
       // },
-      {
-        id: "5edf4dcf-20cd-4266-a22e-20ae94f5089b",
-        conversationID: '',
-        name: '信息网络问答',
-        originalName: '信息网络问答',
-        messages: [],
-        model: OpenAIModels["信息网络问答"],
-        prompt: DEFAULT_SYSTEM_PROMPT,
-        temperature: DEFAULT_TEMPERATURE,
-        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
-        deletable: false,
-      },
-      {
-        id: "257b35c0-e515-446a-94c2-8cadc2bcc694",
-        conversationID: '',
-        name: '财务问答',
-        originalName: '财务问答',
-        messages: [],
-        model: OpenAIModels["财务问答"],
-        prompt: DEFAULT_SYSTEM_PROMPT,
-        temperature: DEFAULT_TEMPERATURE,
-        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
-        deletable: false,
-      },
-      {
-        id: "91a5ab01-06c2-4ecb-9af4-51c8b701b807",
-        conversationID: '',
-        name: '教务问答',
-        originalName: '教务问答',
-        messages: [],
-        model: OpenAIModels["教务问答"],
-        prompt: DEFAULT_SYSTEM_PROMPT,
-        temperature: DEFAULT_TEMPERATURE,
-        folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
-        deletable: false,
-      },
+      // {
+      //   id: "5edf4dcf-20cd-4266-a22e-20ae94f5089b",
+      //   conversationID: '',
+      //   name: '信息网络问答',
+      //   originalName: '信息网络问答',
+      //   messages: [],
+      //   model: OpenAIModels["信息网络问答"],
+      //   prompt: DEFAULT_SYSTEM_PROMPT,
+      //   temperature: DEFAULT_TEMPERATURE,
+      //   folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
+      //   deletable: false,
+      // },
+      // {
+      //   id: "257b35c0-e515-446a-94c2-8cadc2bcc694",
+      //   conversationID: '',
+      //   name: '财务问答',
+      //   originalName: '财务问答',
+      //   messages: [],
+      //   model: OpenAIModels["财务问答"],
+      //   prompt: DEFAULT_SYSTEM_PROMPT,
+      //   temperature: DEFAULT_TEMPERATURE,
+      //   folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
+      //   deletable: false,
+      // },
+      // {
+      //   id: "91a5ab01-06c2-4ecb-9af4-51c8b701b807",
+      //   conversationID: '',
+      //   name: '教务问答',
+      //   originalName: '教务问答',
+      //   messages: [],
+      //   model: OpenAIModels["教务问答"],
+      //   prompt: DEFAULT_SYSTEM_PROMPT,
+      //   temperature: DEFAULT_TEMPERATURE,
+      //   folderId: "ad308d23-9f8a-495c-8211-d54448e13684",
+      //   deletable: false,
+      // },
       // {
       //   id: uuidv4(),
       //   conversationID: '',
@@ -345,19 +353,19 @@ export const Chatbar = () => {
       //   folderId: "95a43638-afed-4fd3-8d08-224535ba08a3",
       //   deletable: false,
       // },
-      {
-        id: "5d1c0466-729f-4c41-ba79-b947523749b3",
-        conversationID: '',
-        name: '开源软件开发技术',
-        originalName: '开源软件开发技术',
-        messages: [],
-        model: OpenAIModels["开源软件开发技术问答"],
-        prompt: DEFAULT_SYSTEM_PROMPT,
-        temperature: DEFAULT_TEMPERATURE,
-        folderId: "5786786f-f7eb-4d18-9e40-59ee4cfe5366",
-        deletable: false,
-      },
-    ];
+    //   {
+    //     id: "5d1c0466-729f-4c41-ba79-b947523749b3",
+    //     conversationID: '',
+    //     name: '开源软件开发技术',
+    //     originalName: '开源软件开发技术',
+    //     messages: [],
+    //     model: OpenAIModels["开源软件开发技术问答"],
+    //     prompt: DEFAULT_SYSTEM_PROMPT,
+    //     temperature: DEFAULT_TEMPERATURE,
+    //     folderId: "5786786f-f7eb-4d18-9e40-59ee4cfe5366",
+    //     deletable: false,
+    //   },
+    // ];
     // 获取已存在的会话名称
     const existingConversationID = conversations.map(conversation => conversation.id);
     // 筛选出不存在的默认会话
@@ -366,7 +374,7 @@ export const Chatbar = () => {
     );
     // 将默认会话添加到会话列表中
     const updatedConversations = [...conversations, ...filteredDefaultConversations];
-    console.log(conversations);
+    // console.log(conversations);
     homeDispatch({ field: 'conversations', value: updatedConversations });
     // 将默认会话保存到本地存储中
     // defaultConversations.forEach((conversation) => {
@@ -555,3 +563,17 @@ export const Chatbar = () => {
     </ChatbarContext.Provider>
   );
 };
+
+// 为以后可能从服务器获取数据做预备
+// export const getStaticProps : GetStaticProps = async () => {
+//   const filePath = path.join(process.cwd(), 'default.json');
+//   const fileContent = fs.readFileSync(filePath, 'utf-8');
+//   const defaults = JSON.parse(fileContent);
+//   console.log(defaults);
+//   return {
+//       props: {
+//           folders: defaults.Folders, // chat folders
+//           chats: defaults.Chats,
+//       }
+//   }
+// }

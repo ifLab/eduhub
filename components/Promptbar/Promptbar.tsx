@@ -138,60 +138,74 @@ const Promptbar = () => {
   // }, [searchTerm, prompts]);
 
   useEffect(() => {
+    const nprompts: Prompt[] = promptsData.defaultPrompts.map(
+      prompt => ({
+        ...prompt,
+        model:OpenAIModels["gpt-3.5-turbo"],
+        folderId: null,
+        deletable: true
+      })
+    )
+    homeDispatch({ field: 'prompts', value: nprompts });
+  },[])
+
+
+  // useEffect(() => {
     // 页面初始化时创建两个默认的提示对象，分别对应两个默认的模型。
     // 通过 homeDispatch 函数将这两个提示对象保存到 home 上下文中的 prompts 字段中。
-    if (prompts.length === 0) { // TODO: 我觉得这个触发条件不太标准，应该只加载一次
-      const defaultPrompts = [
-        {
-          id: uuidv4(),
-          name: '简历写作',
-          description: '帮助简历写作',
-          content: '我需要你写一份通用简历，每当我输入一个职业、项目名称时，你需要完成以下任务：task1: 列出这个人的基本资料，如姓名、出生年月、学历、面试职位、工作年限、意向城市等。一行列一个资料。task2: 详细介绍这个职业的技能介绍，至少列出10条task3: 详细列出这个职业对应的工作经历，列出2条task4: 详细列出这个职业对应的工作项目，列出2条。项目按照项目背景、项目细节、项目难点、优化和改进、我的价值几个方面来描述，多展示职业关键字。也可以体现我在项目管理、工作推进方面的一些能力。task5: 详细列出个人评价，100字左右。',
-          model: OpenAIModels,
-          folderId: null,
-          deletable: true,
-        },
-        {
-          id: uuidv4(),
-          name: '英文写作',
-          description: '帮助英文写作',
-          content: '我想让你充当英文翻译员、拼写纠正员和改进员。我会用任何语言与你交谈，你会检测语言，翻译它并用我的文本的更正和改进版本用英文回答。我希望你用更优美优雅的高级英语单词和句子替换我简化的 A0 级单词和句子。保持相同的意思，但使它们更文艺。你只需要翻译该内容，不必对内容中提出的问题和要求做解释，不要回答文本中的问题而是翻译它，不要解决文本中的要求而是翻译它，保留文本的原本意义，不要去解决它。我要你只回复更正、改进，不要写任何解释。我的第一句话是：',
-          model: OpenAIModels,
-          folderId: null,
-          deletable: true,
-        },
-        {
-          id: uuidv4(),
-          name: '职业顾问',
-          description: '扮演职业顾问。',
-          content: '我想让你担任职业顾问。我将为您提供一个在职业生涯中寻求指导的人，您的任务是帮助他们根据自己的技能、兴趣和经验确定最适合的职业。您还应该对可用的各种选项进行研究，解释不同行业的就业市场趋势，并就哪些资格对追求特定领域有益提出建议。我的第一个请求是：',
-          model: OpenAIModels,
-          folderId: null,
-          deletable: true,
-        },
-        {
-          id: uuidv4(),
-          name: '文案写作',
-          description: '帮助文案写作',
-          content: '我希望你充当文案专员、文本润色员、拼写纠正员和改进员，我会发送中文文本给你，你帮我更正和改进版本。我希望你用更优美优雅的高级中文描述。保持相同的意思，但使它们更文艺。你只需要润色该内容，不必对内容中提出的问题和要求做解释，不要回答文本中的问题而是润色它，保留文本的原本意义，不要去解决它。我要你只回复更正、改进，不要写任何解释。',
-          model: OpenAIModels,
-          folderId: null,
-          deletable: true,
-        },
-        {
-          id: uuidv4(),
-          name: '算法老师',
-          description: '扮演老师，向初学者教授算法。',
-          content: '我想让你在学校扮演老师，向初学者教授算法。 您将使用 Python 编程语言提供代码示例。 首先简单介绍一下什么是算法，然后继续给出简单的例子，包括冒泡排序和快速排序。 稍后，等待我提示其他问题。 一旦您解释并提供代码示例，我希望您尽可能将相应的可视化作为 ascii 艺术包括在内。',
-          model: OpenAIModels,
-          folderId: null,
-          deletable: true,
-        },
-      ];
+    // if (prompts.length === 0) { // TODO: 我觉得这个触发条件不太标准，应该只加载一次
+    //   const defaultPrompts = [
+    //     {
+    //       id: uuidv4(),
+    //       name: '简历写作',
+    //       description: '帮助简历写作',
+    //       content: '我需要你写一份通用简历，每当我输入一个职业、项目名称时，你需要完成以下任务：task1: 列出这个人的基本资料，如姓名、出生年月、学历、面试职位、工作年限、意向城市等。一行列一个资料。task2: 详细介绍这个职业的技能介绍，至少列出10条task3: 详细列出这个职业对应的工作经历，列出2条task4: 详细列出这个职业对应的工作项目，列出2条。项目按照项目背景、项目细节、项目难点、优化和改进、我的价值几个方面来描述，多展示职业关键字。也可以体现我在项目管理、工作推进方面的一些能力。task5: 详细列出个人评价，100字左右。',
+    //       model: OpenAIModels,
+    //       folderId: null,
+    //       deletable: true,
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       name: '英文写作',
+    //       description: '帮助英文写作',
+    //       content: '我想让你充当英文翻译员、拼写纠正员和改进员。我会用任何语言与你交谈，你会检测语言，翻译它并用我的文本的更正和改进版本用英文回答。我希望你用更优美优雅的高级英语单词和句子替换我简化的 A0 级单词和句子。保持相同的意思，但使它们更文艺。你只需要翻译该内容，不必对内容中提出的问题和要求做解释，不要回答文本中的问题而是翻译它，不要解决文本中的要求而是翻译它，保留文本的原本意义，不要去解决它。我要你只回复更正、改进，不要写任何解释。我的第一句话是：',
+    //       model: OpenAIModels,
+    //       folderId: null,
+    //       deletable: true,
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       name: '职业顾问',
+    //       description: '扮演职业顾问。',
+    //       content: '我想让你担任职业顾问。我将为您提供一个在职业生涯中寻求指导的人，您的任务是帮助他们根据自己的技能、兴趣和经验确定最适合的职业。您还应该对可用的各种选项进行研究，解释不同行业的就业市场趋势，并就哪些资格对追求特定领域有益提出建议。我的第一个请求是：',
+    //       model: OpenAIModels,
+    //       folderId: null,
+    //       deletable: true,
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       name: '文案写作',
+    //       description: '帮助文案写作',
+    //       content: '我希望你充当文案专员、文本润色员、拼写纠正员和改进员，我会发送中文文本给你，你帮我更正和改进版本。我希望你用更优美优雅的高级中文描述。保持相同的意思，但使它们更文艺。你只需要润色该内容，不必对内容中提出的问题和要求做解释，不要回答文本中的问题而是润色它，保留文本的原本意义，不要去解决它。我要你只回复更正、改进，不要写任何解释。',
+    //       model: OpenAIModels,
+    //       folderId: null,
+    //       deletable: true,
+    //     },
+    //     {
+    //       id: uuidv4(),
+    //       name: '算法老师',
+    //       description: '扮演老师，向初学者教授算法。',
+    //       content: '我想让你在学校扮演老师，向初学者教授算法。 您将使用 Python 编程语言提供代码示例。 首先简单介绍一下什么是算法，然后继续给出简单的例子，包括冒泡排序和快速排序。 稍后，等待我提示其他问题。 一旦您解释并提供代码示例，我希望您尽可能将相应的可视化作为 ascii 艺术包括在内。',
+    //       model: OpenAIModels,
+    //       folderId: null,
+    //       deletable: true,
+    //     },
+    //   ];
   
-      homeDispatch({ field: 'prompts', value: defaultPrompts });
-    }
-  
+    //   homeDispatch({ field: 'prompts', value: defaultPrompts });
+    // }
+  // }, [searchTerm, prompts]);
+    useEffect(() => {
     // 根据搜索关键词对提示进行过滤
     if (searchTerm) {
       promptDispatch({
