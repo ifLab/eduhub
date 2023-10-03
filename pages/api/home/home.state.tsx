@@ -56,5 +56,5 @@ export const initialState: HomeInitialState = {
   defaultModelId: OpenAIModelID.GPT_3_5,
   serverSideApiKeyIsSet: true,
   serverSidePluginKeysSet: false,
-  user: 'unknown-230911',
+  user: 'unknown-231003',
 };

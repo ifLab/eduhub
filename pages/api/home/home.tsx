@@ -396,9 +396,8 @@ const Home = ({
         <link rel="icon" href="/bistu-logo-440.ico" />
       </Head>
       {ready ? (
-        // selectedConversation && whitelist.includes(user) ? (
-        selectedConversation ? (
-
+        // 当白名单中有空白项时将允许匿名访问
+        selectedConversation && whitelist.includes(user) ? (
           <main
             // className={`flex h-screen w-screen flex-col text-sm text-black dark:text-white ${lightMode}`}
             className={`flex h-screen w-screen flex-col text-sm text-white dark:text-white ${lightMode}`}
