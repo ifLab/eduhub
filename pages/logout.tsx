@@ -9,7 +9,8 @@ import Cookie from 'js-cookie';
 function Logout() {
   const router = useRouter();
   Cookie.remove('user');
-
+  sessionStorage.clear();
+  localStorage.clear();
   useEffect(() => {
     router.replace('/');
   }, []);
