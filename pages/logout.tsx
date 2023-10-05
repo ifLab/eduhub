@@ -4,14 +4,15 @@ import { useRouter } from 'next/router';
 
 import LoginNotice from '@/components/Settings/loginNotice';
 
-import Cookie from 'js-cookie';
+import Cookies from 'js-cookie';
 
 function Logout() {
   const router = useRouter();
-  Cookie.remove('user');
-  sessionStorage.clear();
-  localStorage.clear();
+
   useEffect(() => {
+    Cookies.remove('user');
+    sessionStorage.clear();
+    localStorage.clear();
     router.replace('/');
   }, []);
 
