@@ -28,7 +28,9 @@ import { ChatbarInitialState, initialState } from './Chatbar.state';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FolderInterface } from '@/types/folder';
-import defaultData from '@/chat.json'
+import studentChat from '@/studentChat.json';
+import teacherChat from '@/teacherChat.json';
+
 import { type } from 'os';
 // import fs from 'fs';
 // import { GetStaticProps } from 'next';
@@ -44,7 +46,7 @@ export const Chatbar = () => {
   });
 
   const {
-    state: { conversations, showChatbar, defaultModelId, folders, pluginKeys },
+    state: { conversations, showChatbar, defaultModelId, folders, pluginKeys,user },
     dispatch: homeDispatch,
     handleCreateFolder,
     handleNewConversation,
@@ -203,6 +205,7 @@ export const Chatbar = () => {
     }
   };
 
+  const defaultData = user.length === 8 ? teacherChat :  studentChat ;
   // 默认文件夹渲染
   useEffect(() => {
     // 页面初始化时创建默认文件夹
