@@ -19,6 +19,15 @@ interface Props {
 }
 
 export const SettingDialog: FC<Props> = ({ open, onClose }) => {
+  useEffect(() => {
+    if(process.env.VERSION!=localStorage.getItem('version')){
+      sessionStorage.clear();
+      localStorage.clear();
+      localStorage.setItem('version',process.env.VERSION||'');
+      router.reload();
+    }
+  }
+  )
   const { t } = useTranslation('settings');
   // 通过getSettings函数获取与设置相关的配置信息，并将其赋值给settings变量。
   const settings: Settings = getSettings();
@@ -82,6 +91,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
   };
   const handleLogout = () => {
     Cookies.remove('user');
+    handleClearCache();
     alert('退出登录成功');
     router.reload();
   };
