@@ -30,6 +30,7 @@ export interface HomeInitialState {
   serverSideApiKeyIsSet: boolean;
   serverSidePluginKeysSet: boolean;
   user: string;
+  version: string;
 }
 
 // 首页的初始状态
@@ -57,4 +58,5 @@ export const initialState: HomeInitialState = {
   serverSideApiKeyIsSet: true,
   serverSidePluginKeysSet: false,
   user: 'unknown-231003',
+  version:"2023101801"
 };

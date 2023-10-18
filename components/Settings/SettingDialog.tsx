@@ -19,15 +19,6 @@ interface Props {
 }
 
 export const SettingDialog: FC<Props> = ({ open, onClose }) => {
-  useEffect(() => {
-    if(process.env.VERSION!=localStorage.getItem('version')){
-      sessionStorage.clear();
-      localStorage.clear();
-      localStorage.setItem('version',process.env.VERSION||'');
-      router.reload();
-    }
-  }
-  )
   const { t } = useTranslation('settings');
   // 通过getSettings函数获取与设置相关的配置信息，并将其赋值给settings变量。
   const settings: Settings = getSettings();
@@ -37,7 +28,7 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
   });
   // 使用useContext钩子函数获取到HomeContext上下文，并将其中的dispatch赋值给homeDispatch变量。
   const {
-    state: { lightMode, user },
+    state: { lightMode, user,version },
     dispatch: homeDispatch,
   } = useContext(HomeContext);
 
@@ -82,6 +73,16 @@ export const SettingDialog: FC<Props> = ({ open, onClose }) => {
     onClose();
   };
   const router = useRouter();
+  useEffect(() => {
+    console.log("version",version)
+    if(version!=localStorage.getItem('version')){
+      sessionStorage.clear();
+      localStorage.clear();
+      localStorage.setItem('version',version||'');
+      router.reload();
+    }
+  }
+  )
   const handleClearCache = () => {
     // 清除该页面的缓存
     sessionStorage.clear();
