@@ -1,4 +1,4 @@
-import { IconFileExport, IconSettings, IconTrash } from '@tabler/icons-react';
+import { IconFileExport, IconSettings, IconHomeQuestion,IconTrash } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -7,6 +7,7 @@ import HomeContext from '@/pages/api/home/home.context';
 
 import { LogoDialog } from '@/components/Settings/LogoDialog';
 import { SettingDialog } from '@/components/Settings/SettingDialog';
+import { HelpDialog } from '@/components/Settings/HelpDialog';
 
 import { Import } from '../../Settings/Import';
 import { Key } from '../../Settings/Key';
@@ -20,6 +21,7 @@ export const ChatbarSettings = () => {
   const [isSettingDialogOpen, setIsSettingDialog] = useState<boolean>(false);
 
   const [isLogoDialogOpen, setIsLogoDialog] = useState<boolean>(false);
+  const [isHelpDialogOpen, setIsHelpDialog] = useState<boolean>(false);
 
   const {
     state: {
@@ -65,6 +67,12 @@ export const ChatbarSettings = () => {
 
       {!serverSidePluginKeysSet ? <PluginKeys /> : null}
 
+      <SidebarButton
+        text={t('帮助')}
+        icon={<IconHomeQuestion size={18} />}
+        onClick={() => setIsHelpDialog(true)}
+      />
+
       {/* 左下logo按钮 */}
       <SidebarButton
         text={t('')}
@@ -84,6 +92,14 @@ export const ChatbarSettings = () => {
           setIsSettingDialog(false);
         }}
       />
+
+      <HelpDialog
+        open={isHelpDialogOpen}
+        onClose={() => {
+          setIsHelpDialog(false);
+        }}
+      />      
+
       <LogoDialog
         open={isLogoDialogOpen}
         onClose={() => {

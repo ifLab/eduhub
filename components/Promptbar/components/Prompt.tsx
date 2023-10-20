@@ -116,7 +116,7 @@ export const PromptComponent = ({ prompt }: Props) => {
         </div>
       )}
       {/* deletable 属性为 true 时，渲染删除按钮 */}
-      {prompt.deletable && !isDeleting && !isRenaming && (
+      {!prompt.deletable && !isDeleting && !isRenaming && (
         <div className="absolute right-1 z-10 flex text-gray-300">
           <SidebarActionButton handleClick={handleOpenDeleteModal}>
             <IconTrash size={18} />
