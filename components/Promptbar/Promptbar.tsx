@@ -143,7 +143,7 @@ const Promptbar = () => {
         ...prompt,
         model:OpenAIModels["gpt-3.5-turbo"],
         folderId: null,
-        deletable: true
+        deletable: false
       })
     )
     homeDispatch({ field: 'prompts', value: nprompts });
