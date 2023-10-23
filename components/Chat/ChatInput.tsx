@@ -372,13 +372,13 @@ export const ChatInput = ({
               : 'bg-[#F6F6F6] dark:bg-[#343541]'
           } dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4`}
         >
-          {/* <button
+          <button
             className="absolute left-2 top-2 rounded-sm p-1 text-neutral-800 opacity-60 hover:bg-neutral-200 hover:text-neutral-900 dark:bg-opacity-50 dark:text-neutral-100 dark:hover:text-neutral-200"
-            onClick={() => setShowPluginSelect(!showPluginSelect)}
+            // onClick={() => setShowPluginSelect(!showPluginSelect)}
             onKeyDown={(e) => {}}
           >
             {plugin ? <IconBrandGoogle size={20} /> : <IconBolt size={20} />}
-          </button> */}
+          </button>
 
           {showPluginSelect && (
             <div className="absolute left-0 bottom-14 rounded bg-white dark:bg-[#343541]">
