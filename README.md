@@ -1,4 +1,6 @@
 # Chatbot UI for BistuCopilot
+## Online Demo
+[eduhub.chat](https://eduhub.chat)
 
 ## 本地部署方法
 
