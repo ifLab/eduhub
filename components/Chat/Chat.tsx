@@ -186,8 +186,9 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
               console.log('answer', answer);
 
               const chunkValue = answer;
-
-              text += chunkValue;
+              if (chunkValue != undefined) {
+                text += chunkValue;
+              }
               // 第一次读取响应的数据块
               if (isFirst) {
                 isFirst = false;
