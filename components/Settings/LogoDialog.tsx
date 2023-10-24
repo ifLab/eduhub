@@ -62,16 +62,11 @@ export const LogoDialog: FC<Props> = ({ open, onClose }) => {
             role="dialog"
           >
             <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
-              {('校园智能助理 BistuCopilot')}
+              About page
             </div>
 
             <div className="text-sm mb-2 text-black dark:text-neutral-200" style={{ lineHeight: '2' }}>
-              {('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0校园智能助理（BistuCopilot）由信息网络中心和计算机学院联合开发，系统使用国产信创开源大语言模型作为基础，将学校各部门的公开信息，如办事指南、规章制度等数据嵌入到系统中，以问答的方式帮助校园用户查找和获取校园内部的知识和信息资源，并能实现对信息内容进行总结、润色、翻译等功能，为师生提供个性化的信息服务。除此以外，系统还可以通过语意理解用户需求，自动调用联网搜索、论文搜索、数学计算等插件，扩展大语言模型的能力。')}
-              <br />
-              <br />
-              {('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0Contributors 周翌旭，孙达，肖克强，王肄文，李若妍，吕正日')}
-              <br />
-              {('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0如果你有AI应用开发经验，有兴趣参与开发，请联系 zz@bistu.edu.cn')}
+              about page content
             </div>
 
             <button

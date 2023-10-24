@@ -1,4 +1,4 @@
-import { IconFileExport, IconSettings, IconHomeQuestion,IconTrash } from '@tabler/icons-react';
+import { IconFileExport, IconSettings, IconHomeQuestion,IconTrash, IconAccessPoint, IconInfoCircle } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 
 import { useTranslation } from 'next-i18next';
@@ -68,21 +68,15 @@ export const ChatbarSettings = () => {
       {!serverSidePluginKeysSet ? <PluginKeys /> : null}
 
       <SidebarButton
-        text={t('帮助')}
+        text={t('Help')}
         icon={<IconHomeQuestion size={18} />}
         onClick={() => setIsHelpDialog(true)}
       />
 
       {/* 左下logo按钮 */}
       <SidebarButton
-        text={t('')}
-        icon={
-          <img
-            src="bistu2.png"
-            alt="Logo"
-            style={{ height: '27px', width: '130px' }}
-          />
-        }
+        text={t("About")}
+        icon={<IconInfoCircle size={18} />}
         onClick={() => setIsLogoDialog(true)}
       />
 
