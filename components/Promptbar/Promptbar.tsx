@@ -138,7 +138,7 @@ const Promptbar = () => {
   // }, [searchTerm, prompts]);
 
   useEffect(() => {
-    const nprompts: Prompt[] = promptsData.defaultPrompts.map(
+    const loadedPrompt: Prompt[] = promptsData.defaultPrompts.map(
       prompt => ({
         ...prompt,
         model:OpenAIModels["gpt-3.5-turbo"],
@@ -146,8 +146,13 @@ const Promptbar = () => {
         deletable: false
       })
     )
-    homeDispatch({ field: 'prompts', value: nprompts });
+    const existingPromptID = prompts.map(prompt => prompt.id)
+    const filteredPrompt = loadedPrompt.filter(prompt => !existingPromptID.includes(prompt.id))
+    const newPrompts = [...prompts, ...filteredPrompt]
+    homeDispatch({ field: 'prompts', value: newPrompts });
+    savePrompts(newPrompts);
   },[])
+
 
 
   // useEffect(() => {
