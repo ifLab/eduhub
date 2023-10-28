@@ -1,4 +1,4 @@
-# Chatbot UI for BistuCopilot
+# Chatbot UI for Eduhub
 ## Online Demo
 [eduhub.chat](https://eduhub.chat)
 

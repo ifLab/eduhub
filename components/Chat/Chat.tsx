@@ -412,8 +412,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
           ? 'bg-[#C5DFF8]'
           : lightMode === 'brown'
           ? 'bg-[#F4EEE0]'
-          : lightMode === 'BISTU'
-          ? 'bg-[#eef5fd]'
           : 'bg-[#F6F6F6] dark:bg-[#343541]'
       }`}
     >
@@ -430,8 +428,8 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                 <div className="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100">
                   <h3 style={{color: '#1a4687'}}>📘 <i>eduhub.chat</i></h3>
                   {/* <img
-                    src="bistu.png"
-                    alt="bistu logo"
+                    src="logo.png"
+                    alt="logo"
                     className="mx-auto"
                     width="200px"
                     height="auto"
@@ -479,8 +477,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     ? 'bg-[#C5DFF8]'
                     : lightMode === 'brown'
                     ? 'bg-[#F4EEE0]'
-                    : lightMode === 'BISTU'
-                    ? 'bg-[#eef5fd]'
                     : 'bg-[#F6F6F6] dark:bg-[#343541]'
                 } dark:text-neutral-200`}
               >
@@ -538,8 +534,6 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
                     ? 'bg-[#C5DFF8]'
                     : lightMode === 'brown'
                     ? 'bg-[#F4EEE0]'
-                    : lightMode === 'BISTU'
-                    ? 'bg-[#eef5fd]'
                     : 'bg-[#F6F6F6] dark:bg-[#343541]'
                 }`}
                 ref={messagesEndRef}

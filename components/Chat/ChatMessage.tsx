@@ -165,12 +165,9 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                                   ? 'border-b border-black/10 bg-[#F4EEE0] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
                                   : lightMode === 'brown'
                                     ? 'border-b border-black/10 bg-[#F4EEE0] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
-                                      :message.role === 'assistant' && lightMode === 'BISTU'
+                                      :message.role === 'assistant' 
                                         ? 'border-b border-black/10 bg-[#eef5fd] text-gray-800 dark:border-gray-900/50 dark:bg-[#444654] dark:text-gray-100'
-                                        : lightMode === 'BISTU'
-                                          ? 'border-b border-black/10 bg-[#eef5fd] text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
-                                          : 'border-b border-black/10 bg-white text-gray-800 dark:border-gray-900/50 dark:bg-[#343541] dark:text-gray-100'
-                                    
+                                        
       }`}
       style={{ overflowWrap: 'anywhere' }}
     >
@@ -192,7 +189,7 @@ export const ChatMessage: FC<Props> = memo(({ message, messageIndex, onEdit }) =
                   {/* 修改已发送的消息时 输入框的样式设置 */}
                   <textarea
                     ref={textareaRef}
-                    className={`w-full resize-none whitespace-pre-wrap border-none ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]'  : lightMode === 'BISTU' ? 'bg-[#eef5fd]' :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
+                    className={`w-full resize-none whitespace-pre-wrap border-none ${lightMode === 'red' ? 'bg-[#F2ECBE]' : lightMode === 'blue' ? 'bg-[#F6F4EB]' : lightMode === 'green' ? 'bg-[#FAF1E4]' : lightMode === 'purple' ? 'bg-[#C5DFF8]' : lightMode === 'brown' ? 'bg-[#F4EEE0]'   :'bg-[#F6F6F6] dark:bg-[#343541]'}`}
                     value={messageContent}
                     onChange={handleInputChange}
                     onKeyDown={handlePressEnter}

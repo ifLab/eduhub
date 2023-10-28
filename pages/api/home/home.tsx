@@ -393,7 +393,7 @@ const Home = ({
           name="viewport"
           content="height=device-height ,width=device-width, initial-scale=1, user-scalable=no"
         />
-        {/* <link rel="icon" href="/bistu-logo-440.ico" /> */}
+        {/* <link rel="icon" href="/logo-440.ico" /> */}
       </Head>
       {ready ? (
         // 当白名单中有空白项时将允许匿名访问

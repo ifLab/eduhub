@@ -301,8 +301,6 @@ export const ChatInput = ({
           ? 'via-[#C5DFF8] to-[#C5DFF8]'
           : lightMode === 'brown'
           ? 'via-[#F4EEE0] to-[#F4EEE0]'
-          : lightMode === 'BISTU' 
-          ? 'bg-[#eef5fd]' 
           : 'via-white to-white dark:via-[#343541] dark:to-[#343541]'
       } md:pt-2`}
     >
@@ -320,8 +318,6 @@ export const ChatInput = ({
                 ? 'bg-[#C5DFF8]'
                 : lightMode === 'brown'
                 ? 'bg-[#F4EEE0]'
-                : lightMode === 'BISTU' 
-                ? 'bg-[#eef5fd]' 
                 : 'bg-[#F6F6F6] dark:bg-[#343541]'
             } dark:text-white md:mb-0 md:mt-2`}
             onClick={handleStopConversation}
@@ -345,8 +341,6 @@ export const ChatInput = ({
                   ? 'bg-[#C5DFF8]'
                   : lightMode === 'brown'
                   ? 'bg-[#F4EEE0]'
-                  : lightMode === 'BISTU' 
-                  ? 'bg-[#eef5fd]' 
                   : 'bg-[#F6F6F6] dark:bg-[#343541]'
               } dark:text-white md:mb-0 md:mt-2`}
               onClick={onRegenerate}
@@ -367,8 +361,6 @@ export const ChatInput = ({
               ? 'bg-[#C5DFF8]'
               : lightMode === 'brown'
               ? 'bg-[#F4EEE0]'
-              : lightMode === 'BISTU' 
-              ? 'bg-[#eef5fd]' 
               : 'bg-[#F6F6F6] dark:bg-[#343541]'
           } dark:text-white dark:shadow-[0_0_15px_rgba(0,0,0,0.10)] sm:mx-4`}
         >
@@ -478,11 +470,11 @@ export const ChatInput = ({
           rel="noreferrer"
           className="underline"
         >
-          BISTU Copilot
+          Eduhub Copilot
         </a>
         .{' '}
         {t(
-          "BISTU Copilot is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
+          "Eduhub Copilot is an advanced chatbot kit for OpenAI's chat models aiming to mimic ChatGPT's interface and functionality.",
         )}
       </div> */}
     </div>

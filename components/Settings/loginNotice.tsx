@@ -10,7 +10,7 @@ export default function LoginNotice(props: Props) {
 
   const handleSave = () => {
     router.push(
-      'https://ids.bistu.edu.cn/oauth/authorize?client_id=6039hD163z83mJs6&response_type=code',
+      '', // 登录认证页面
     );
   };
 
