@@ -68,7 +68,7 @@ export const ChatbarSettings = () => {
       {!serverSidePluginKeysSet ? <PluginKeys /> : null}
 
       <SidebarButton
-        text={t('帮助')}
+        text={t('Help')}
         icon={<IconHomeQuestion size={18} />}
         onClick={() => setIsHelpDialog(true)}
       />
