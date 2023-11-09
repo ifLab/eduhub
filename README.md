@@ -7,7 +7,7 @@
 **1. 克隆仓库**
 
 ```bash
-git clone https://github.com/mckaywrigley/chatbot-ui.git
+git clone -b eduhub https://github.com/sunny2567/chatbot-ui.git
 ```
 
 **2. 安装依赖项**
