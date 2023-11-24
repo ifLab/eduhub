@@ -259,6 +259,7 @@ export const Chat = memo(({ stopConversationRef }: Props) => {
             !deletableConversations.length &&
             updatedConversation.deletable === true
           ) {
+            updatedConversation.originalName='';
             updatedConversations.push(updatedConversation);
           }
           homeDispatch({ field: 'conversations', value: updatedConversations });
