@@ -206,6 +206,7 @@ export const Chatbar = () => {
   };
 
   const defaultData = user.length === 8 ? teacherChat :  studentChat ;
+  console.log(user,user.length)
   // 默认文件夹渲染
   useEffect(() => {
     // 页面初始化时创建默认文件夹
@@ -224,7 +225,7 @@ export const Chatbar = () => {
     // console.log(updatedFolders)
     homeDispatch({ field: 'folders', value: updatedFolders });
     saveFolders(updatedFolders);
-  }, []);
+  }, [user]);
   
   // 六个默认会话渲染
   useEffect(() => {
@@ -254,7 +255,7 @@ export const Chatbar = () => {
     //   saveConversation(conversation);
     // });
     saveConversations(updatedConversations);
-  }, []);
+  }, [user]);
 
 
   // 在搜索条件发生变化时，根据条件对对话进行过滤，
