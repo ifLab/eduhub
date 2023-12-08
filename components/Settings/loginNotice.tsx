@@ -9,6 +9,7 @@ export default function LoginNotice(props: Props) {
   const router = useRouter();
 
   const handleSave = () => {
+    alert('请联系管理员');
     router.push(
       '', // 登录认证页面
     );
