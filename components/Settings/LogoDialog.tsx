@@ -62,13 +62,13 @@ export const LogoDialog: FC<Props> = ({ open, onClose }) => {
             role="dialog"
           >
             <div className="text-lg pb-4 font-bold text-black dark:text-neutral-200">
-              About page
+              {('Eduhub')}
             </div>
 
             <div className="text-sm mb-2 text-black dark:text-neutral-200" style={{ lineHeight: '2' }}>
-              about page content
+              <p className="mb-4">{"Eduhub是北京信息科技大学信息网络中心和计算机学院联合开发的校园大模型应用系统。基于学校公开数据，系统提供知识问答、数据检索、课程教材问答等信息服务。"}</p>
+              <p className='mb-4'>{"有兴趣加入项目组的同学请联系 zz@bistu.edu.cn"}</p>
             </div>
-
             <button
               type="button"
               className="w-full px-4 py-2 mt-6 border rounded-lg shadow border-neutral-500 text-neutral-900 hover:bg-neutral-100 focus:outline-none dark:border-neutral-800 dark:border-opacity-50 dark:bg-white dark:text-black dark:hover:bg-neutral-300"
