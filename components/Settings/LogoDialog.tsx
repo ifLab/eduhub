@@ -66,8 +66,19 @@ export const LogoDialog: FC<Props> = ({ open, onClose }) => {
             </div>
 
             <div className="text-sm mb-2 text-black dark:text-neutral-200" style={{ lineHeight: '2' }}>
-              <p className="mb-4">{"Eduhub是北京信息科技大学信息网络中心和计算机学院联合开发的校园大模型应用系统。基于学校公开数据，系统提供知识问答、数据检索、课程教材问答等信息服务。"}</p>
-              <p className='mb-4'>{"有兴趣加入项目组的同学请联系 zz@bistu.edu.cn"}</p>
+              <p className="mb-4">
+                {'本网站是开源项目 '}
+                <a
+                  href="https://github.com/ifLab/chatbot-ui-admin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  {"https://github.com/ifLab/chatbot-ui-admin"}
+                </a>
+                {" 的演示。"}
+                {"如果需要联系开发者，请邮件到 info@iflab.org"}
+              </p>
             </div>
             <button
               type="button"
