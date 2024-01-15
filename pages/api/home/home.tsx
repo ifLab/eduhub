@@ -269,13 +269,13 @@ const Home = ({
     setUser(CheckLogin()); // 检查是否登录并设置用户，执行一次即可
     setReady(true);
     // 获取并设置用户的主题设置。
-    const settings = getSettings();
-    if (settings.theme) {
-      dispatch({
-        field: 'lightMode',
-        value: settings.theme,
-      });
-    }
+    // const settings = getSettings();
+    // if (settings.theme) {
+    //   dispatch({
+    //     field: 'lightMode',
+    //     value: settings.theme,
+    //   });
+    // }
 
     // 获取并设置存储在本地的API密钥。
     // const apiKey = localStorage.getItem('apiKey');
