@@ -46,7 +46,7 @@ export const Chatbar = () => {
   });
 
   const {
-    state: { conversations, showChatbar, defaultModelId, folders, pluginKeys,user },
+    state: { conversations, showChatbar, defaultModelId, folders, pluginKeys,user,ready },
     dispatch: homeDispatch,
     handleCreateFolder,
     handleNewConversation,
@@ -209,53 +209,58 @@ export const Chatbar = () => {
   console.log(user,user.length)
   // 默认文件夹渲染
   useEffect(() => {
-    // 页面初始化时创建默认文件夹
-    const defaultFolders: FolderInterface[] = defaultData.Folders.map(folder => ({
-      ...folder,
-      type: 'chat'}))
+    if (ready) {
+      // 页面初始化时创建默认文件夹
+      const defaultFolders: FolderInterface[] = defaultData.Folders.map(folder => ({
+        ...folder,
+        type: 'chat'
+      }));
 
-    // 获取已存在的文件夹名称
-    const existingFolderNames = folders.map(folder => folder.name);
-    // 筛选出不存在的默认文件夹
-    const filteredDefaultFolders = defaultFolders.filter(folder =>
-      !existingFolderNames.includes(folder.name)
-    );
-    // 将默认文件夹添加到文件夹列表中
-    const updatedFolders = [...folders, ...filteredDefaultFolders];
-    // console.log(updatedFolders)
-    homeDispatch({ field: 'folders', value: updatedFolders });
-    saveFolders(updatedFolders);
-  }, [user]);
+      // 获取已存在的文件夹名称
+      const existingFolderNames = folders.map(folder => folder.name);
+      // 筛选出不存在的默认文件夹
+      const filteredDefaultFolders = defaultFolders.filter(folder =>
+        !existingFolderNames.includes(folder.name)
+      );
+      // 将默认文件夹添加到文件夹列表中
+      const updatedFolders = [...folders, ...filteredDefaultFolders];
+      // console.log(updatedFolders)
+      homeDispatch({ field: 'folders', value: updatedFolders });
+      saveFolders(updatedFolders);
+    }
+  }, [ready]);
   
   // 六个默认会话渲染
   useEffect(() => {
-    const defaultConversations: Conversation[] = defaultData.Chats.map(chat => ({
-      ...chat,
-      conversationID: '',
-      originalName: chat.name,
-      messages: [],
-      model: OpenAIModels[chat.name as keyof typeof OpenAIModels],
-      prompt: DEFAULT_SYSTEM_PROMPT,
-      temperature: DEFAULT_TEMPERATURE,
-      deletable: false,
-    }))
+    if (ready) {
+      const defaultConversations: Conversation[] = defaultData.Chats.map(chat => ({
+        ...chat,
+        conversationID: '',
+        originalName: chat.name,
+        messages: [],
+        model: OpenAIModels[chat.name as keyof typeof OpenAIModels],
+        prompt: DEFAULT_SYSTEM_PROMPT,
+        temperature: DEFAULT_TEMPERATURE,
+        deletable: false,
+      }))
 
-    // 获取已存在的会话名称
-    const existingConversationID = conversations.map(conversation => conversation.id);
-    // 筛选出不存在的默认会话
-    const filteredDefaultConversations = defaultConversations.filter(conversation =>
-      !existingConversationID.includes(conversation.id)
-    );
-    // 将默认会话添加到会话列表中
-    const updatedConversations = [...conversations, ...filteredDefaultConversations];
-    // console.log(conversations);
-    homeDispatch({ field: 'conversations', value: updatedConversations });
-    // 将默认会话保存到本地存储中
-    // defaultConversations.forEach((conversation) => {
-    //   saveConversation(conversation);
-    // });
-    saveConversations(updatedConversations);
-  }, [user]);
+      // 获取已存在的会话名称
+      const existingConversationID = conversations.map(conversation => conversation.id);
+      // 筛选出不存在的默认会话
+      const filteredDefaultConversations = defaultConversations.filter(conversation =>
+        !existingConversationID.includes(conversation.id)
+      );
+      // 将默认会话添加到会话列表中
+      const updatedConversations = [...conversations, ...filteredDefaultConversations];
+      // console.log(conversations);
+      homeDispatch({ field: 'conversations', value: updatedConversations });
+      // 将默认会话保存到本地存储中
+      // defaultConversations.forEach((conversation) => {
+      //   saveConversation(conversation);
+      // });
+      saveConversations(updatedConversations);
+    }
+  }, [ready]);
 
 
   // 在搜索条件发生变化时，根据条件对对话进行过滤，

@@ -30,6 +30,7 @@ export interface HomeInitialState {
   serverSideApiKeyIsSet: boolean;
   serverSidePluginKeysSet: boolean;
   user: string;
+  ready: boolean;
   version: string;
 }
 
@@ -58,5 +59,6 @@ export const initialState: HomeInitialState = {
   serverSideApiKeyIsSet: true,
   serverSidePluginKeysSet: false,
   user: 'unknown',
+  ready: false,
   version:"2023120901"
 };
