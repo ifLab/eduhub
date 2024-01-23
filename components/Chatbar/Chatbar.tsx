@@ -46,7 +46,7 @@ export const Chatbar = () => {
   });
 
   const {
-    state: { conversations, showChatbar, defaultModelId, folders, pluginKeys,user,ready },
+    state: { conversations, showChatbar, defaultModelId, folders, pluginKeys,user },
     dispatch: homeDispatch,
     handleCreateFolder,
     handleNewConversation,
@@ -209,7 +209,6 @@ export const Chatbar = () => {
   console.log(user,user.length)
   // 默认文件夹渲染
   useEffect(() => {
-    if (ready) {
       // 页面初始化时创建默认文件夹
       const defaultFolders: FolderInterface[] = defaultData.Folders.map(folder => ({
         ...folder,
@@ -217,7 +216,8 @@ export const Chatbar = () => {
       }));
 
       // 获取已存在的文件夹名称
-      const existingFolderNames = folders.map(folder => folder.name);
+      const existingFolderNames = folders
+        .map(folder => folder.name);
       // 筛选出不存在的默认文件夹
       const filteredDefaultFolders = defaultFolders.filter(folder =>
         !existingFolderNames.includes(folder.name)
@@ -226,13 +226,11 @@ export const Chatbar = () => {
       const updatedFolders = [...folders, ...filteredDefaultFolders];
       // console.log(updatedFolders)
       homeDispatch({ field: 'folders', value: updatedFolders });
-      saveFolders(updatedFolders);
-    }
-  }, [ready]);
+      saveFolders(filteredDefaultFolders);
+  }, [user]);
   
   // 六个默认会话渲染
   useEffect(() => {
-    if (ready) {
       const defaultConversations: Conversation[] = defaultData.Chats.map(chat => ({
         ...chat,
         conversationID: '',
@@ -245,7 +243,8 @@ export const Chatbar = () => {
       }))
 
       // 获取已存在的会话名称
-      const existingConversationID = conversations.map(conversation => conversation.id);
+      const existingConversationID = conversations
+        .map(conversation => conversation.id);
       // 筛选出不存在的默认会话
       const filteredDefaultConversations = defaultConversations.filter(conversation =>
         !existingConversationID.includes(conversation.id)
@@ -258,9 +257,8 @@ export const Chatbar = () => {
       // defaultConversations.forEach((conversation) => {
       //   saveConversation(conversation);
       // });
-      saveConversations(updatedConversations);
-    }
-  }, [ready]);
+      saveConversations(filteredDefaultConversations);
+  }, [user]);
 
 
   // 在搜索条件发生变化时，根据条件对对话进行过滤，
