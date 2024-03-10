@@ -1,13 +1,13 @@
 {
   "gpt-3.5-turbo": "app-DOaQmJPVjJ11oquGnccHrWBw",
-  "ChatGLM": "app-DOaQmJPVjJ11oquGnccHrWBw",
-  "MiniMax":"app-qDAWkwSh9bLXAWf2wAecnzmO",
-  "Claude":"app-krXit89dZzzWq4eaKJo2jzlp",
   "写作导师":"app-HaClTYOWCyQtrsfE9p330BnF",
   "项目分析":"app-fNuz2AmP9cZuQYM9NNJiHKzX",
   "同伴学习":"app-QOaqj6xg2OFhYQZJSYjKqj6j",
-  "反面教学":"app-ThQc65wIVyhHthfGJH0EMZIQ",
+  "决策讨论":"app-ThQc65wIVyhHthfGJH0EMZIQ",
   "课程规划":"app-AiHrPsfRFFvrcHO1WILI7epP",
   "挑战识别":"app-BYTTDAyLVRw8dNk2vcCILcV3",
-  "测试生成":"app-sUp7HO5olcWolZsgHvo801EC"
+  "测试生成":"app-sUp7HO5olcWolZsgHvo801EC",
+  "智能助手":"app-gpwcRknMawjeFjtBii2CF62m",
+  "课程助教":"app-Y8bfV5GmrPmHN3t0x6by3bNW",
+  "校园助手":"app-5x5rMqF9dzsNh0w9zKBAmVnE"
 }

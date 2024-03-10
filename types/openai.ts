@@ -12,16 +12,16 @@ export interface OpenAIModel {
 
 export enum OpenAIModelID {
   GPT_3_5 = 'gpt-3.5-turbo',
-  ChatGLM = 'ChatGLM',
-  MiniMax = 'MiniMax',
-  Claude = 'Claude',
   写作导师 = '写作导师',
   项目分析 = '项目分析',
   同伴学习 = '同伴学习',
-  反面教学 = '反面教学',
+  决策讨论 = '决策讨论',
   课程规划 = '课程规划',
   挑战识别 = '挑战识别',
   测试生成 = '测试生成',
+  智能助手 = '智能助手',
+  课程助教 = '课程助教',
+  校园助手 = '校园助手',
 }
 
 // in case the `DEFAULT_MODEL` environment variable is not set or set to an unsupported model
@@ -34,27 +34,6 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     maxLength: 12000,
     tokenLimit: 4000,
     key: keys['gpt-3.5-turbo'] || process.env.DIFY_API_KEY || '',
-  },
-  [OpenAIModelID.ChatGLM]: {
-    id: OpenAIModelID.ChatGLM,
-    name: 'ChatGLM',
-    maxLength: 12000,
-    tokenLimit: 4000,
-    key: keys['ChatGLM'] || process.env.DIFY_API_KEY || '',
-  },
-  [OpenAIModelID.MiniMax]: {
-    id: OpenAIModelID.MiniMax,
-    name: 'MiniMax',
-    maxLength: 12000,
-    tokenLimit: 4000,
-    key: keys['MiniMax'] || process.env.DIFY_API_KEY || '',
-  },
-  [OpenAIModelID.Claude]: {
-    id: OpenAIModelID.Claude,
-    name: 'Claude',
-    maxLength: 12000,
-    tokenLimit: 4000,
-    key: keys['Claude'] || process.env.DIFY_API_KEY || '',
   },
   [OpenAIModelID.写作导师]: {
     id: OpenAIModelID.写作导师,
@@ -77,12 +56,12 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     tokenLimit: 4000,
     key: keys['同伴学习'] || process.env.DIFY_API_KEY || '',
   },
-  [OpenAIModelID.反面教学]: {
-    id: OpenAIModelID.反面教学,
-    name: '反面教学',
+  [OpenAIModelID.决策讨论]: {
+    id: OpenAIModelID.决策讨论,
+    name: '决策讨论',
     maxLength: 12000,
     tokenLimit: 4000,
-    key: keys['反面教学'] || process.env.DIFY_API_KEY || '',
+    key: keys['决策讨论'] || process.env.DIFY_API_KEY || '',
   },
   [OpenAIModelID.课程规划]: {
     id: OpenAIModelID.课程规划,
@@ -104,5 +83,26 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     maxLength: 12000,
     tokenLimit: 4000,
     key: keys['测试生成'] || process.env.DIFY_API_KEY || '',
+  },
+  [OpenAIModelID.智能助手]: {
+    id: OpenAIModelID.智能助手,
+    name: '智能助手',
+    maxLength: 12000,
+    tokenLimit: 4000,
+    key: keys['智能助手'] || process.env.DIFY_API_KEY || '',
+  },
+  [OpenAIModelID.课程助教]: {
+    id: OpenAIModelID.课程助教,
+    name: '课程助教',
+    maxLength: 12000,
+    tokenLimit: 4000,
+    key: keys['课程助教'] || process.env.DIFY_API_KEY || '',
+  },
+  [OpenAIModelID.校园助手]: {
+    id: OpenAIModelID.校园助手,
+    name: '校园助手',
+    maxLength: 12000,
+    tokenLimit: 4000,
+    key: keys['校园助手'] || process.env.DIFY_API_KEY || '',
   },
 };

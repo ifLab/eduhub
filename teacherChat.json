@@ -1,34 +1,20 @@
 {
   "Folders": [
     {
-      "id": "83087580-29C1-4B24-A123-D89C45B66EBB",
-      "name": "模型广场",
-      "type": "chat",
-      "deletable": false
-    },
-    {
       "id":"4576D839-C2C4-41C3-A4B4-11C18000DFD1",
       "name":"教师助手",
+      "type":"chat",
+      "deletable":false
+    },
+    {
+      "id":"C12033A1-92B0-44BC-9506-9350AF020894",
+      "name":"知识库",
       "type":"chat",
       "deletable":false
     }
   ],
   "Chats": [
-    {
-      "id": "FCD62096-937D-4AE5-B947-08DEBDB9B1C1",
-      "name": "ChatGLM",
-      "folderId": "83087580-29C1-4B24-A123-D89C45B66EBB"
-    },
-    {
-      "id": "E8E05ED4-DEC7-4015-A445-712666D19A9D",
-      "name": "MiniMax",
-      "folderId": "83087580-29C1-4B24-A123-D89C45B66EBB"
-    },
-    {
-      "id":"0253E3EF-374F-4A60-BBAD-E14B23244798",
-      "name":"Claude",
-      "folderId":"83087580-29C1-4B24-A123-D89C45B66EBB"
-    },
+
     {
       "id":"0601CF20-E5A3-4FB9-A3FE-4DACFD25F6EE",
       "name":"课程规划",
@@ -43,6 +29,21 @@
       "id":"DC8C8C0C-69BC-4515-8860-970DDA762C32",
       "name":"测试生成",
       "folderId":"4576D839-C2C4-41C3-A4B4-11C18000DFD1"
+    },
+    {
+      "id":"4A57A97D-C037-48B3-8B05-385DC458F0B8",
+      "name":"智能助手",
+      "folderId":"C12033A1-92B0-44BC-9506-9350AF020894"
+    },
+    {
+      "id":"6B456DA3-1C5F-4200-A147-FDF286EAF3EB",
+      "name":"课程助教",
+      "folderId":"C12033A1-92B0-44BC-9506-9350AF020894"
+    },
+    {
+      "id":"0939C210-3A3F-4B78-A3E4-DF00DA6D32D3",
+      "name":"校园助手",
+      "folderId":"C12033A1-92B0-44BC-9506-9350AF020894"
     }
   ]
 }

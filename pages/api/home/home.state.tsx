@@ -58,5 +58,5 @@ export const initialState: HomeInitialState = {
   serverSideApiKeyIsSet: true,
   serverSidePluginKeysSet: false,
   user: 'unknown',
-  version:"2023120901"
+  version:"2024031001"
 };
