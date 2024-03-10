@@ -29,7 +29,7 @@ const Search: FC<Props> = ({ placeholder, searchTerm, onSearch }) => {
     <div className="relative flex items-center">
       <input
       // 搜索框 样式设置（背景色、边框）
-        className={`w-full flex-1 rounded-md border border-white/20 px-4 py-3 pr-10 text-[14px] leading-3 text-white ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]'  :'bg-[#202123] dark:bg-[#202123]'}`}
+        className={`w-full flex-1 rounded-md border border-white/20 px-4 py-3 pr-10 text-[14px] leading-3 text-white ${lightMode === 'red' ? 'bg-[#9A3B3B]' : lightMode === 'blue' ? 'bg-[#4682A9]' : lightMode === 'green' ? 'bg-[#435334]' : lightMode === 'purple' ? 'bg-[#4A55A2]' : lightMode === 'brown' ? 'bg-[#393646]'  :'bg-[#687084] dark:bg-[#202123]'}`}
         type="text"
         placeholder={t(placeholder) || ''}
         value={searchTerm}
