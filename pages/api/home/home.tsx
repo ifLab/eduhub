@@ -265,12 +265,6 @@ const Home = ({
   useEffect(() => {
     if (user) {
       dispatch({ field: 'user', value: user });
-    }
-  }, [user]);
-
-  useEffect(() => {
-    setUser(CheckLogin()); // 检查是否登录并设置用户，执行一次即可
-    setReady(true);
 
     const defaultData = user.length === 8 ? teacherChat : studentChat;
     console.log(user, user.length);
@@ -313,6 +307,13 @@ const Home = ({
       deletable: false,
     }));
     dispatch({ field: 'prompts', value: loadedPrompt });
+
+    }
+  }, [user]);
+
+  useEffect(() => {
+    setUser(CheckLogin()); // 检查是否登录并设置用户，执行一次即可
+    setReady(true);
 
     // 获取并设置用户的主题设置。
     // const settings = getSettings();
