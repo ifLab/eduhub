@@ -1,6 +1,12 @@
 {
   "Folders": [
     {
+      "id":"C12033A1-92B0-44BC-9506-9350AF020894",
+      "name":"知识库",
+      "type":"chat",
+      "deletable":false
+    },
+    {
       "id":"3674E631-008B-4B01-92A3-8A413B57568F",
       "name":"学生助手",
       "type":"chat",
@@ -11,13 +17,8 @@
       "name":"教师助手",
       "type":"chat",
       "deletable":false
-    },
-    {
-      "id":"C12033A1-92B0-44BC-9506-9350AF020894",
-      "name":"知识库",
-      "type":"chat",
-      "deletable":false
     }
+    
   
   ],
   "Chats": [
