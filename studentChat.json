@@ -7,6 +7,12 @@
       "deletable":false
     },
     {
+      "id":"4576D839-C2C4-41C3-A4B4-11C18000DFD1",
+      "name":"教师助手",
+      "type":"chat",
+      "deletable":false
+    },
+    {
       "id":"C12033A1-92B0-44BC-9506-9350AF020894",
       "name":"知识库",
       "type":"chat",
@@ -15,6 +21,21 @@
   
   ],
   "Chats": [
+    {
+      "id":"0601CF20-E5A3-4FB9-A3FE-4DACFD25F6EE",
+      "name":"课程规划",
+      "folderId":"4576D839-C2C4-41C3-A4B4-11C18000DFD1"
+    },
+    {
+      "id":"CB4AF4E9-B702-4214-A0C6-A71602742F51",
+      "name":"挑战识别",
+      "folderId":"4576D839-C2C4-41C3-A4B4-11C18000DFD1"
+    },
+    {
+      "id":"DC8C8C0C-69BC-4515-8860-970DDA762C32",
+      "name":"测试生成",
+      "folderId":"4576D839-C2C4-41C3-A4B4-11C18000DFD1"
+    },
     {
       "id":"F769CD87-733A-4621-A235-7E3245822C49",
       "name":"写作导师",
