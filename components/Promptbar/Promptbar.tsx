@@ -137,21 +137,42 @@ const Promptbar = () => {
   //   }
   // }, [searchTerm, prompts]);
 
-  useEffect(() => {
-    const loadedPrompt: Prompt[] = promptsData.defaultPrompts.map(
-      prompt => ({
-        ...prompt,
-        model:OpenAIModels["gpt-3.5-turbo"],
-        folderId: null,
-        deletable: false
-      })
-    )
-    const existingPromptID = prompts.map(prompt => prompt.id)
-    const filteredPrompt = loadedPrompt.filter(prompt => !existingPromptID.includes(prompt.id))
-    const newPrompts = [...prompts, ...filteredPrompt]
-    homeDispatch({ field: 'prompts', value: newPrompts });
-    savePrompts(newPrompts);
-  },[])
+//   useEffect(() => {
+//     // 页面初始化时创建默认文件夹
+//     const defaultFolders: FolderInterface[] = promptsData.Folders.map(folder => ({
+//       ...folder,
+//       type: 'prompt'
+//     }));
+
+//       // 获取已存在的文件夹名称
+//       const existingFolderNames = folders
+//         .map(folder => folder.id);
+//       // 筛选出不存在的默认文件夹
+//       const filteredDefaultFolders = defaultFolders.filter(folder =>
+//         !existingFolderNames.includes(folder.id)
+//       );
+//       // 将默认文件夹添加到文件夹列表中
+//       const updatedFolders = [...folders, ...filteredDefaultFolders];
+//       // console.log(updatedFolders)
+//       homeDispatch({ field: 'folders', value: updatedFolders });
+//       saveFolders(updatedFolders);
+// }, []);
+
+
+//   useEffect(() => {
+//     const loadedPrompt: Prompt[] = promptsData.defaultPrompts.map(
+//       prompt => ({
+//         ...prompt,
+//         model:OpenAIModels["gpt-3.5-turbo"],
+//         deletable: false
+//       })
+//     )
+//     const existingPromptID = prompts.map(prompt => prompt.id)
+//     const filteredPrompt = loadedPrompt.filter(prompt => !existingPromptID.includes(prompt.id))
+//     const newPrompts = [...prompts, ...filteredPrompt]
+//     homeDispatch({ field: 'prompts', value: newPrompts });
+//     savePrompts(newPrompts);
+//   },[])
 
 
 

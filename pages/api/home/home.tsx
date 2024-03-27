@@ -40,6 +40,9 @@ import LoginNotice from '@/components/Settings/loginNotice';
 import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
+import defaultPrompt from '@/prompt.json';
+import studentChat from '@/studentChat.json';
+import teacherChat from '@/teacherChat.json';
 import whitelist from '@/whitelist.json';
 import Cookie from 'js-cookie';
 import { v4 as uuidv4 } from 'uuid';
@@ -268,6 +271,49 @@ const Home = ({
   useEffect(() => {
     setUser(CheckLogin()); // 检查是否登录并设置用户，执行一次即可
     setReady(true);
+
+    const defaultData = user.length === 8 ? teacherChat : studentChat;
+    console.log(user, user.length);
+    // 页面初始化时创建默认文件夹
+    const chatFolders: FolderInterface[] = defaultData.Folders.map(
+      (folder) => ({
+        ...folder,
+        type: 'chat',
+      }),
+    );
+
+    const PromptFolders: FolderInterface[] = defaultPrompt.Folders.map(
+      (folder) => ({
+        ...folder,
+        type: 'prompt',
+      }),
+    );
+
+    const defaultFolders = [...chatFolders, ...PromptFolders];
+    dispatch({ field: 'folders', value: defaultFolders });
+
+    const defaultConversations: Conversation[] = defaultData.Chats.map(
+      (chat) => ({
+        ...chat,
+        conversationID: '',
+        originalName: chat.name,
+        messages: [],
+        model: OpenAIModels[chat.name as keyof typeof OpenAIModels],
+        prompt: DEFAULT_SYSTEM_PROMPT,
+        temperature: DEFAULT_TEMPERATURE,
+        deletable: false,
+      }),
+    );
+
+    dispatch({ field: 'conversations', value: defaultConversations });
+
+    const loadedPrompt: Prompt[] = defaultPrompt.Prompts.map((prompt) => ({
+      ...prompt,
+      model: OpenAIModels['gpt-3.5-turbo'],
+      deletable: false,
+    }));
+    dispatch({ field: 'prompts', value: loadedPrompt });
+
     // 获取并设置用户的主题设置。
     // const settings = getSettings();
     // if (settings.theme) {
