@@ -69,12 +69,12 @@ export const LogoDialog: FC<Props> = ({ open, onClose }) => {
               <p className="mb-4">
                 {'本网站是开源项目 '}
                 <a
-                  href="https://github.com/ifLab/chatbot-ui-admin"
+                  href="https://github.com/ifLab/eduhub"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 underline"
                 >
-                  {"https://github.com/ifLab/chatbot-ui-admin"}
+                  {"https://github.com/ifLab/eduhub"}
                 </a>
                 {" 的演示。"}
                 {"如果需要联系开发者，请邮件到 info@iflab.org"}
