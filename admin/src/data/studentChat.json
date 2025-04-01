@@ -1,0 +1,64 @@
+{
+  "Folders": [
+    {
+      "id": "C12033A1-92B0-44BC-9506-9350AF020894",
+      "name": "知识库",
+      "type": "chat",
+      "deletable": false
+    },
+    {
+      "id": "3674E631-008B-4B01-92A3-8A413B57568F",
+      "name": "学生助手",
+      "type": "chat",
+      "deletable": false
+    },
+    {
+      "id": "4576D839-C2C4-41C3-A4B4-11C18000DFD1",
+      "name": "教师助手",
+      "type": "chat",
+      "deletable": false
+    }
+  ],
+  "Chats": [
+    {
+      "id": "CB4AF4E9-B702-4214-A0C6-A71602742F51",
+      "name": "挑战识别",
+      "folderId": "4576D839-C2C4-41C3-A4B4-11C18000DFD1"
+    },
+    {
+      "id": "DC8C8C0C-69BC-4515-8860-970DDA762C32",
+      "name": "测试生成",
+      "folderId": "4576D839-C2C4-41C3-A4B4-11C18000DFD1"
+    },
+    {
+      "id": "F769CD87-733A-4621-A235-7E3245822C49",
+      "name": "写作导师",
+      "folderId": "3674E631-008B-4B01-92A3-8A413B57568F"
+    },
+    {
+      "id": "A758FAE2-B02A-4D21-84AF-F7D80486F6DF",
+      "name": "项目分析",
+      "folderId": "3674E631-008B-4B01-92A3-8A413B57568F"
+    },
+    {
+      "id": "07D45817-83A7-49C8-8508-1EA6367F4E07",
+      "name": "同伴学习",
+      "folderId": "3674E631-008B-4B01-92A3-8A413B57568F"
+    },
+    {
+      "id": "AA33807C-4C50-470B-A4D6-23BD1E32F0CA",
+      "name": "决策讨论",
+      "folderId": "3674E631-008B-4B01-92A3-8A413B57568F"
+    },
+    {
+      "id": "6B456DA3-1C5F-4200-A147-FDF286EAF3EB",
+      "name": "课程助教",
+      "folderId": "C12033A1-92B0-44BC-9506-9350AF020894"
+    },
+    {
+      "id": "0939C210-3A3F-4B78-A3E4-DF00DA6D32D3",
+      "name": "校园助手",
+      "folderId": "C12033A1-92B0-44BC-9506-9350AF020894"
+    }
+  ]
+}
